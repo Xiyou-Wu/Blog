@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://xiyou-wu.github.io/images/next-schemes.png">
 <meta property="og:image" content="https://xiyou-wu.github.io/images/next-schemes-dark.png">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-09T00:42:43.954Z">
+<meta property="article:modified_time" content="2025-06-09T00:44:32.217Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -334,22 +334,32 @@ html {
   overflow: visible;
 }
 
-/* Core PDF content styles */
-.pf, .pc {
-  position: relative;
-  overflow: visible;
+/* 2. 页面框架改为相对定位 */
+.pf {
+  position: relative !important;
+  width: 100% !important;
+  max-width: none !important;
 }
 
-.pc.opened { display: block; }
+/* 3. 内容容器改为相对定位 */
+.pc {
+  position: relative !important;
+  padding: 20px !important;
+}
 
-/* Text rendering */
+/* 4. 对于精确定位的文本，可以考虑调整但保持absolute */
+[class^="x"], [class^="y"] {
+  position: absolute; /* 保持原有定位 */
+  /* 但可以添加响应式调整 */
+  max-width: calc(100% - 40px) !important;
+  word-wrap: break-word !important;
+}
+
+/* 5. 文本块尝试相对定位 */
 .t {
-  position: relative;
-  white-space: pre;
-  transform-origin: 0 100%;
-  -ms-transform-origin: 0 100%;
-  -webkit-transform-origin: 0 100%;
-  unicode-bidi: bidi-override;
+  position: relative !important; /* 尝试改为相对定位 */
+  display: inline-block;
+  margin: 2px 0;
 }
 
 /* 禁用所有图片和背景的点击事件 */
@@ -367,8 +377,8 @@ html {
 }
 
 /* Essential utility classes */
-.c { position: relative; border: 0; padding: 0; margin: 0; overflow: hidden; display: block; }
-.d { position: relative; transform-origin: 0 100%; }
+.c { position: absolute; border: 0; padding: 0; margin: 0; overflow: hidden; display: block; }
+.d { position: absolute; transform-origin: 0 100%; }
 ._ { display: inline-block; color: transparent; z-index: -1; }
 
 
