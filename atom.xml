@@ -3,11 +3,11 @@
   <title>Math Notes</title>
   
   
-  <link href="https://xiyou-wu.github.io/atom.xml" rel="self"/>
+  <link href="https://xiyou-wu.github.io/Blog/atom.xml" rel="self"/>
   
-  <link href="https://xiyou-wu.github.io/"/>
+  <link href="https://xiyou-wu.github.io/Blog/"/>
   <updated>2025-06-16T12:33:23.918Z</updated>
-  <id>https://xiyou-wu.github.io/</id>
+  <id>https://xiyou-wu.github.io/Blog/</id>
   
   <author>
     <name>John Doe</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Moving Plane Method</title>
-    <link href="https://xiyou-wu.github.io/elliptic-han-lin-moving-plane-method/"/>
-    <id>https://xiyou-wu.github.io/elliptic-han-lin-moving-plane-method/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-han-lin-moving-plane-method/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-han-lin-moving-plane-method/</id>
     <published>2025-06-16T20:23:00.000Z</published>
     <updated>2025-06-16T12:33:23.918Z</updated>
     
@@ -30,15 +30,15 @@
     
     
     
-    <category term="Math" scheme="https://xiyou-wu.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://xiyou-wu.github.io/Blog/categories/Math/"/>
     
     
   </entry>
   
   <entry>
     <title>Alexandroff Maximum Principle</title>
-    <link href="https://xiyou-wu.github.io/elliptic-han-lin-alexandroff-maximum-principle/"/>
-    <id>https://xiyou-wu.github.io/elliptic-han-lin-alexandroff-maximum-principle/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-han-lin-alexandroff-maximum-principle/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-han-lin-alexandroff-maximum-principle/</id>
     <published>2025-06-16T20:19:00.000Z</published>
     <updated>2025-06-16T12:33:09.218Z</updated>
     
@@ -49,15 +49,15 @@
     
     
     
-    <category term="Math" scheme="https://xiyou-wu.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://xiyou-wu.github.io/Blog/categories/Math/"/>
     
     
   </entry>
   
   <entry>
     <title>Gradient Estimates</title>
-    <link href="https://xiyou-wu.github.io/elliptic-han-lin-gradient-estimates/"/>
-    <id>https://xiyou-wu.github.io/elliptic-han-lin-gradient-estimates/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-han-lin-gradient-estimates/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-han-lin-gradient-estimates/</id>
     <published>2025-06-16T20:17:00.000Z</published>
     <updated>2025-06-16T12:33:16.436Z</updated>
     
@@ -68,15 +68,15 @@
     
     
     
-    <category term="Math" scheme="https://xiyou-wu.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://xiyou-wu.github.io/Blog/categories/Math/"/>
     
     
   </entry>
   
   <entry>
     <title>A Priori Estimates</title>
-    <link href="https://xiyou-wu.github.io/elliptic-han-lin-a-priori-estimates/"/>
-    <id>https://xiyou-wu.github.io/elliptic-han-lin-a-priori-estimates/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-han-lin-a-priori-estimates/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-han-lin-a-priori-estimates/</id>
     <published>2025-06-16T20:15:00.000Z</published>
     <updated>2025-06-16T12:33:01.807Z</updated>
     
@@ -87,15 +87,15 @@
     
     
     
-    <category term="Math" scheme="https://xiyou-wu.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://xiyou-wu.github.io/Blog/categories/Math/"/>
     
     
   </entry>
   
   <entry>
     <title>Strong Maximum Principle</title>
-    <link href="https://xiyou-wu.github.io/elliptic-han-lin-strong-maximum-principle/"/>
-    <id>https://xiyou-wu.github.io/elliptic-han-lin-strong-maximum-principle/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-han-lin-strong-maximum-principle/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-han-lin-strong-maximum-principle/</id>
     <published>2025-06-16T20:12:00.000Z</published>
     <updated>2025-06-16T12:33:31.863Z</updated>
     
@@ -106,15 +106,15 @@
     
     
     
-    <category term="Math" scheme="https://xiyou-wu.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://xiyou-wu.github.io/Blog/categories/Math/"/>
     
     
   </entry>
   
   <entry>
     <title>Energy Method</title>
-    <link href="https://xiyou-wu.github.io/elliptic-han-lin-energy-method/"/>
-    <id>https://xiyou-wu.github.io/elliptic-han-lin-energy-method/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-han-lin-energy-method/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-han-lin-energy-method/</id>
     <published>2025-06-16T20:09:00.000Z</published>
     <updated>2025-06-16T12:32:21.061Z</updated>
     
@@ -125,15 +125,15 @@
     
     
     
-    <category term="Math" scheme="https://xiyou-wu.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://xiyou-wu.github.io/Blog/categories/Math/"/>
     
     
   </entry>
   
   <entry>
     <title>Maximum Principles</title>
-    <link href="https://xiyou-wu.github.io/elliptic-han-lin-harmonic-maximum-principles/"/>
-    <id>https://xiyou-wu.github.io/elliptic-han-lin-harmonic-maximum-principles/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-han-lin-harmonic-maximum-principles/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-han-lin-harmonic-maximum-principles/</id>
     <published>2025-06-16T20:05:00.000Z</published>
     <updated>2025-06-16T12:32:37.118Z</updated>
     
@@ -144,15 +144,15 @@
     
     
     
-    <category term="Math" scheme="https://xiyou-wu.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://xiyou-wu.github.io/Blog/categories/Math/"/>
     
     
   </entry>
   
   <entry>
     <title>Fundamental Solutions</title>
-    <link href="https://xiyou-wu.github.io/elliptic-han-lin-fundamental-solutions/"/>
-    <id>https://xiyou-wu.github.io/elliptic-han-lin-fundamental-solutions/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-han-lin-fundamental-solutions/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-han-lin-fundamental-solutions/</id>
     <published>2025-06-16T20:00:00.000Z</published>
     <updated>2025-06-16T12:32:28.618Z</updated>
     
@@ -163,15 +163,15 @@
     
     
     
-    <category term="Math" scheme="https://xiyou-wu.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://xiyou-wu.github.io/Blog/categories/Math/"/>
     
     
   </entry>
   
   <entry>
     <title>Documentation</title>
-    <link href="https://xiyou-wu.github.io/elliptic-han-lin-maximum-principles/"/>
-    <id>https://xiyou-wu.github.io/elliptic-han-lin-maximum-principles/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-han-lin-maximum-principles/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-han-lin-maximum-principles/</id>
     <published>2025-06-16T19:58:00.000Z</published>
     <updated>2025-06-16T12:19:26.239Z</updated>
     
@@ -185,8 +185,8 @@
   
   <entry>
     <title>Documentation</title>
-    <link href="https://xiyou-wu.github.io/functional-analysis/"/>
-    <id>https://xiyou-wu.github.io/functional-analysis/</id>
+    <link href="https://xiyou-wu.github.io/Blog/functional-analysis/"/>
+    <id>https://xiyou-wu.github.io/Blog/functional-analysis/</id>
     <published>2025-06-04T19:28:00.000Z</published>
     <updated>2025-06-04T12:12:02.642Z</updated>
     
@@ -202,8 +202,8 @@
   
   <entry>
     <title>Introduction of Elliptic PDES (Han-Lin)</title>
-    <link href="https://xiyou-wu.github.io/elliptic-pdes-han-lin/"/>
-    <id>https://xiyou-wu.github.io/elliptic-pdes-han-lin/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-pdes-han-lin/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-pdes-han-lin/</id>
     <published>2025-06-04T19:28:00.000Z</published>
     <updated>2025-06-09T23:00:48.342Z</updated>
     
@@ -214,15 +214,15 @@
     
     
     
-    <category term="Math" scheme="https://xiyou-wu.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://xiyou-wu.github.io/Blog/categories/Math/"/>
     
     
   </entry>
   
   <entry>
     <title>Introduction of Elliptic PDES (Gilbarg-Trudinger)</title>
-    <link href="https://xiyou-wu.github.io/elliptic-pdes-gilbarg-trudinger/"/>
-    <id>https://xiyou-wu.github.io/elliptic-pdes-gilbarg-trudinger/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-pdes-gilbarg-trudinger/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-pdes-gilbarg-trudinger/</id>
     <published>2025-06-04T19:28:00.000Z</published>
     <updated>2025-06-10T07:22:57.436Z</updated>
     
@@ -238,8 +238,8 @@
   
   <entry>
     <title>Introduction of Grometric Measure Theory</title>
-    <link href="https://xiyou-wu.github.io/geometric-measure-theory/"/>
-    <id>https://xiyou-wu.github.io/geometric-measure-theory/</id>
+    <link href="https://xiyou-wu.github.io/Blog/geometric-measure-theory/"/>
+    <id>https://xiyou-wu.github.io/Blog/geometric-measure-theory/</id>
     <published>2025-06-04T19:28:00.000Z</published>
     <updated>2025-06-10T07:24:11.690Z</updated>
     
@@ -250,15 +250,15 @@
     
     
     
-    <category term="Math" scheme="https://xiyou-wu.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://xiyou-wu.github.io/Blog/categories/Math/"/>
     
     
   </entry>
   
   <entry>
     <title>Documentation</title>
-    <link href="https://xiyou-wu.github.io/elliptic-han-lin-harmonic-functions/"/>
-    <id>https://xiyou-wu.github.io/elliptic-han-lin-harmonic-functions/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-han-lin-harmonic-functions/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-han-lin-harmonic-functions/</id>
     <published>2025-06-04T19:28:00.000Z</published>
     <updated>2025-06-09T01:01:21.812Z</updated>
     
@@ -272,8 +272,8 @@
   
   <entry>
     <title>Mean Value Properties</title>
-    <link href="https://xiyou-wu.github.io/elliptic-han-lin-mean-value-properties/"/>
-    <id>https://xiyou-wu.github.io/elliptic-han-lin-mean-value-properties/</id>
+    <link href="https://xiyou-wu.github.io/Blog/elliptic-han-lin-mean-value-properties/"/>
+    <id>https://xiyou-wu.github.io/Blog/elliptic-han-lin-mean-value-properties/</id>
     <published>2025-06-04T19:28:00.000Z</published>
     <updated>2025-06-16T12:32:45.801Z</updated>
     
@@ -284,15 +284,15 @@
     
     
     
-    <category term="Math" scheme="https://xiyou-wu.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://xiyou-wu.github.io/Blog/categories/Math/"/>
     
     
   </entry>
   
   <entry>
     <title>Welcome to the NexT Organization!</title>
-    <link href="https://xiyou-wu.github.io/hexo-theme-next/"/>
-    <id>https://xiyou-wu.github.io/hexo-theme-next/</id>
+    <link href="https://xiyou-wu.github.io/Blog/hexo-theme-next/"/>
+    <id>https://xiyou-wu.github.io/Blog/hexo-theme-next/</id>
     <published>2020-03-01T04:00:00.000Z</published>
     <updated>2025-06-04T07:44:42.041Z</updated>
     
