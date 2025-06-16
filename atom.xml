@@ -218,6 +218,23 @@
   </entry>
   
   <entry>
+    <title>Documentation</title>
+    <link href="https://xiyou-wu.github.io/Blog/functional-analysis/"/>
+    <id>https://xiyou-wu.github.io/Blog/functional-analysis/</id>
+    <published>2025-06-04T19:28:00.000Z</published>
+    <updated>2025-06-04T12:12:02.642Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Elegant-and-Powerful-Theme-for-Hexo"><a href="#Elegant-and-Powerful-Theme-for-Hexo" class="headerlink" title="Elegant and Powerful Theme for Hexo"></a>Elegant and Powerful Theme for Hexo</h3><p>Theme NexT has the following features:</p><ul><li>Vanilla JavaScript.</li><li>Support <span class="exturl" data-url="aHR0cHM6Ly9jYW5pdXNlLmNvbS9wcmVmZXJzLWNvbG9yLXNjaGVtZQ==">native dark mode<i class="fa fa-external-link-alt"></i></span>.</li><li>Support <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01vT3gvcGpheA==">Pjax<i class="fa fa-external-link-alt"></i></span> to deliver a fast browsing experience.</li><li>Integrated <span class="exturl" data-url="aHR0cHM6Ly93d3cubWF0aGpheC5vcmcv">MathJax<i class="fa fa-external-link-alt"></i></span> and <span class="exturl" data-url="aHR0cHM6Ly9rYXRleC5vcmcv">KaTeX<i class="fa fa-external-link-alt"></i></span> mathematical formula rendering.</li><li>Integrated <span class="exturl" data-url="aHR0cHM6Ly9tb3ppbGxhLmdpdGh1Yi5pby9wZGYuanMv">PDF.js<i class="fa fa-external-link-alt"></i></span> and <span class="exturl" data-url="aHR0cHM6Ly9tZXJtYWlkLWpzLmdpdGh1Yi5pby9tZXJtYWlkLw==">mermaid diagram<i class="fa fa-external-link-alt"></i></span>.</li><li>Support <span class="exturl" data-url="aHR0cHM6Ly9kaXNxdXMuY29tLw==">Disqus<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ3lhbi5rdWFpemhhbi5jb20v">Changyan<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9saXZlcmUuY29tLw==">LiveRe<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9naXRhbGsuZ2l0aHViLmlvLw==">Gitalk<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly91dHRlcmFuYy5lcy8=">Utterances<i class="fa fa-external-link-alt"></i></span> and <span class="exturl" data-url="aHR0cHM6Ly9pc3NvLWNvbW1lbnRzLmRlLw==">Isso<i class="fa fa-external-link-alt"></i></span> comment systems.</li><li>Support a large number of third-party statistics services.</li><li>Easy to switch CDN provider.</li><li>Easy to customize content or modify style.</li></ul><h3 id="Four-Schemes-in-One"><a href="#Four-Schemes-in-One" class="headerlink" title="Four Schemes in One"></a>Four Schemes in One</h3><p>By using different Schemes in NexT, you can simply change the style of your blog, and nearly all options can be used in all schemes.</p><style>.image-comparison-container {    position: relative;}.image-comparison {    opacity: 1 !important;}@keyframes next-clip-path {    from {        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);    }    to {        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);    }}.image-comparison:last-of-type {    animation: next-clip-path 8s alternate ease-in-out infinite;    position: absolute;    top: 0;}</style><div class="image-comparison-container">    <img class="image-comparison" src="/images/next-schemes.png" alt="NexT Schemes">    <img class="image-comparison" src="/images/next-schemes-dark.png" alt="NexT Schemes"></div><h3 id="Multilingual-Support"><a href="#Multilingual-Support" class="headerlink" title="Multilingual Support"></a>Multilingual Support</h3><p>Thanks to the contribution of our users and developers, <a href="/docs/theme-settings/internationalization.html#Choosing-Language">NexT now supports over 20 languages</a>.</p>]]></content>
+    
+    
+    <summary type="html">Outline</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>Introduction of Elliptic PDES (Han-Lin)</title>
     <link href="https://xiyou-wu.github.io/Blog/elliptic-pdes-han-lin/"/>
     <id>https://xiyou-wu.github.io/Blog/elliptic-pdes-han-lin/</id>
@@ -232,23 +249,6 @@
     
     
     <category term="Math" scheme="https://xiyou-wu.github.io/Blog/categories/Math/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Documentation</title>
-    <link href="https://xiyou-wu.github.io/Blog/functional-analysis/"/>
-    <id>https://xiyou-wu.github.io/Blog/functional-analysis/</id>
-    <published>2025-06-04T19:28:00.000Z</published>
-    <updated>2025-06-04T12:12:02.642Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Elegant-and-Powerful-Theme-for-Hexo"><a href="#Elegant-and-Powerful-Theme-for-Hexo" class="headerlink" title="Elegant and Powerful Theme for Hexo"></a>Elegant and Powerful Theme for Hexo</h3><p>Theme NexT has the following features:</p><ul><li>Vanilla JavaScript.</li><li>Support <span class="exturl" data-url="aHR0cHM6Ly9jYW5pdXNlLmNvbS9wcmVmZXJzLWNvbG9yLXNjaGVtZQ==">native dark mode<i class="fa fa-external-link-alt"></i></span>.</li><li>Support <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01vT3gvcGpheA==">Pjax<i class="fa fa-external-link-alt"></i></span> to deliver a fast browsing experience.</li><li>Integrated <span class="exturl" data-url="aHR0cHM6Ly93d3cubWF0aGpheC5vcmcv">MathJax<i class="fa fa-external-link-alt"></i></span> and <span class="exturl" data-url="aHR0cHM6Ly9rYXRleC5vcmcv">KaTeX<i class="fa fa-external-link-alt"></i></span> mathematical formula rendering.</li><li>Integrated <span class="exturl" data-url="aHR0cHM6Ly9tb3ppbGxhLmdpdGh1Yi5pby9wZGYuanMv">PDF.js<i class="fa fa-external-link-alt"></i></span> and <span class="exturl" data-url="aHR0cHM6Ly9tZXJtYWlkLWpzLmdpdGh1Yi5pby9tZXJtYWlkLw==">mermaid diagram<i class="fa fa-external-link-alt"></i></span>.</li><li>Support <span class="exturl" data-url="aHR0cHM6Ly9kaXNxdXMuY29tLw==">Disqus<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ3lhbi5rdWFpemhhbi5jb20v">Changyan<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9saXZlcmUuY29tLw==">LiveRe<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9naXRhbGsuZ2l0aHViLmlvLw==">Gitalk<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly91dHRlcmFuYy5lcy8=">Utterances<i class="fa fa-external-link-alt"></i></span> and <span class="exturl" data-url="aHR0cHM6Ly9pc3NvLWNvbW1lbnRzLmRlLw==">Isso<i class="fa fa-external-link-alt"></i></span> comment systems.</li><li>Support a large number of third-party statistics services.</li><li>Easy to switch CDN provider.</li><li>Easy to customize content or modify style.</li></ul><h3 id="Four-Schemes-in-One"><a href="#Four-Schemes-in-One" class="headerlink" title="Four Schemes in One"></a>Four Schemes in One</h3><p>By using different Schemes in NexT, you can simply change the style of your blog, and nearly all options can be used in all schemes.</p><style>.image-comparison-container {    position: relative;}.image-comparison {    opacity: 1 !important;}@keyframes next-clip-path {    from {        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);    }    to {        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);    }}.image-comparison:last-of-type {    animation: next-clip-path 8s alternate ease-in-out infinite;    position: absolute;    top: 0;}</style><div class="image-comparison-container">    <img class="image-comparison" src="/images/next-schemes.png" alt="NexT Schemes">    <img class="image-comparison" src="/images/next-schemes-dark.png" alt="NexT Schemes"></div><h3 id="Multilingual-Support"><a href="#Multilingual-Support" class="headerlink" title="Multilingual Support"></a>Multilingual Support</h3><p>Thanks to the contribution of our users and developers, <a href="/docs/theme-settings/internationalization.html#Choosing-Language">NexT now supports over 20 languages</a>.</p>]]></content>
-    
-    
-    <summary type="html">Outline</summary>
-    
-    
     
     
   </entry>
