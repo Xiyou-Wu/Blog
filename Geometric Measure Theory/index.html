@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T17:37:24.865Z">
+<meta property="article:modified_time" content="2025-06-21T17:39:15.282Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -329,8 +329,9 @@
 }
 
 /* 图片和背景元素 - 使用与文字相同的缩放原点 */
-.bi, .bf {
-  transform-origin: 0 100% !important; /* 修改为与文字相同的左下角原点 */
+/* 为所有PDF图形元素统一设置变换原点 */
+.bi, .bf, .c, .d {
+  transform-origin: 0 100% !important; /* 统一使用左下角原点 */
 }
 
 /* 禁用所有图片和背景的点击事件 */
