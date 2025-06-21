@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T18:24:47.940Z">
+<meta property="article:modified_time" content="2025-06-21T18:42:32.715Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -251,69 +251,80 @@
  * Copyright 2012,2013 Lu Wang <coolwanglu@gmail.com> 
  * https://github.com/pdf2htmlEX/pdf2htmlEX/blob/master/share/LICENSE
  */
+
 /* Remove sidebar completely */
 #sidebar { display: none !important; }
 
-/* PDF外层包装器 */
+/* PDF外层包装器 - 使用Grid布局实现居中 */
 .pdf-wrapper {
   width: 100vw;
   height: auto;
+  display: grid !important;
+  place-items: center !important; /* 垂直水平居中 */
+  grid-template-columns: 1fr !important;
+  overflow-x: hidden !important;
   padding: 0;
   box-sizing: border-box;
-  overflow-x: hidden !important; /* 防止水平滚动 */
 }
 
-/* PDF容器 - 移除全局变换 */
+/* PDF容器 - Grid布局 */
 #page-container {
   position: relative;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  place-items: center !important;
+  
+  /* 移除margin依赖 */
+  margin: 0 !important;
+  padding: 20px 0 !important;
+  
+  width: auto !important;
+  max-width: none !important;
   left: 0 !important;
   height: auto !important;
-  overflow-x: hidden !important; /* 防止水平滚动 */
-  
-  /* 保持原始容器属性 */
-  display: block;
-  margin: 0 !important;
-  padding: 0 !important;
+  overflow-x: hidden !important;
   
   /* 移除全局缩放 */
   transform: none !important;
   transform-origin: none !important;
-  width: auto !important;
-  max-width: none !important;
   min-width: auto !important;
 }
 
-/* PDF页面 - 每页独立居中和缩放 */
+/* PDF页面 - 使用Grid自动居中 */
 .pf {
   position: relative !important;
+  justify-self: center !important; /* Grid中的水平居中 */
+  width: min(60vw, 100%) !important; /* 响应式宽度 */
+  
+  /* 移除所有margin依赖 */
+  margin: 0 !important;
   overflow: visible !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: flex-start !important;
-  margin: 20px 0 !important;
+  display: block !important;
   
-  /* 保持原始页面宽度 */
-  width: 50vw !important;
-  max-width: none !important;
-  
-  /* 不对页面容器进行缩放 */
-  transform: none !important;
-  transform-origin: center top !important;
+  /* 保持原始页面属性 */
+  background-color: white;
+  box-shadow: 1px 1px 3px 1px #333;
+  border-collapse: separate;
 }
 
-/* 页面内容容器 - 应用缩放和居中 */
+/* 页面内容容器 - 缩放时保持居中 */
 .pc {
   position: relative !important;
   display: block !important;
-  margin: 0 auto !important;
-  overflow: visible !important;
+  width: 100% !important;
   
-  /* 这里会通过JavaScript设置缩放 */
-  transform-origin: center top !important;
+  /* 使用CSS变量控制缩放，居中为原点 */
+  transform-origin: center center !important;
+  transform: scale(var(--pdf-scale, 1)) !important;
   
-  /* 基础宽度控制 */
-  width: auto !important;
-  max-width: 60vw !important;
+  /* 保持原始内容属性 */
+  border: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 .pc.opened { 
@@ -324,18 +335,49 @@
 .t {
   position: absolute;
   white-space: pre;
+  font-size: 1px;
   transform-origin: 0 100% !important; /* 必须保持不变 */
   -ms-transform-origin: 0 100% !important;
   -webkit-transform-origin: 0 100% !important;
   unicode-bidi: bidi-override;
+  -moz-font-feature-settings: "liga" 0;
 }
+
+.t:after { content: ''; }
+.t:before { content: ''; display: inline-block; }
+.t span { position: relative; unicode-bidi: bidi-override; }
 
 /* 图片和背景元素 - 使用与文字相同的缩放原点 */
 .bi, .bf, .c, .d {
   transform-origin: 0 100% !important; /* 统一使用左下角原点 */
 }
 
-/* 其余样式保持不变... */
+/* 背景和图片元素 */
+.bf {
+  position: absolute;
+  border: 0;
+  margin: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.bi {
+  position: absolute;
+  border: 0;
+  margin: 0;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 禁用交互 */
 .bi, .bf, #page-container img {
   pointer-events: none !important;
   cursor: default !important;
@@ -349,9 +391,27 @@
 }
 
 /* Essential utility classes */
-.c { position: absolute; border: 0; padding: 0; margin: 0; overflow: hidden; display: block; }
-.d { position: absolute; transform-origin: 0 100%; }
-._ { display: inline-block; color: transparent; z-index: -1; }
+.c { 
+  position: absolute; 
+  border: 0; 
+  padding: 0; 
+  margin: 0; 
+  overflow: hidden; 
+  display: block; 
+}
+
+.d { 
+  position: absolute; 
+  transform-origin: 0 100%; 
+  -ms-transform-origin: 0 100%; 
+  -webkit-transform-origin: 0 100%; 
+}
+
+._ { 
+  display: inline-block; 
+  color: transparent; 
+  z-index: -1; 
+}
 
 /* 选择高亮 */
 ::selection { background: rgba(127,255,255,0.4); }
@@ -359,13 +419,15 @@
 
 /* 页面布局 */
 body {
-  overflow-x: auto !important;
+  overflow-x: hidden !important;
   margin: 0 !important;
   padding: 0 !important;
+  background-color: #9e9e9e;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjOWU5ZTllIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiM4ODgiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
 }
 
 html {
-  overflow-x: auto !important;
+  overflow-x: hidden !important;
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -377,307 +439,78 @@ html {
   padding: 0 !important;
 }
 
+/* 响应式缩放 - 使用媒体查询 */
+@media (max-width: 768px) {
+  :root { --pdf-scale: 0.7; }
+  .pf { width: min(90vw, 100%) !important; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root { --pdf-scale: 0.85; }
+  .pf { width: min(75vw, 100%) !important; }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  :root { --pdf-scale: 1; }
+  .pf { width: min(60vw, 100%) !important; }
+}
+
+@media (min-width: 1441px) {
+  :root { --pdf-scale: 1.1; }
+  .pf { width: min(50vw, 100%) !important; }
+}
+
 /* 打印样式 */
 @media print {
   .pdf-wrapper {
     width: 100% !important;
     padding: 0 !important;
+    display: block !important;
+  }
+  
+  #page-container {
+    display: block !important;
   }
   
   .pf {
+    width: 100% !important;
     margin-bottom: 1cm !important;
+    display: block !important;
+    justify-self: auto !important;
   }
   
   .pc {
     transform: none !important;
-    margin: 0 auto !important;
   }
+}
+
+/* 加载指示器 */
+.loading-indicator {
+  display: none;
+}
+
+.loading-indicator.active {
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  top: 50%;
+  left: 50%;
+  margin-top: -32px;
+  margin-left: -32px;
+}
+
+/* 确保页面在加载时也能正确显示 */
+.pf:not(.loaded) {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pf.loaded {
+  opacity: 1;
 }
 </style>
 
-<script type="text/javascript">
-// 每页独立居中的 PDF 显示系统
-(function() {
-    'use strict';
-    
-    const DEBUG = true;
-    
-    function log(...args) {
-        if (DEBUG) {
-            console.log('[PDF每页居中]', ...args);
-        }
-    }
-    
-    // 获取设备显示宽度
-    function getDisplayWidth() {
-        const methods = [
-            () => window.innerWidth,
-            () => document.documentElement.clientWidth,
-            () => window.outerWidth,
-            () => screen.availWidth,
-            () => screen.width
-        ];
-        
-        let width = 0;
-        for (const method of methods) {
-            try {
-                const result = method();
-                if (result && result > width) {
-                    width = result;
-                }
-            } catch (e) {
-                continue;
-            }
-        }
-        
-        if (width < 320) {
-            width = Math.max(window.innerWidth, 1024);
-        }
-        
-        return width;
-    }
-    
-    // 创建外层包装器
-    function createWrapper() {
-        const container = document.getElementById('page-container');
-        if (!container || container.parentElement.classList.contains('pdf-wrapper')) {
-            return document.querySelector('.pdf-wrapper');
-        }
-        
-        const wrapper = document.createElement('div');
-        wrapper.className = 'pdf-wrapper';
-        
-        container.parentElement.insertBefore(wrapper, container);
-        wrapper.appendChild(container);
-        
-        log('已创建PDF包装器');
-        return wrapper;
-    }
-    
-    // 为每页应用独立的60%宽度居中布局
-    function applyPageCenterLayout() {
-        const container = document.getElementById('page-container');
-        const pdfPages = document.querySelectorAll('.pf');
-        
-        if (!container || pdfPages.length === 0) {
-            log('等待PDF元素加载...');
-            setTimeout(applyPageCenterLayout, 100);
-            return;
-        }
-        
-        // 确保包装器存在
-        const wrapper = createWrapper();
-        if (!wrapper) {
-            log('无法创建包装器');
-            return;
-        }
-        
-        // 获取设备宽度和目标宽度
-        const displayWidth = getDisplayWidth();
-        const targetWidth = Math.floor(displayWidth * 0.3); // 精确 60%
-        
-        let processedPages = 0;
-        
-        // 为每一页单独处理
-        pdfPages.forEach((page, index) => {
-            const pageContent = page.querySelector('.pc');
-            if (!pageContent) return;
-            
-            // 重置当前页面的变换
-            pageContent.style.transform = 'none';
-            pageContent.style.width = 'auto';
-            pageContent.style.maxWidth = 'none';
-            
-            // 强制重新计算布局
-            pageContent.offsetHeight;
-            
-            // 获取当前页面的原始宽度
-            const originalWidth = Math.max(
-                pageContent.scrollWidth,
-                pageContent.offsetWidth,
-                pageContent.getBoundingClientRect().width
-            );
-            
-            if (originalWidth === 0) {
-                log(`第${index + 1}页尚未渲染完成`);
-                return;
-            }
-            
-            // 计算缩放比例
-            const scale = targetWidth / originalWidth;
-            const finalScale = Math.max(0.1, Math.min(scale, 3.0));
-            
-            // 应用缩放到页面内容
-            pageContent.style.transform = `scale(${finalScale})`;
-            pageContent.style.transformOrigin = 'center top';
-            
-            // 调整页面容器高度以适应缩放后的内容
-            const scaledHeight = pageContent.scrollHeight * finalScale;
-            page.style.minHeight = `${scaledHeight + 40}px`;
-            
-            // 确保页面内容居中
-            const scaledWidth = originalWidth * finalScale;
-            pageContent.style.width = `${originalWidth}px`;
-            pageContent.style.margin = '0 auto';
-            
-            processedPages++;
-            
-            log(`第${index + 1}页处理完成:`, {
-                originalWidth: originalWidth.toFixed(1),
-                targetWidth,
-                scale: finalScale.toFixed(4),
-                scaledWidth: scaledWidth.toFixed(1),
-                scaledHeight: scaledHeight.toFixed(1)
-            });
-        });
-        
-        log(`共处理了${processedPages}页`);
-        
-        // 显示调试信息
-        showDebugInfo({
-            displayWidth,
-            targetWidth,
-            processedPages,
-            totalPages: pdfPages.length
-        });
-    }
-    
-    // 显示调试信息
-    function showDebugInfo(info) {
-        if (!DEBUG) return;
-        
-        let panel = document.getElementById('pdf-debug-panel');
-        if (!panel) {
-            panel = document.createElement('div');
-            panel.id = 'pdf-debug-panel';
-            panel.style.cssText = `
-                position: fixed;
-                top: 10px;
-                right: 10px;
-                background: rgba(0,0,0,0.9);
-                color: white;
-                padding: 15px;
-                border-radius: 8px;
-                font-size: 12px;
-                font-family: 'Courier New', monospace;
-                z-index: 10000;
-                max-width: 350px;
-                border: 1px solid #333;
-                cursor: pointer;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            `;
-            document.body.appendChild(panel);
-            
-            panel.addEventListener('click', function() {
-                this.style.display = 'none';
-            });
-        }
-        
-        panel.innerHTML = `
-            <strong>📊 PDF每页居中布局调试信息</strong><br><br>
-            🖥️ 设备显示宽度: ${info.displayWidth}px<br>
-            🎯 目标宽度(60%): ${info.targetWidth}px<br>
-            📄 处理页面数: ${info.processedPages}/${info.totalPages}<br>
-            ✅ 每页独立居中: 启用<br>
-            🎯 每页宽度占比: 60%<br>
-            <br>
-            <small>💡 点击关闭此面板</small>
-        `;
-    }
-    
-    // 响应窗口变化
-    let resizeTimeout;
-    function handleResize() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            log('窗口尺寸改变，重新计算每页布局');
-            applyPageCenterLayout();
-        }, 300);
-    }
-    
-    // 响应方向变化
-    function handleOrientationChange() {
-        setTimeout(() => {
-            log('屏幕方向改变，重新计算每页布局');
-            applyPageCenterLayout();
-        }, 500);
-    }
-    
-    // 监听DOM变化
-    function observeContainer() {
-        const targetNode = document.body;
-        const observer = new MutationObserver((mutations) => {
-            let shouldReapply = false;
-            mutations.forEach((mutation) => {
-                if (mutation.type === 'childList') {
-                    mutation.addedNodes.forEach((node) => {
-                        if (node.nodeType === 1 && 
-                            (node.id === 'page-container' || 
-                             node.querySelector && node.querySelector('#page-container'))) {
-                            shouldReapply = true;
-                        }
-                    });
-                }
-            });
-            
-            if (shouldReapply) {
-                setTimeout(applyPageCenterLayout, 100);
-            }
-        });
-        
-        observer.observe(targetNode, {
-            childList: true,
-            subtree: true
-        });
-        
-        return observer;
-    }
-    
-    // 初始化
-    function init() {
-        log('PDF每页独立居中系统启动');
-        
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                setTimeout(applyPageCenterLayout, 100);
-                observeContainer();
-            });
-        } else {
-            setTimeout(applyPageCenterLayout, 100);
-            observeContainer();
-        }
-        
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('orientationchange', handleOrientationChange);
-        
-        window.addEventListener('load', () => {
-            setTimeout(applyPageCenterLayout, 500);
-        });
-        
-        log('事件监听器已设置');
-    }
-    
-    // 全局调试接口
-    window.PDFPageCenter = {
-        reapply: applyPageCenterLayout,
-        getDisplayWidth: getDisplayWidth,
-        toggleDebug: function() {
-            const panel = document.getElementById('pdf-debug-panel');
-            if (panel) {
-                panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-            }
-        },
-        showInfo: function() {
-            const panel = document.getElementById('pdf-debug-panel');
-            if (panel) panel.style.display = 'block';
-        }
-    };
-    
-    // 启动系统
-    init();
-    
-})();
-</script>
 
 <style type="text/css">
 .ff0{font-family:sans-serif;visibility:hidden;}
