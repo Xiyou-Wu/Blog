@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T21:10:17.487Z">
+<meta property="article:modified_time" content="2025-06-21T21:11:55.947Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -471,9 +471,8 @@ html {
             return;
         }
         
-        // 获取设备宽度和目标宽度
-        const displayWidth = getDisplayWidth();
-        const targetWidth = Math.floor(displayWidth * 0.6); // 修正为60%
+        // 将目标宽度设置为容器的当前宽度
+        const targetWidth = container.clientWidth;
         
         let processedPages = 0;
         
