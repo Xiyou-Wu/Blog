@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T19:04:18.990Z">
+<meta property="article:modified_time" content="2025-06-21T19:06:03.009Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -254,48 +254,61 @@
 /* Remove sidebar completely */
 #sidebar { display: none !important; }
 
-/* PDF外层包装器 - 使用Flexbox实现完美居中 */
+/* PDF外层包装器 */
 .pdf-wrapper {
   width: 100vw;
-  min-height: 100vh;
-  display: flex !important;
-  justify-content: center !important; /* 水平居中 */
-  align-items: flex-start !important; /* 顶部对齐 */
-  padding: 20px 0;
+  height: auto;
+  padding: 0;
   box-sizing: border-box;
-  overflow-x: auto;
+  overflow-x: hidden !important; /* 防止水平滚动 */
 }
 
-/* PDF容器 - 移除所有margin依赖 */
+/* PDF容器 - 使用transform居中 */
 #page-container {
   position: relative;
-  margin: 0 !important; /* 完全移除margin */
-  padding: 20px;
-  width: auto !important;
-  max-width: min(60vw, 800px) !important; /* 响应式最大宽度 */
+  left: 50% !important; /* 移动到水平中心 */
+  transform: translateX(-50%) !important; /* 向左偏移自身宽度的50% */
   
-  /* 移除全局缩放，让每页单独处理 */
-  transform: none !important;
-  transform-origin: none !important;
-  left: 0 !important;
+  /* 移除所有margin依赖 */
+  margin: 0 !important;
+  padding: 20px;
+  
+  width: min(60vw, 800px) !important; /* 响应式宽度 */
   height: auto !important;
   overflow: visible !important;
 }
 
-/* PDF页面 - 响应式居中 */
+/* PDF页面 - 每页独立居中和缩放 */
 .pf {
   position: relative !important;
-  width: 100% !important;
-  margin-bottom: 20px !important;
-  background-color: white;
-  box-shadow: 1px 1px 3px 1px #333;
+  overflow: visible !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  margin: 20px 0 !important;
+  
+  /* 保持原始页面宽度 */
+  width: 50vw !important;
+  max-width: none !important;
+  
+  /* 不对页面容器进行缩放 */
+  transform: none !important;
+  transform-origin: center top !important;
 }
 
-/* 页面内容 - 使用center作为缩放原点 */
+/* 页面内容容器 - 应用缩放和居中 */
 .pc {
   position: relative !important;
-  transform-origin: center center !important; /* 以中心为缩放原点 */
-  width: 100% !important;
+  display: block !important;
+  margin: 0 auto !important;
+  overflow: visible !important;
+  
+  /* 这里会通过JavaScript设置缩放 */
+  transform-origin: center top !important;
+  
+  /* 基础宽度控制 */
+  width: auto !important;
+  max-width: 60vw !important;
 }
 
 .pc.opened { 
