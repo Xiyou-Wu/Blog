@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T17:53:42.596Z">
+<meta property="article:modified_time" content="2025-06-21T17:57:38.185Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -259,9 +259,9 @@
   width: 100vw;
   height: auto;
   padding: 0;
-  margin: 0 auto; /* 添加左右自动边距 */
+  margin: 0;
   box-sizing: border-box;
-  overflow-x: visible;
+  overflow-x: hidden !important; /* 改为hidden防止水平滚动 */
 }
 
 /* PDF容器 - 移除全局变换 */
@@ -274,13 +274,13 @@
   
   /* 保持原始容器属性 */
   display: block;
-  margin: 0 auto !important; /* 确保居中 */
+  margin: 0 !important;
   padding: 0 !important;
   
   /* 移除全局缩放 */
   transform: none !important;
-  transform-origin: center top !important;
-  width: auto !important;
+  transform-origin: none !important;
+  width: 100vw !important; /* 明确设置宽度 */
   max-width: none !important;
   min-width: auto !important;
 }
@@ -289,10 +289,8 @@
 .pf {
   position: relative !important;
   overflow: visible !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: flex-start !important;
-  margin: 20px auto !important; /* 改为上下20px，左右自动 */
+  display: block !important; /* 改为block */
+  margin: 20px 0 !important; /* 只设置上下边距 */
   
   /* 保持原始页面宽度 */
   width: 100vw !important;
@@ -300,22 +298,22 @@
   
   /* 不对页面容器进行缩放 */
   transform: none !important;
-  transform-origin: center top !important;
+  transform-origin: none !important;
 }
 
 /* 页面内容容器 - 应用缩放和居中 */
 .pc {
   position: relative !important;
   display: block !important;
-  margin: 0 auto !important; /* 确保页面内容居中 */
+  margin: 0 !important; /* 移除自动边距，通过JS控制 */
   overflow: visible !important;
   
   /* 这里会通过JavaScript设置缩放 */
-  transform-origin: center top !important;
+  transform-origin: center top !important; /* 统一使用center top */
   
   /* 基础宽度控制 */
   width: auto !important;
-  max-width: 60vw !important;
+  max-width: none !important; /* 移除限制 */
 }
 
 .pc.opened { 
@@ -456,93 +454,102 @@ html {
         return wrapper;
     }
     
-    // 为每页应用独立的60%宽度居中布局
-    function applyPageCenterLayout() {
-        const container = document.getElementById('page-container');
-        const pdfPages = document.querySelectorAll('.pf');
-        
-        if (!container || pdfPages.length === 0) {
-            log('等待PDF元素加载...');
-            setTimeout(applyPageCenterLayout, 100);
-            return;
-        }
-        
-        // 确保包装器存在
-        const wrapper = createWrapper();
-        if (!wrapper) {
-            log('无法创建包装器');
-            return;
-        }
-        
-        // 获取设备宽度和目标宽度
-        const displayWidth = getDisplayWidth();
-        const targetWidth = Math.floor(displayWidth * 0.6); // 精确 60%
-        
-        let processedPages = 0;
-        
-        // 为每一页单独处理
-        pdfPages.forEach((page, index) => {
-            const pageContent = page.querySelector('.pc');
-            if (!pageContent) return;
-            
-            // 重置当前页面的变换
-            pageContent.style.transform = 'none';
-            pageContent.style.width = 'auto';
-            pageContent.style.maxWidth = 'none';
-            
-            // 强制重新计算布局
-            pageContent.offsetHeight;
-            
-            // 获取当前页面的原始宽度
-            const originalWidth = Math.max(
-                pageContent.scrollWidth,
-                pageContent.offsetWidth,
-                pageContent.getBoundingClientRect().width
-            );
-            
-            if (originalWidth === 0) {
-                log(`第${index + 1}页尚未渲染完成`);
-                return;
-            }
-            
-            // 计算缩放比例
-            const scale = targetWidth / originalWidth;
-            const finalScale = Math.max(0.1, Math.min(scale, 3.0));
-            
-            // 应用缩放到页面内容
-            pageContent.style.transform = `scale(${finalScale})`;
-            pageContent.style.transformOrigin = 'center top';
-            
-            // 调整页面容器高度以适应缩放后的内容
-            const scaledHeight = pageContent.scrollHeight * finalScale;
-            page.style.minHeight = `${scaledHeight + 40}px`;
-            
-            // 确保页面内容居中
-            const scaledWidth = originalWidth * finalScale;
-            pageContent.style.width = `${originalWidth}px`;
-            pageContent.style.margin = '0 auto';
-            
-            processedPages++;
-            
-            log(`第${index + 1}页处理完成:`, {
-                originalWidth: originalWidth.toFixed(1),
-                targetWidth,
-                scale: finalScale.toFixed(4),
-                scaledWidth: scaledWidth.toFixed(1),
-                scaledHeight: scaledHeight.toFixed(1)
-            });
-        });
-        
-        log(`共处理了${processedPages}页`);
-        
-        // 显示调试信息
-        showDebugInfo({
-            displayWidth,
-            targetWidth,
-            processedPages,
-            totalPages: pdfPages.length
-        });
+// 为每页应用独立的60%宽度居中布局
+function applyPageCenterLayout() {
+    const container = document.getElementById('page-container');
+    const pdfPages = document.querySelectorAll('.pf');
+    
+    if (!container || pdfPages.length === 0) {
+        log('等待PDF元素加载...');
+        setTimeout(applyPageCenterLayout, 100);
+        return;
     }
+    
+    // 确保包装器存在
+    const wrapper = createWrapper();
+    if (!wrapper) {
+        log('无法创建包装器');
+        return;
+    }
+    
+    // 获取设备宽度和目标宽度
+    const displayWidth = getDisplayWidth();
+    const targetWidth = Math.floor(displayWidth * 0.6); // 精确 60%
+    
+    let processedPages = 0;
+    
+    // 为每一页单独处理
+    pdfPages.forEach((page, index) => {
+        const pageContent = page.querySelector('.pc');
+        if (!pageContent) return;
+        
+        // 完全重置页面内容的样式
+        pageContent.style.transform = 'none';
+        pageContent.style.width = 'auto';
+        pageContent.style.maxWidth = 'none';
+        pageContent.style.margin = '0';
+        pageContent.style.left = '0';
+        pageContent.style.right = 'auto';
+        pageContent.style.position = 'relative';
+        
+        // 强制重新计算布局
+        pageContent.offsetHeight;
+        
+        // 获取当前页面的原始宽度
+        const rect = pageContent.getBoundingClientRect();
+        const originalWidth = Math.max(
+            pageContent.scrollWidth,
+            pageContent.offsetWidth,
+            rect.width
+        );
+        
+        if (originalWidth === 0) {
+            log(`第${index + 1}页尚未渲染完成`);
+            return;
+        }
+        
+        // 计算缩放比例
+        const scale = targetWidth / originalWidth;
+        const finalScale = Math.max(0.1, Math.min(scale, 3.0));
+        
+        // 计算居中位置
+        const scaledWidth = originalWidth * finalScale;
+        const leftOffset = (displayWidth - scaledWidth) / 2;
+        
+        // 应用缩放和位置
+        pageContent.style.transformOrigin = 'center top';
+        pageContent.style.transform = `scale(${finalScale})`;
+        pageContent.style.width = `${originalWidth}px`;
+        
+        // 使用margin-left来居中页面
+        pageContent.style.marginLeft = `${leftOffset}px`;
+        
+        // 调整页面容器高度
+        const scaledHeight = pageContent.scrollHeight * finalScale;
+        page.style.minHeight = `${scaledHeight + 40}px`;
+        
+        processedPages++;
+        
+        log(`第${index + 1}页处理完成:`, {
+            originalWidth: originalWidth.toFixed(1),
+            targetWidth,
+            scale: finalScale.toFixed(4),
+            scaledWidth: scaledWidth.toFixed(1),
+            scaledHeight: scaledHeight.toFixed(1),
+            leftOffset: leftOffset.toFixed(1)
+        });
+    });
+    
+    log(`共处理了${processedPages}页`);
+    
+    // 显示调试信息
+    showDebugInfo({
+        displayWidth,
+        targetWidth,
+        processedPages,
+        totalPages: pdfPages.length
+    });
+}
     
     // 显示调试信息
     function showDebugInfo(info) {
