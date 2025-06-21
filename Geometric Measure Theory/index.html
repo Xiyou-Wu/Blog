@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T14:07:17.133Z">
+<meta property="article:modified_time" content="2025-06-21T14:08:12.391Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -291,20 +291,17 @@
 
 .pc.opened { display: block !important; }
 
-/* Text rendering */
+/* PDF内部元素保持原始样式 */
 .t {
   position: absolute;
   white-space: pre;
   transform-origin: 0 100%;
-  -ms-transform-origin: 0 100%;
-  -webkit-transform-origin: 0 100%;
   unicode-bidi: bidi-override;
 }
 
-/* 禁用所有图片和背景的点击事件 */
-.bi, .bf, #page-container img {
-  pointer-events: none !important;
-  cursor: default !important;
+.bi, .bf {
+  position: absolute;
+  overflow: hidden;
 }
 
 /* 页面布局 */
