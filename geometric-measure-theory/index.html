@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T16:10:10.993Z">
+<meta property="article:modified_time" content="2025-06-21T16:12:39.796Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -536,83 +536,83 @@ function applyLayout() {
         container.style.transformOrigin = 'center top';
         
         // 调整包装器的高度以适应缩放后的内容
-        const scaledHeight = container.scrollHeight * finalScale;
-        wrapper.style.minHeight = `${scaledHeight + 40}px`;
+        // const scaledHeight = container.scrollHeight * finalScale;
+        // wrapper.style.minHeight = `${scaledHeight + 40}px`;
         
         // 计算实际的边距
         // const scaledWidth = originalWidth * finalScale;
         // const leftMargin = (displayWidth - scaledWidth) / 2;
         // const marginPercentage = (leftMargin / displayWidth) * 100;
         
-        log('布局计算结果:', {
-            displayWidth,
-            originalWidth,
-            targetWidth,
-            scale: finalScale.toFixed(3),
-            scaledWidth: scaledWidth.toFixed(0),
-            leftMargin: leftMargin.toFixed(0),
-            marginPercentage: marginPercentage.toFixed(1) + '%'
-        });
+        // log('布局计算结果:', {
+        //     displayWidth,
+        //     originalWidth,
+        //     targetWidth,
+        //     scale: finalScale.toFixed(3),
+        //     scaledWidth: scaledWidth.toFixed(0),
+        //     leftMargin: leftMargin.toFixed(0),
+        //     marginPercentage: marginPercentage.toFixed(1) + '%'
+        // });
         
-        // 显示调试信息
-        showDebugInfo({
-            displayWidth,
-            originalWidth,
-            targetWidth,
-            scale: finalScale,
-            scaledWidth,
-            leftMargin,
-            marginPercentage
-        });
+        // // 显示调试信息
+        // showDebugInfo({
+        //     displayWidth,
+        //     originalWidth,
+        //     targetWidth,
+        //     scale: finalScale,
+        //     scaledWidth,
+        //     leftMargin,
+        //     marginPercentage
+        // });
         
         log('PDF布局应用完成');
     }
     
-    // 显示调试信息
-    function showDebugInfo(info) {
-        if (!DEBUG) return;
+    // // 显示调试信息
+    // function showDebugInfo(info) {
+    //     if (!DEBUG) return;
         
-        let panel = document.getElementById('pdf-debug-panel');
-        if (!panel) {
-            panel = document.createElement('div');
-            panel.id = 'pdf-debug-panel';
-            panel.style.cssText = `
-                position: fixed;
-                top: 10px;
-                right: 10px;
-                background: rgba(0,0,0,0.9);
-                color: white;
-                padding: 15px;
-                border-radius: 8px;
-                font-size: 12px;
-                font-family: 'Courier New', monospace;
-                z-index: 10000;
-                max-width: 320px;
-                border: 1px solid #333;
-                cursor: pointer;
-            `;
-            document.body.appendChild(panel);
+    //     let panel = document.getElementById('pdf-debug-panel');
+    //     if (!panel) {
+    //         panel = document.createElement('div');
+    //         panel.id = 'pdf-debug-panel';
+    //         panel.style.cssText = `
+    //             position: fixed;
+    //             top: 10px;
+    //             right: 10px;
+    //             background: rgba(0,0,0,0.9);
+    //             color: white;
+    //             padding: 15px;
+    //             border-radius: 8px;
+    //             font-size: 12px;
+    //             font-family: 'Courier New', monospace;
+    //             z-index: 10000;
+    //             max-width: 320px;
+    //             border: 1px solid #333;
+    //             cursor: pointer;
+    //         `;
+    //         document.body.appendChild(panel);
             
-            panel.addEventListener('click', function() {
-                this.style.display = 'none';
-            });
-        }
+    //         panel.addEventListener('click', function() {
+    //             this.style.display = 'none';
+    //         });
+    //     }
         
-        const percentage = ((info.scaledWidth / info.displayWidth) * 100).toFixed(1);
+    //     const percentage = ((info.scaledWidth / info.displayWidth) * 100).toFixed(1);
         
-        panel.innerHTML = `
-            <strong>📊 PDF布局调试信息</strong><br><br>
-            🖥️ 设备显示宽度: ${info.displayWidth}px<br>
-            📄 PDF原始宽度: ${info.originalWidth}px<br>
-            🎯 目标宽度(60%): ${info.targetWidth}px<br>
-            📏 实际宽度: ${info.scaledWidth.toFixed(0)}px (${percentage}%)<br>
-            📐 缩放比例: ${info.scale.toFixed(3)}<br>
-            ⬅️ 左边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
-            ➡️ 右边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
-            <br>
-            <small>💡 点击关闭此面板</small>
-        `;
-    }
+    //     panel.innerHTML = `
+    //         <strong>📊 PDF布局调试信息</strong><br><br>
+    //         🖥️ 设备显示宽度: ${info.displayWidth}px<br>
+    //         📄 PDF原始宽度: ${info.originalWidth}px<br>
+    //         🎯 目标宽度(60%): ${info.targetWidth}px<br>
+    //         📏 实际宽度: ${info.scaledWidth.toFixed(0)}px (${percentage}%)<br>
+    //         📐 缩放比例: ${info.scale.toFixed(3)}<br>
+    //         ⬅️ 左边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
+    //         ➡️ 右边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
+    //         <br>
+    //         <small>💡 点击关闭此面板</small>
+    //     `;
+    // }
     
     // 响应窗口变化
     let resizeTimeout;
@@ -3061,13 +3061,13 @@ pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Blog/elliptic-pdes-gilbarg-trudinger/" rel="prev" title="Introduction of Elliptic PDES (Gilbarg-Trudinger)">
-                  <i class="fa fa-angle-left"></i> Introduction of Elliptic PDES (Gilbarg-Trudinger)
+                <a href="/Blog/hexo-theme-next/" rel="prev" title="Welcome to the NexT Organization!">
+                  <i class="fa fa-angle-left"></i> Welcome to the NexT Organization!
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Blog/functional-analysis/" rel="next" title="Documentation">
-                  Documentation <i class="fa fa-angle-right"></i>
+                <a href="/Blog/elliptic-pdes-gilbarg-trudinger/" rel="next" title="Introduction of Elliptic PDES (Gilbarg-Trudinger)">
+                  Introduction of Elliptic PDES (Gilbarg-Trudinger) <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
