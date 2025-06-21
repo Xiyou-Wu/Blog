@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T15:39:43.364Z">
+<meta property="article:modified_time" content="2025-06-21T15:40:45.145Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -428,92 +428,12 @@ html {
 }
 </style>
 
-<!-- <!DOCTYPE html>
-<!-- Created by pdf2htmlEX (https://github.com/pdf2htmlEX/pdf2htmlEX) -->
-<head>
-<style type="text/css">
-/*! 
- * Base CSS for pdf2htmlEX
- * Copyright 2012,2013 Lu Wang <coolwanglu@gmail.com> 
- * https://github.com/pdf2htmlEX/pdf2htmlEX/blob/master/share/LICENSE
- */
-/* Remove sidebar completely */
-#sidebar { display: none !important; }
-
-/* PDF容器 - 仅控制整体布局，不影响内部元素 */
-#page-container {
-  position: relative;
-  left: 0 !important;
-  height: auto !important;
-  overflow: visible !important;
-  
-  /* 核心设置：由JS计算的精确定位 */
-  margin: 0 auto !important;
-  padding: 20px 0 !important;
-  
-  /* 变换原点设置为左上角，保持PDF内部坐标系 */
-  transform-origin: left top !important;
-  
-  /* 清除可能的干扰 */
-  display: block !important;
-  box-sizing: content-box !important;
-}
-
-/* 移除所有可能影响PDF内部定位的样式重写 */
-/* PDF页面 - 完全保持原样，不做任何修改 */
-.pf {
-  /* 不设置任何样式，保持PDF原有样式 */
-}
-
-/* 页面内容 - 完全保持原样，不做任何修改 */
-.pc {
-  /* 不设置任何样式，保持PDF原有样式 */
-}
-
-/* PDF内部元素 - 完全保持原样，不做任何修改 */
-.t, .bi, .bf, .c, .d, ._ {
-  /* 不设置任何样式，保持PDF原有样式 */
-}
-
-/* 只设置页面级别的布局 */
-body {
-  overflow-x: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-html {
-  overflow-x: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* 博客内容容器 */
-.post-content, .article-entry {
-  overflow: visible !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* 选择高亮 */
-::selection { background: rgba(127,255,255,0.4); }
-::-moz-selection { background: rgba(127,255,255,0.4); }
-
-/* 打印样式 */
-@media print {
-  #page-container {
-    transform: none !important;
-    margin: 0 !important;
-    width: 100% !important;
-  }
-}
-</style>
-
 <script type="text/javascript">
-// PDF精确60%宽度居中显示系统 - 保持内部布局版本
+// PDF智能60%宽度居中显示系统
 (function() {
     'use strict';
     
+    // 调试模式
     const DEBUG = true;
     
     function log(...args) {
@@ -522,129 +442,133 @@ html {
         }
     }
     
-    // 获取真实设备宽度
-    function getRealDeviceWidth() {
-        const candidates = [
-            window.screen?.width || 0,
-            window.screen?.availWidth || 0,
-            window.outerWidth || 0,
-            document.documentElement?.clientWidth || 0,
-            window.innerWidth || 0
-        ].filter(w => w > 0);
+    // 获取设备真实显示宽度
+    function getDisplayWidth() {
+        // 优先级顺序的检测方法
+        const methods = [
+            () => screen.width,
+            () => screen.availWidth, 
+            () => window.outerWidth,
+            () => document.documentElement.clientWidth,
+            () => window.innerWidth
+        ];
         
-        const deviceWidth = Math.max(...candidates, 1024);
-        log('设备宽度检测结果:', candidates, '选择:', deviceWidth);
-        return deviceWidth;
+        let width = 0;
+        for (const method of methods) {
+            try {
+                const result = method();
+                if (result && result > width) {
+                    width = result;
+                }
+            } catch (e) {
+                continue;
+            }
+        }
+        
+        // 确保有一个合理的默认值
+        if (width < 320) {
+            width = Math.max(window.innerWidth, 1024);
+        }
+        
+        log('检测到的显示宽度:', width);
+        return width;
     }
     
-    // 应用60%宽度布局 - 改进版，保持内部布局
-    function applyPDFLayout() {
+    // 创建外层包装器
+    function createWrapper() {
         const container = document.getElementById('page-container');
-        if (!container) {
-            log('PDF容器未找到，稍后重试...');
-            setTimeout(applyPDFLayout, 100);
+        if (!container || container.parentElement.classList.contains('pdf-wrapper')) {
+            return document.querySelector('.pdf-wrapper');
+        }
+        
+        const wrapper = document.createElement('div');
+        wrapper.className = 'pdf-wrapper';
+        
+        // 将容器包装在wrapper中
+        container.parentElement.insertBefore(wrapper, container);
+        wrapper.appendChild(container);
+        
+        log('已创建PDF包装器');
+        return wrapper;
+    }
+    
+    // 应用60%宽度布局
+    function applyLayout() {
+        const container = document.getElementById('page-container');
+        const pdfPages = document.querySelectorAll('.pf');
+        
+        if (!container || pdfPages.length === 0) {
+            log('等待PDF元素加载...');
+            setTimeout(applyLayout, 100);
             return;
         }
         
-        // 临时移除transform以获取原始尺寸
-        const originalTransform = container.style.transform;
+        // 确保包装器存在
+        const wrapper = createWrapper();
+        if (!wrapper) {
+            log('无法创建包装器');
+            return;
+        }
+        
+        // 获取设备宽度和目标宽度
+        const displayWidth = getDisplayWidth();
+        const targetWidth = Math.floor(displayWidth * 0.6); // 60%
+        
+        // 获取PDF容器的原始宽度
         container.style.transform = 'none';
-        container.style.width = '';
-        container.style.marginLeft = '';
-        container.style.marginRight = '';
+        const originalWidth = container.scrollWidth || container.offsetWidth;
         
-        // 强制重排以获取准确尺寸
-        container.offsetHeight; // 触发重排
+        if (originalWidth === 0) {
+            log('PDF尚未渲染完成，稍后重试...');
+            setTimeout(applyLayout, 200);
+            return;
+        }
         
-        requestAnimationFrame(() => {
-            const deviceWidth = getRealDeviceWidth();
-            const targetWidth = Math.floor(deviceWidth * 0.6); // 精确60%
-            const sideMargin = Math.floor(deviceWidth * 0.2); // 各20%边距
-            
-            // 获取PDF的原始宽度 - 使用多种方法确保准确
-            let originalWidth = 0;
-            const widthMethods = [
-                () => container.scrollWidth,
-                () => container.offsetWidth,
-                () => container.getBoundingClientRect().width,
-                () => {
-                    const firstPage = container.querySelector('.pf');
-                    return firstPage ? firstPage.offsetWidth : 0;
-                }
-            ];
-            
-            for (const method of widthMethods) {
-                try {
-                    const width = method();
-                    if (width > originalWidth) {
-                        originalWidth = width;
-                    }
-                } catch (e) {
-                    continue;
-                }
-            }
-            
-            if (originalWidth === 0) {
-                log('PDF内容尚未加载完成，重试...');
-                setTimeout(applyPDFLayout, 300);
-                return;
-            }
-            
-            // 计算缩放比例
-            const scale = targetWidth / originalWidth;
-            const finalScale = Math.max(0.2, Math.min(scale, 3.0));
-            
-            // 应用变换 - 使用left top作为原点保持内部布局
-            container.style.transformOrigin = 'left top';
-            container.style.transform = `scale(${finalScale})`;
-            
-            // 计算缩放后的实际宽度和居中所需的左边距
-            const scaledWidth = originalWidth * finalScale;
-            const centeringMargin = (deviceWidth - scaledWidth) / 2;
-            
-            // 设置左边距以实现居中
-            container.style.marginLeft = `${centeringMargin}px`;
-            container.style.marginRight = `${centeringMargin}px`;
-            
-            // 计算缩放后的高度，调整容器的下边距
-            const scaledHeight = container.scrollHeight * finalScale;
-            container.style.marginBottom = `${20}px`; // 固定下边距
-            
-            // 计算最终效果
-            const actualPercentage = (scaledWidth / deviceWidth * 100).toFixed(1);
-            const leftMarginPercentage = (centeringMargin / deviceWidth * 100).toFixed(1);
-            
-            log('布局应用完成:', {
-                设备宽度: deviceWidth,
-                原始PDF宽度: originalWidth,
-                目标宽度: targetWidth,
-                缩放比例: finalScale.toFixed(3),
-                缩放后宽度: scaledWidth.toFixed(0),
-                实际占比: actualPercentage + '%',
-                居中边距: centeringMargin.toFixed(0) + 'px',
-                边距占比: leftMarginPercentage + '%',
-                缩放后高度: scaledHeight.toFixed(0) + 'px'
-            });
-            
-            // 显示调试信息
-            if (DEBUG) {
-                showDebugPanel({
-                    deviceWidth,
-                    originalWidth,
-                    targetWidth,
-                    scale: finalScale,
-                    scaledWidth,
-                    actualPercentage,
-                    centeringMargin,
-                    leftMarginPercentage,
-                    scaledHeight
-                });
-            }
+        // 计算缩放比例
+        const scale = targetWidth / originalWidth;
+        const finalScale = Math.max(0.1, Math.min(scale, 2.0)); // 限制缩放范围
+        
+        // 应用缩放到整个容器
+        container.style.transform = `scale(${finalScale})`;
+        container.style.transformOrigin = 'center top';
+        
+        // 调整包装器的高度以适应缩放后的内容
+        const scaledHeight = container.scrollHeight * finalScale;
+        wrapper.style.minHeight = `${scaledHeight + 40}px`;
+        
+        // 计算实际的边距
+        const scaledWidth = originalWidth * finalScale;
+        const leftMargin = (displayWidth - scaledWidth) / 2;
+        const marginPercentage = (leftMargin / displayWidth) * 100;
+        
+        log('布局计算结果:', {
+            displayWidth,
+            originalWidth,
+            targetWidth,
+            scale: finalScale.toFixed(3),
+            scaledWidth: scaledWidth.toFixed(0),
+            leftMargin: leftMargin.toFixed(0),
+            marginPercentage: marginPercentage.toFixed(1) + '%'
         });
+        
+        // 显示调试信息
+        showDebugInfo({
+            displayWidth,
+            originalWidth,
+            targetWidth,
+            scale: finalScale,
+            scaledWidth,
+            leftMargin,
+            marginPercentage
+        });
+        
+        log('PDF布局应用完成');
     }
     
-    // 显示调试面板
-    function showDebugPanel(info) {
+    // 显示调试信息
+    function showDebugInfo(info) {
+        if (!DEBUG) return;
+        
         let panel = document.getElementById('pdf-debug-panel');
         if (!panel) {
             panel = document.createElement('div');
@@ -653,85 +577,94 @@ html {
                 position: fixed;
                 top: 10px;
                 right: 10px;
-                background: rgba(0,0,0,0.95);
-                color: #00ff00;
+                background: rgba(0,0,0,0.9);
+                color: white;
                 padding: 15px;
                 border-radius: 8px;
-                font-size: 11px;
+                font-size: 12px;
                 font-family: 'Courier New', monospace;
-                z-index: 99999;
-                max-width: 300px;
-                border: 1px solid #00ff00;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                z-index: 10000;
+                max-width: 320px;
+                border: 1px solid #333;
                 cursor: pointer;
-                user-select: none;
             `;
             document.body.appendChild(panel);
             
-            panel.addEventListener('click', () => panel.remove());
+            panel.addEventListener('click', function() {
+                this.style.display = 'none';
+            });
         }
         
+        const percentage = ((info.scaledWidth / info.displayWidth) * 100).toFixed(1);
+        
         panel.innerHTML = `
-            <div style="color: #ffff00; font-weight: bold; margin-bottom: 8px;">
-                🎯 PDF 60%布局调试 (保持内部布局)
-            </div>
-            <div>🖥️ 设备宽度: ${info.deviceWidth}px</div>
-            <div>📄 PDF原宽度: ${info.originalWidth}px</div>
-            <div>🎯 目标宽度: ${info.targetWidth}px (60%)</div>
-            <div>📏 实际宽度: ${info.scaledWidth.toFixed(0)}px (${info.actualPercentage}%)</div>
-            <div>📐 缩放比例: ${info.scale.toFixed(3)}</div>
-            <div>🎯 居中边距: ${info.centeringMargin.toFixed(0)}px (${info.leftMarginPercentage}%)</div>
-            <div>📏 缩放后高度: ${info.scaledHeight.toFixed(0)}px</div>
-            <div style="color: #888; font-size: 10px; margin-top: 8px;">
-                💡 使用left top原点保持内部布局<br>
-                💡 点击关闭 | 窗口变化时自动重新计算
-            </div>
+            <strong>📊 PDF布局调试信息</strong><br><br>
+            🖥️ 设备显示宽度: ${info.displayWidth}px<br>
+            📄 PDF原始宽度: ${info.originalWidth}px<br>
+            🎯 目标宽度(60%): ${info.targetWidth}px<br>
+            📏 实际宽度: ${info.scaledWidth.toFixed(0)}px (${percentage}%)<br>
+            📐 缩放比例: ${info.scale.toFixed(3)}<br>
+            ⬅️ 左边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
+            ➡️ 右边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
+            <br>
+            <small>💡 点击关闭此面板</small>
         `;
     }
     
     // 响应窗口变化
-    let resizeTimer;
+    let resizeTimeout;
     function handleResize() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            log('窗口变化，重新计算布局...');
-            applyPDFLayout();
-        }, 250);
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            log('窗口尺寸改变，重新计算布局');
+            applyLayout();
+        }, 300);
     }
     
-    // 响应屏幕方向变化
+    // 响应方向变化
     function handleOrientationChange() {
         setTimeout(() => {
-            log('屏幕方向变化，重新计算布局...');
-            applyPDFLayout();
-        }, 300);
+            log('屏幕方向改变，重新计算布局');
+            applyLayout();
+        }, 500);
     }
     
     // 初始化
     function init() {
-        log('PDF 60%宽度居中布局系统启动 (保持内部布局版本)');
+        log('PDF 60%宽度布局系统启动');
         
-        // 初始应用
+        // 等待DOM加载
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => {
-                setTimeout(applyPDFLayout, 50);
+                setTimeout(applyLayout, 100);
             });
         } else {
-            setTimeout(applyPDFLayout, 50);
+            setTimeout(applyLayout, 100);
         }
         
-        // 监听事件
+        // 绑定事件监听器
         window.addEventListener('resize', handleResize);
         window.addEventListener('orientationchange', handleOrientationChange);
         
-        // 多次尝试确保成功
-        const retryTimes = [100, 300, 600, 1000, 2000];
-        retryTimes.forEach(delay => {
-            setTimeout(applyPDFLayout, delay);
-        });
+        log('事件监听器已设置');
     }
     
-    // 启动
+    // 全局调试接口
+    window.PDFDebugger = {
+        reapply: applyLayout,
+        getDisplayWidth: getDisplayWidth,
+        toggleDebug: function() {
+            const panel = document.getElementById('pdf-debug-panel');
+            if (panel) {
+                panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            }
+        },
+        showInfo: function() {
+            document.getElementById('pdf-debug-panel').style.display = 'block';
+        }
+    };
+    
+    // 启动系统
     init();
     
 })();
@@ -3125,13 +3058,13 @@ pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Blog/hexo-theme-next/" rel="prev" title="Welcome to the NexT Organization!">
-                  <i class="fa fa-angle-left"></i> Welcome to the NexT Organization!
+                <a href="/Blog/elliptic-pdes-gilbarg-trudinger/" rel="prev" title="Introduction of Elliptic PDES (Gilbarg-Trudinger)">
+                  <i class="fa fa-angle-left"></i> Introduction of Elliptic PDES (Gilbarg-Trudinger)
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Blog/elliptic-pdes-gilbarg-trudinger/" rel="next" title="Introduction of Elliptic PDES (Gilbarg-Trudinger)">
-                  Introduction of Elliptic PDES (Gilbarg-Trudinger) <i class="fa fa-angle-right"></i>
+                <a href="/Blog/elliptic-pdes-han-lin/" rel="next" title="Introduction of Elliptic PDES (Han-Lin)">
+                  Introduction of Elliptic PDES (Han-Lin) <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
