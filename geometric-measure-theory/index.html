@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T12:34:44.724Z">
+<meta property="article:modified_time" content="2025-06-21T12:37:04.177Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -281,6 +281,7 @@
     
     <div class="post-body" itemprop="articleBody">
 
+
 <!-- <!DOCTYPE html>
 <!-- Created by pdf2htmlEX (https://github.com/pdf2htmlEX/pdf2htmlEX) -->
 <head>
@@ -297,11 +298,11 @@
   left: 0 !important;
   height: auto !important;
   overflow: visible !important;
-  margin: 0 auto !important;
+  margin: 0 auto !important; /* 确保水平居中 */
   padding: 20px;
   box-sizing: border-box;
   transform-origin: top center !important;
-  width: 80vw !important;
+  width: 60vw !important; /* 修改为60%屏幕宽度 */
   max-width: none !important;
   min-height: 100vh;
 }
@@ -328,7 +329,9 @@ html {
 .pf, .pc {
   position: relative;
   overflow: visible;
-  margin-bottom: 20px; /* 页面间距 */
+  margin: 0 auto 20px auto; /* 每页都居中，增加底部间距 */
+  width: 100% !important; /* 每个PDF页面占容器的100%宽度 */
+  display: block;
 }
 
 .pc.opened { display: block; }
@@ -366,38 +369,41 @@ html {
 ::selection { background: rgba(127,255,255,0.4); }
 ::-moz-selection { background: rgba(127,255,255,0.4); }
 
-/* 响应式缩放 - 确保每页宽度为屏幕80% */
+/* 响应式缩放 - 确保在不同设备上都是60%宽度且居中 */
 @media screen {
   #page-container {
     transform: scale(1) !important;
+    width: 60vw !important;
+    margin: 0 auto !important;
   }
   
-  /* 让每个PDF页面都占容器的100%宽度（即屏幕80%） */
+  /* 让每个PDF页面都占容器的100%宽度并居中 */
   #page-container .pf {
     width: 100% !important;
     transform: scale(1) !important;
     transform-origin: top center !important;
+    margin: 0 auto 20px auto !important;
   }
 }
 
-/* 大屏幕优化 */
+/* 大屏幕优化 - 保持60%宽度 */
 @media screen and (min-width: 1200px) {
   #page-container {
-    width: 80vw !important;
+    width: 60vw !important;
   }
 }
 
-/* 平板设备优化 */
+/* 平板设备优化 - 保持60%宽度 */
 @media screen and (max-width: 1199px) and (min-width: 768px) {
   #page-container {
-    width: 85vw !important;
+    width: 60vw !important;
   }
 }
 
-/* 手机设备优化 */
+/* 手机设备优化 - 在小屏幕上适当增加宽度以保证可读性 */
 @media screen and (max-width: 767px) {
   #page-container {
-    width: 95vw !important;
+    width: 85vw !important;
     padding: 10px;
   }
 }
@@ -405,10 +411,11 @@ html {
 /* 超小屏幕优化 */
 @media screen and (max-width: 480px) {
   #page-container {
-    width: 98vw !important;
+    width: 95vw !important;
     padding: 5px;
   }
-}</style> 
+}
+</style> 
 
 <style type="text/css">
 .ff0{font-family:sans-serif;visibility:hidden;}
@@ -2798,13 +2805,13 @@ pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Blog/hexo-theme-next/" rel="prev" title="Welcome to the NexT Organization!">
-                  <i class="fa fa-angle-left"></i> Welcome to the NexT Organization!
+                <a href="/Blog/elliptic-pdes-gilbarg-trudinger/" rel="prev" title="Introduction of Elliptic PDES (Gilbarg-Trudinger)">
+                  <i class="fa fa-angle-left"></i> Introduction of Elliptic PDES (Gilbarg-Trudinger)
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Blog/elliptic-pdes-gilbarg-trudinger/" rel="next" title="Introduction of Elliptic PDES (Gilbarg-Trudinger)">
-                  Introduction of Elliptic PDES (Gilbarg-Trudinger) <i class="fa fa-angle-right"></i>
+                <a href="/Blog/elliptic-pdes-han-lin/" rel="next" title="Introduction of Elliptic PDES (Han-Lin)">
+                  Introduction of Elliptic PDES (Han-Lin) <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
