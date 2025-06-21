@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/Blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/Blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/Blog/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inconsolata:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xiyou-wu.github.io","root":"/Blog/","images":"/Blog/images","scheme":"Mist","darkmode":false,"version":"8.23.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"item":["recent_posts","archives","categories","tags"]},"hljswrap":true,"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/Blog/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/Blog/js/config.js" defer></script>
+
+    <meta name="description" content="Outline">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Introduction of Grometric Measure Theory">
+<meta property="og:url" content="https://xiyou-wu.github.io/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/index.html">
+<meta property="og:site_name" content="Math Notes">
+<meta property="og:description" content="Outline">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
+<meta property="article:modified_time" content="2025-06-21T22:32:35.418Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Math Notes">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiyou-wu.github.io/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":true,"permalink":"https://xiyou-wu.github.io/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/index.html","path":"Geometric Measure Theory/Part I - Radon measures on Rn/index.html","title":"Introduction of Grometric Measure Theory"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Introduction of Grometric Measure Theory | Math Notes
+</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous" defer></script>
+<script src="/Blog/js/utils.js" defer></script><script src="/Blog/js/motion.js" defer></script><script src="/Blog/js/sidebar.js" defer></script><script src="/Blog/js/next-boot.js" defer></script><script src="/Blog/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/Blog/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.5.0/mermaid.min.js","integrity":"sha256-2obLuIPcceEhkE3G09G33hBdmE55ivVcZUlcKcGNHjU="}}</script>
+  <script src="/Blog/js/third-party/tags/mermaid.js" defer></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/Blog/js/third-party/tags/wavedrom.js" defer></script>
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/Blog/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/Blog/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/Blog/atom.xml" title="Math Notes" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/Blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Math Notes</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Record my math notes</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/Blog/" rel="section"><i class="fa fa-bell fa-fw"></i>Home</a></li><li class="menu-item menu-item-geometric-measure-theory"><a href="/Blog/Geometric%20Measure%20Theory/" rel="section"><i class="fa fa-book fa-fw"></i>Geometric Measure Theory</a></li><li class="menu-item menu-item-elliptic-pdes-(han-lin)"><a href="/Blog/Elliptic%20Partial%20Differential%20Equations%20(Han-Lin)/" rel="section"><i class="fa fa-book fa-fw"></i>Elliptic PDEs (Han-Lin)</a></li><li class="menu-item menu-item-global-calculus"><a href="/Blog/Global%20calculus/" rel="section"><i class="fa fa-book fa-fw"></i>Global Calculus</a></li><li class="menu-item menu-item-elliptic-pdes-(trudinger)"><a href="/Blog/Elliptic%20Partial%20Differential%20Equations%20(Gilbarg-Trudinger)/" rel="section"><i class="fa fa-book fa-fw"></i>Elliptic PDEs (Trudinger)</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xiyou"
+      src="/Blog/images/touxiang.jpeg">
+  <p class="site-author-name" itemprop="name">Xiyou</p>
+  <div class="site-description" itemprop="description">Each small advance, its fitting delight.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/Blog/archives/">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+<!--
+<div class="sidebar-button animated">
+  <a target="_blank" rel="noopener" href="https://discord.gg/qmkgkY3jaG">
+    <i class="fab fa-discord"></i>
+    Discord Chat
+  </a>
+</div>
+<div class="cc-license animated" itemprop="sponsor">
+  <span class="exturl cc-opacity" title="Deploy with Netlify → https://www.netlify.com" data-url="aHR0cHM6Ly93d3cubmV0bGlmeS5jb20="><img width="120" src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Netlify"></span>
+</div>
+-->
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+    <ul class="sub-menu menu">
+      
+  <li class="menu-item menu-item-part-i---radon-measures-on-rn"><a href="/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/" rel="section"><i class="fa fa-book fa-fw"></i>Part I - Radon measures on Rn</a></li>
+
+
+      
+  <li class="menu-item menu-item-part-ii---sets-of-finite-perimeter"><a href="/Blog/Geometric%20Measure%20Theory/Part%20II%20-%20Sets%20of%20finite%20perimeter/" rel="section"><i class="fa fa-book fa-fw"></i>Part II - Sets of finite perimeter</a></li>
+
+
+      
+  <li class="menu-item menu-item-part-iii---regularity-theory-and-analysis-of-singularities"><a href="/Blog/Geometric%20Measure%20Theory/Part%20III%20-%20Regularity%20theory%20and%20analysis%20of%20singularities/" rel="section"><i class="fa fa-book fa-fw"></i>Part III - Regularity theory and analysis of singularities</a></li>
+
+
+      
+  <li class="menu-item menu-item-part-iv---minimizing-clusters"><a href="/Blog/Geometric%20Measure%20Theory/Part%20IV%20-%20Minimizing%20clusters/" rel="section"><i class="fa fa-book fa-fw"></i>Part IV - Minimizing clusters</a></li>
+
+
+    </ul>
+    <ul class="sub-menu menu">
+      
+  <li class="menu-item menu-item-outer-measures"><a href="/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/Outer%20measures.html" rel="section"><i class="fa fa-hand-peace fa-fw"></i>Outer measures</a></li>
+
+
+      
+  <li class="menu-item menu-item-borel-and-radon-measures"><a href="/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/Borel%20and%20Radon%20measures.html" rel="section"><i class="fa fa-hand-peace fa-fw"></i>Borel and Radon measures</a></li>
+
+
+      
+  <li class="menu-item menu-item-hausdorﬀ-measures"><a href="/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/Hausdor%EF%AC%80%20measures.html" rel="section"><i class="fa fa-hand-peace fa-fw"></i>Hausdorﬀ measures</a></li>
+
+
+      
+  <li class="menu-item menu-item-radon-measures-and-continuous-functions"><a href="/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/Radon%20measures%20and%20continuous%20functions.html" rel="section"><i class="fa fa-hand-peace fa-fw"></i>Radon measures and continuous functions</a></li>
+
+
+      
+  <li class="menu-item menu-item-diﬀerentiation-of-radon-measures"><a href="/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/Di%EF%AC%80erentiation%20of%20Radon%20measures.html" rel="section"><i class="fa fa-hand-peace fa-fw"></i>Diﬀerentiation of Radon measures</a></li>
+
+
+      
+  <li class="menu-item menu-item-two-further-applications-of-diﬀerentiation-theory"><a href="/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/Two%20further%20applications%20of%20di%EF%AC%80erentiation%20theory.html" rel="section"><i class="fa fa-hand-peace fa-fw"></i>Two further applications of diﬀerentiation theory</a></li>
+
+
+      
+  <li class="menu-item menu-item-lipschitz-functions"><a href="/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/Lipschitz%20functions.html" rel="section"><i class="fa fa-hand-peace fa-fw"></i>Lipschitz functions</a></li>
+
+
+      
+  <li class="menu-item menu-item-area-formula"><a href="/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/Area%20formula.html" rel="section"><i class="fa fa-hand-peace fa-fw"></i>Area formula</a></li>
+
+
+      
+  <li class="menu-item menu-item-gauss_green-theorem"><a href="/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/Gauss_Green%20theorem.html" rel="section"><i class="fa fa-hand-peace fa-fw"></i>Gauss_Green theorem</a></li>
+
+
+      
+  <li class="menu-item menu-item-rectifiable-sets-and-blow-ups-of-radon-measures"><a href="/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/Rectifiable%20sets%20and%20blow-ups%20of%20Radon%20measures.html" rel="section"><i class="fa fa-hand-peace fa-fw"></i>Rectifiable sets and blow-ups of Radon measures</a></li>
+
+
+      
+  <li class="menu-item menu-item-tangential-diﬀerentiability-and-the-area-formula"><a href="/Blog/Geometric%20Measure%20Theory/Part%20I%20-%20Radon%20measures%20on%20Rn/Tangential%20di%EF%AC%80erentiability%20and%20the%20area%20formula.html" rel="section"><i class="fa fa-hand-peace fa-fw"></i>Tangential diﬀerentiability and the area formula</a></li>
+
+
+    </ul>
+
+
+    
+    
+    
+    <div class="post-block" lang="en"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">Introduction of Grometric Measure Theory
+</h1>
+
+<div class="post-meta-container">
+    <div class="post-description">Outline</div>
+  <ul class="breadcrumb">
+            <li><a href="/Blog/Geometric%20Measure%20Theory/">GEOMETRIC MEASURE THEORY</a></li>
+          <li>PART I - RADON MEASURES ON RN</li>
+  </ul>
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          
+
+
+<!-- <!DOCTYPE html>
+<!-- Created by pdf2htmlEX (https://github.com/pdf2htmlEX/pdf2htmlEX) -->
+<head>
+<style type="text/css">
+/*! 
+ * Base CSS for pdf2htmlEX
+ * Copyright 2012,2013 Lu Wang <coolwanglu@gmail.com> 
+ * https://github.com/pdf2htmlEX/pdf2htmlEX/blob/master/share/LICENSE
+ */
+/* Remove sidebar completely */
+#sidebar { display: none !important; }
+
+/* PDF外层包装器 */
+.pdf-wrapper {
+  width: 100%; /* 使用 100% 替代 100vw，以适应博客主题的容器宽度 */
+  height: auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* PDF容器 - 移除全局变换 */
+#page-container {
+  position: relative;
+  left: 0 !important;
+  height: auto !important;
+  overflow-x: auto !important; /* 允许在需要时显示水平滚动条 */
+  
+  /* 使用 Flexbox 布局来居中页面 */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  
+  margin: 0 !important;
+  padding: 0 !important;
+  
+  /* 移除全局缩放 */
+  transform: none !important;
+  transform-origin: none !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: auto !important;
+}
+
+/* PDF页面 - 每页独立居中和缩放 */
+.pf {
+  position: relative !important;
+  overflow: visible !important;
+  margin: 20px 0 !important;
+  
+  /* 布局样式将由JavaScript动态设置 */
+  
+  max-width: none !important;
+  
+  /* 不对页面容器进行缩放 */
+  transform: none !important;
+  transform-origin: center top !important;
+}
+
+/* 页面内容容器 - 应用缩放和居中 */
+.pc {
+  position: relative !important;
+  display: block !important;
+  margin: 0 auto !important;
+  overflow: visible !important;
+  
+  /* 这里会通过JavaScript设置缩放 */
+  transform-origin: center top !important;
+  
+  /* 宽度将由JavaScript动态设置 */
+}
+
+.pc.opened { 
+  display: block !important; 
+}
+
+/* 文字渲染 - 保持原始设置 */
+.t {
+  position: absolute;
+  white-space: pre;
+  transform-origin: 0 100% !important; /* 必须保持不变 */
+  -ms-transform-origin: 0 100% !important;
+  -webkit-transform-origin: 0 100% !important;
+  unicode-bidi: bidi-override;
+}
+
+/* 图片和背景元素 - 使用与文字相同的缩放原点 */
+.bi, .bf, .c, .d {
+  transform-origin: 0 100% !important; /* 统一使用左下角原点 */
+}
+
+/* 其余样式保持不变... */
+.bi, .bf, #page-container img {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+#page-container a,
+#page-container [onclick],
+#page-container [href] {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+/* Essential utility classes */
+.c { position: absolute; border: 0; padding: 0; margin: 0; overflow: hidden; display: block; }
+.d { position: absolute; transform-origin: 0 100%; }
+._ { display: inline-block; color: transparent; z-index: -1; }
+
+/* 选择高亮 */
+::selection { background: rgba(127,255,255,0.4); }
+::-moz-selection { background: rgba(127,255,255,0.4); }
+
+/* 页面布局 */
+body {
+  overflow-x: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html {
+  overflow-x: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 博客内容容器 */
+.post-content, .article-entry {
+  overflow: visible !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+
+/* 打印样式 */
+@media print {
+  .pdf-wrapper {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  
+  .pf {
+    margin-bottom: 1cm !important;
+  }
+  
+  .pc {
+    transform: none !important;
+    margin: 0 auto !important;
+  }
+}
+
+
+
+</style>
+
+
+<script type="text/javascript">
+// 每页独立居中的 PDF 显示系统
+(function() {
+    'use strict';
+    
+    const DEBUG = true;
+    
+    function log(...args) {
+        if (DEBUG) {
+            console.log('[PDF每页居中]', ...args);
+        }
+    }
+    
+    // 获取设备显示宽度
+    function getDisplayWidth() {
+        const methods = [
+            () => window.innerWidth,
+            () => document.documentElement.clientWidth,
+            () => window.outerWidth,
+            () => screen.availWidth,
+            () => screen.width
+        ];
+        
+        let width = 0;
+        for (const method of methods) {
+            try {
+                const result = method();
+                if (result && result > width) {
+                    width = result;
+                }
+            } catch (e) {
+                continue;
+            }
+        }
+        
+        if (width < 320) {
+            width = Math.max(window.innerWidth, 1024);
+        }
+        
+        return width;
+    }
+    
+    // 创建外层包装器
+    function createWrapper() {
+        const container = document.getElementById('page-container');
+        if (!container || container.parentElement.classList.contains('pdf-wrapper')) {
+            return document.querySelector('.pdf-wrapper');
+        }
+        
+        const wrapper = document.createElement('div');
+        wrapper.className = 'pdf-wrapper';
+        
+        container.parentElement.insertBefore(wrapper, container);
+        wrapper.appendChild(container);
+        
+        log('已创建PDF包装器');
+        return wrapper;
+    }
+    
+    // 为每页应用独立的60%宽度居中布局
+    function applyPageCenterLayout() {
+        const container = document.getElementById('page-container');
+        const pdfPages = document.querySelectorAll('.pf');
+        
+        if (!container || pdfPages.length === 0) {
+            log('等待PDF元素加载...');
+            setTimeout(applyPageCenterLayout, 100);
+            return;
+        }
+        
+        // 确保包装器存在
+        const wrapper = createWrapper();
+        if (!wrapper) {
+            log('无法创建包装器');
+            return;
+        }
+        
+        // 将目标宽度设置为容器的当前宽度
+        const containerWidth = container.clientWidth;
+        if (containerWidth <= 0) {
+            log('容器宽度无效，稍后重试');
+            setTimeout(applyPageCenterLayout, 100);
+            return;
+        }
+        const targetWidth = containerWidth;
+        let processedPages = 0;
+        
+        // 为每一页单独处理
+        pdfPages.forEach((page, index) => {
+            const pageContent = page.querySelector('.pc');
+            if (!pageContent) return;
+
+            // 重置内容容器(.pc)样式，以确保JS可以精确控制其尺寸
+            pageContent.style.maxWidth = 'none';
+            pageContent.style.width = 'auto';
+            
+            // 重置当前页面的变换
+            pageContent.style.transform = 'none';
+            
+            // 强制重新计算布局
+            pageContent.offsetHeight;
+            
+            // 获取当前页面的原始宽度
+            const originalWidth = Math.max(
+                pageContent.scrollWidth,
+                pageContent.offsetWidth,
+                pageContent.getBoundingClientRect().width
+            );
+            
+            if (originalWidth === 0) {
+                log(`第${index + 1}页尚未渲染完成`);
+                return;
+            }
+            
+            // 计算缩放比例
+            const scale = targetWidth / originalWidth;
+            const finalScale = Math.max(0.1, Math.min(scale, 3.0));
+            
+            // 应用缩放到页面内容
+            pageContent.style.transform = `scale(${finalScale})`;
+            pageContent.style.transformOrigin = 'center top';
+            
+            // 调整页面容器高度以适应缩放后的内容
+            const scaledHeight = pageContent.scrollHeight * finalScale;
+            page.style.minHeight = `${scaledHeight}px`;
+            
+            pageContent.style.width = `${originalWidth}px`;
+            pageContent.style.margin = '0 auto';
+            
+            processedPages++;
+            
+            log(`第${index + 1}页处理完成:`, {
+                originalWidth: originalWidth.toFixed(1),
+                targetWidth,
+                scale: finalScale.toFixed(4),
+                scaledWidth: (originalWidth * finalScale).toFixed(1),
+                scaledHeight: scaledHeight.toFixed(1)
+            });
+        });
+        
+        log(`共处理了${processedPages}页`);
+        
+        // 显示调试信息
+        showDebugInfo({
+            displayWidth,
+            targetWidth,
+            processedPages,
+            totalPages: pdfPages.length
+        });
+    }
+    
+    // 显示调试信息
+    function showDebugInfo(info) {
+        if (!DEBUG) return;
+        
+        let panel = document.getElementById('pdf-debug-panel');
+        if (!panel) {
+            panel = document.createElement('div');
+            panel.id = 'pdf-debug-panel';
+            panel.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                background: rgba(0,0,0,0.9);
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+                font-size: 12px;
+                font-family: 'Courier New', monospace;
+                z-index: 10000;
+                max-width: 350px;
+                border: 1px solid #333;
+                cursor: pointer;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            `;
+            document.body.appendChild(panel);
+            
+            panel.addEventListener('click', function() {
+                this.style.display = 'none';
+            });
+        }
+        
+        panel.innerHTML = `
+            <strong>📊 PDF每页居中布局调试信息</strong><br><br>
+            🖥️ 设备显示宽度: ${info.displayWidth}px<br>
+            🎯 目标宽度(60%): ${info.targetWidth}px<br>
+            📄 处理页面数: ${info.processedPages}/${info.totalPages}<br>
+            ✅ 每页独立居中: 启用 (CSS Flex)<br>
+            🎯 每页宽度占比: 60%<br>
+            <br>
+            <small>💡 点击关闭此面板</small>
+        `;
+    }
+    
+    // 响应窗口变化
+    let resizeTimeout;
+    function handleResize() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            log('窗口尺寸改变，重新计算每页布局');
+            applyPageCenterLayout();
+        }, 300);
+    }
+    
+    // 响应方向变化
+    function handleOrientationChange() {
+        setTimeout(() => {
+            log('屏幕方向改变，重新计算每页布局');
+            applyPageCenterLayout();
+        }, 500);
+    }
+    
+    // 监听DOM变化
+    function observeContainer() {
+        const targetNode = document.body;
+        const observer = new MutationObserver((mutations) => {
+            let shouldReapply = false;
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1 && 
+                            (node.id === 'page-container' || 
+                             node.querySelector && node.querySelector('#page-container'))) {
+                            shouldReapply = true;
+                        }
+                    });
+                }
+            });
+            
+            if (shouldReapply) {
+                setTimeout(applyPageCenterLayout, 100);
+            }
+        });
+        
+        observer.observe(targetNode, {
+            childList: true,
+            subtree: true
+        });
+        
+        return observer;
+    }
+    
+    // 初始化
+    function init() {
+        log('PDF每页独立居中系统启动');
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(applyPageCenterLayout, 100);
+                observeContainer();
+            });
+        } else {
+            setTimeout(applyPageCenterLayout, 100);
+            observeContainer();
+        }
+        
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('orientationchange', handleOrientationChange);
+        
+        window.addEventListener('load', () => {
+            setTimeout(applyPageCenterLayout, 500);
+        });
+        
+        log('事件监听器已设置');
+    }
+    
+    // 全局调试接口
+    window.PDFPageCenter = {
+        reapply: applyPageCenterLayout,
+        getDisplayWidth: getDisplayWidth,
+        toggleDebug: function() {
+            const panel = document.getElementById('pdf-debug-panel');
+            if (panel) {
+                panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            }
+        },
+        showInfo: function() {
+            const panel = document.getElementById('pdf-debug-panel');
+            if (panel) panel.style.display = 'block';
+        }
+    };
+    
+    // 启动系统
+    init();
+    
+})();
+</script>
+
+<style type="text/css">
+.ff0{font-family:sans-serif;visibility:hidden;}
+@font-face{font-family:ff1;src:url('data:application/font-woff;base64,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')format("woff");}.ff1{font-family:ff1;line-height:0.929000;font-style:normal;font-weight:normal;visibility:visible;}
+@font-face{font-family:ff2;src:url('data:application/font-woff;base64,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')format("woff");}.ff2{font-family:ff2;line-height:0.859000;font-style:normal;font-weight:normal;visibility:visible;}
+@font-face{font-family:ff3;src:url('data:application/font-woff;base64,d09GRgABAAAAACIoAA0AAAAAMbgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAAiDAAAABoAAAAc3HZXg0dERUYAACHsAAAAHgAAAB4AKQBXT1MvMgAAAaQAAABKAAAAVlWCGJ9jbWFwAAAC3AAAAOoAAAGeggX3HGdhc3AAACHkAAAACAAAAAj//wADZ2x5ZgAABGwAABmCAAAkIP/C2EhoZWFkAAABMAAAAC8AAAA2WmCjwmhoZWEAAAFgAAAAIgAAACQFxAKTaG10eAAAAfAAAADqAAABRJmCBY5sb2NhAAADyAAAAKQAAACkST9R/G1heHAAAAGEAAAAHgAAACAAlgBYbmFtZQAAHfAAAANQAAAHTT+OmMhwb3N0AAAhQAAAAKMAAADLgbEpMXicY2BkAAP7uNyeeH6brwzczC9A/BrVDQ0w+n/uf33mLqZ1QC4HAxNIFAA8QwuwAHicY2BkYGBa91+fgYHZ8X/u/zzmLoYUBhkGZBAIAJMrBlsAAHicY2BkYGAIZAhlYGYAASYgZmQAiTmA+QwAE1YA7wAAeJxjYGTMYJzAwMrAwNTFtIdBlaEHRP9vYHzAYMjIBBRlYGVmAIMGBgZmBwYECEhzTQFSCr+ZmNb91weqXMdwEchnBMkBAGGzDYMAAHicLZA/agJBFIffjIUWYd0g2SALSZqALGthSKfN2lgYc4mFdKlyhXiGLbb3BLHzCjZ7BREsQhpTyCA+v1l24Jvf+zfz3ow4qZdZ+K3WBEJxekZH4iQ2//IEI7iBLphGH2De6D31LxDbXLdwsqVMbYXmqjaXjq3k1ftmARt15Ns21VMr0z9b6i/5CXWCjjlz5M5bm2JX8kH8rZXJjPiO2DvnnM/XfTd1/y76aCL9xO5Az0TMHOk38QB7wD1+/gB4k67RvlnKEELyz/gJtXfMFTLfHg5mqRfe9EO9Qwt6r6DA//LwP3IFzA1lSwAAeJxjYGBgZoBgGQZGBhCYAeQxgvksDDVAWoRBACjCwqDAoMdgzRDFUMWwRUFYQfY30///QFkFBg0GAwZHhkSwqORvxv///z9mYPh/8/+V/+f+T31gDjYTZJ4QAwKIAE1nAJrJCuaxMbAzcDB4g9k+DL4Mfgz+QC1sDFAHAWkmIMHEgAoYIc4GARagOWzsHAycXNw8vHz8AoJCwiJgCVExcQlJKWkZWTl5BUUlZRVVNXUNTS1tHV09iEZ9A0MjYxNTM3MLSytrG1s7ewdHJ2cXVzd3DwYSgScxirwYfHyh/gQCP39C6gFe1ySBAAAAAAAAAAAAAAAAACIAQgBcAGoAgACyAOQBFgFWAXgBrAHoAgQCUAKOArIC2gMOA14DkAPKBBoEZgSwBQAFKAVcBbAF4gYsBmgGmgbYBzIHegfKB/4ISAh0CL4JDglWCX4JzAoOCkAKkArICwwLdgvGDAgMSgySDMANIg1oDZYN6A4sDl4Omg7SDxQPUA+mEAQQUBCKEKAQrhDIEPgRJhGaEhASEHicdVoLlBvldZ7/H41Go9eMNJoZaSSNHqP3+63d1a52tU+v9+W1jb1+rV/rJzY2GC/4EQiBxMEEcAxJCCSUUKB5HecFJw00xaUkp81pGqCkTVIKbWl60oY4hxInJo2l/jMj7a5NenyOV9pd/fe73733u/f+sxjAEq0JUIOfx+wYJpCRaKRcqtZBVbACUs85+D+x52zBsH9+pyXf5ZzgvqafK914y5HN0yfn6NK62nMvrTqKYQBjWpMggM6woTOiFfT5cila5QWec5BW4LWsjYSzebaL42PBrc/SG25Y88aOTx4ndt8wv/Hw/OwiBlp/aN2JncH2YFb18+jDCEWlWECfJ6gJh8vLuwJ32QpRC8sLDndc2qDYzGMXgYi1MBy9IeUqEC1vWLFWf7/yM3frMnYWW8BMGFZVTtHLQeXEtUIg6OT8gYWgwPv9vBDEMIj5W++Dd+FTyLaEPqr+Nqn9fh0IQYQfsVAsqD5FwA3j6/ZO1Bvjc3PnRgfL0UY6PtiTrKTgU2cWD73RlTmx+9hP7vFsH7myZmBsYepfF3oHMUzDioHPIht+DCuWEbss8jFCg3IdFvthwUHipF5huwa4fC1FnSU5W7fORIDNMzihfxDg0DzKWAnOA95xUbQNQBpAYKeBlb/6PkEZwrSfRjbMyMbLyIYPw8ICGShXK1XFihwko8iixqaeBlyxUAHnbIXm51/bFaZWlTdUOD4byVeG5/vmLv5lPHYfeY/tX/evcwRKo/NkpcaJu1bld8xdJETFDxpx9RqykcIwFp2qnUlyHc7KpWJBQGSplqMRudyB8E3GtbHUu6axZcdobWDD0ZQrmvJIdRs/7+0/3t3Ix/pglch1raoW6zKeOjB0XA7Xoh5/RIr0nPKbGEc0ORAvKLECCMRbyL4Ro5GXpIziHqiCIi6zMuDA96wLmZl88/cO8IX4idkduuYr7za+/s0h8LXmFBhsvqTTYqH48Ev4qBILlpSAsJwebfAIcTQDouVqgLwU7Wt4Bi+czncLdi4Y8wzv8zrdg+P7ASbAdXO0JPZvu+2LPtHOi94PrY2NOHgnQ/9sTLEDMan1PqTgBYzDwsgsh+pJaAdBs4YyCr8uvSA191xZl06t3vHwnnULh7c3Tj45FHOIxcxA2hOowwuM8d7tkNs9dfPTx3bc+LdjuVTzymDgaKE+Mhg9XOwZ0fybaF2BLuQfyn0KyCAqB/VktBqArubpUXAEvpmshKyz4DZ47up+uAH3JqmPK5/DFbzgV4hbJ8KLyAYSUKGqpVjNgE5BokBroDWiOhFWtAKMDxRPbb2jICxsL4QX1kzunvyyXdczMrk4FWVdhtlaLlsNgzsGtxWm9m2IpAb3+qpjsaF1M/Xy2BAJxV1dfTMzfYneB8y6xHS50VfyV1UehdavwTsIl4BFkToo1VOpRpcipiKyAvY6JoXaXGWvqBvrGVz/0Pa1u3durJ98qRzyx8rZepIPlGx2SzozPw7Te6YP/Ontu/a8OJzPw7ORwOGuwfEkf1utPqrFsNC6DAjwHZRvnKokndjZl+N4kA8EnLw/sDujfl0IZnyKsoAbAk4BvXKq57hbd6rnWDHXBxRuxVmhjtgx2mHXaB54t3MibP0QHVqCn8PcimaFObmsOJ0FsirZgvoelQUrgXARh6Xf5iToeKPbwUVekGI1EBTnjc7m0y+lGIYhHB6D/e6bYzxr1jGMPrsb/ObqD6ru/wFKseCtK8jOJLwf2YljJQyTl7QrWg4UNHUnea2CcFXB2uUTwclCJzEMCdFyyuTLALhzX9JZqQy5gg8thuxWeWDLAdkn8Y07MkPdvV6BMQhJ8HxE5BgdMznWF+YEi8cb7N10BEyM5k/aE9tm430WMzD8wh2eq5ZNaq4Pti7Bb2i1DKKK1LWToKL0r7aGa1VdLcJP2OmzeydqQ1vX9e0Ztg1/eOrY+Zu/uz876jW7TRx4FX9yqu8rm3YeKg1aZ0bPHzv88qKN5BHXCgd/gThwKHXMan4jX5NgiQwBVz3X2p7i8kcA/7HHZ8dvf+6q5vu9J/jGY5uKtcn8ZskNP8ScP7Xx8+WNmsNRl8MWba6ZtoU3Fz83e7IrbEH9sIVsnkQ2S0pvi7aJpEGlqHRmUssfMhhtU672a6T4y8GBJ30cXL2YEInBUWo44bEPO0jS3iuWGCa05kTNnwsx9SbRDgy8/7MwaEp7KNt/QdwzoPsF4eOcpA3ifZU72aCbzuQNT2pYY06HTccg3g0I30cRvoKGr7qMsFDHlxAi8ViZkB1sH/VzAIDpO3wuYrCQrDAes8U+aTPwppRYrVOB5B+SCi5PXsFlJSymjNdE/xegSFFwE/9NxO1eM4G/FTALLEQZK6SVnOGtBKPkQwnlw2soH3IqLpSHK2VBbUrBDJDLAaTGNGiLm72dIPDlvF3P5/5urDZyYOdYkDLZEATKQgBjPmTOH7njo9OTlx+vTfgsISf89PfwLnl8df+3tu66MUh5qvOSWwcQHNydeKE+PX3oaazlNAZVPVbzp4W4Kra7AK5RooSrHwT+CEEaukC1TVcL0XEPLuWav87HzI3m24O4mP6tGjopC2zptKkCvBmTOwnvV4LU9JnNHAoSQ0jRd35jMvGMnmknmsAzBIIYiPz1U1GBsymMtfGBDyN8wrX1XVyBVSthd/J3amRcyc6ByiGq0ZGok6PVA0Hr961LqL/er9akdga5rNZeoGVs2wj4JTpxnxTJzZQaooP1opql7zZLWeQLimzz/kPp7nzUKXlYSk/FKuDVBK8moFr7JOL1NWSnotjRkwRSO4XVSrGiSCEN/j9itTINKtS+Jsear1/gvNnmr1hjJnKirje4sldSTqvGbSpjKj8yOB2ErF4BJP1781VZpVDHS41X/oNzmwXlLcmnV7L70sHMpJ3BIVjmFyKHMO/K+P+xogUPoWCeMqa6b80GsqKjp4m3o4yMo3ObIxEzSwu2akX/rZURVWxcQmJ9ANlILdnopFiVBbLpWi60wRBFmAX4AdVZsagm113NM7a+RSoQ+X40JByEgITG1c9VwRpkH/mI7GcYNbFi4B+v/ggGmzM+JIU4w+hy0+BWAy7qJFNAxzRZ8CsF0zutd+E/IUxyB9N1OJQRq+gGpU6e/1PW6zln/89bKH/k+0mf9zZLRP7CK3shpWa2MbGzScFIc7Of51hkUp/ZAb7gdeJM0wJOQ71odzu0vIBYL9KAi0gDOvM8aYXtgavygXH+Z3vuIoiTF/duP7V+8vSJQ2vTjaH+A2vz/aPw0QcOHvnBqY8dmLswenPgtsZfj87OLY69PDu6VrWh/LcN+eZBfRH1BLWPK1n+Qb0TSMVaWw7PX9l7eGboQ7VA2cxlL6PUX7R5PzYWtG/IDIWD/RHUGaZWbevJGf4qSbuspKZuX6pxDlv4CuGK7RwRUe/Haq1x+ALyL4nVMIwgldO1mVtQBiFF09ojf0Qb3ZbGtutnJCBUXFBn2bpNqown6IAU2Rmv7hx017qMXYWxbnn9+sk7Ti/cdfbI2IZDazMDQ32H1ub6R5huAAU+kDKlBSnktvvoaLxu8TTu3Hhh7OZ79iy+VY/Bu29rvLRqZuPiyMtrxtaqVLXea88RISyjziv4B4iKKpLTGSkECeAKb+USaiqw+vCpRpeZz/xGKQez1ZS5sufGoruvZ5s19O8NifvuaafAMGCYeDVrctFI7UghBZ7P2FiKJJnVo8Npp2i5HPXBxs+JTx81a9phQxr1B/gYVlXnhmh7fhWWRl7EoIz41GYJdaCJKjvB8o5QLYLX7bjX312s+YeG07duSNQjVo/RHnTA9fXqapds9LqsaWlhuhj0W212owBex7cGwtVsOD88PJ2/4ZhgCbwFrdTY9qkufz5s8nmsuVpsfN5qMir9FUUWnkB8SUv9Pwk0LS4s1XUEERWtwhMpG47w3GfmJVykmm8WUuZza9YUPPYEvP9Pocgmok1r2srbIRIkRifFIAPs+W7doyoPe1GtXEV2cmqN6ki8PTX1g2XFRPM+1LJGUQ67Fip4leMctNWyLnDnru2nkmXSUwC2YoQBul3T9f01r2gGq23WGKpcgrKEEqnm20cPb1vV/dhFieZpRUQCZcLavJArDW5Lz2chIETBSOnUHj6JMH0dYXJqug5kXFUKTsldwQ1U6YJf9zub97E3MFzi3awEBv++1I9MgejVz0LDfIhQ5lrRSDRHwMJmr5tU+xI21rqEn0Xnptt6hA5W/mVANLLi+OiSMc0W+hl+1is6mq86CsSbbJ0yUqbYOxk3SH2VIsTUpZgHxF7gXIqnlCty9Tvg+80eSIymDCYFBeeliOZBsHUkrAwrOqfP2rwJHE24OFr1tfU2ivOD7TlPbU7tJqaN82qNFLUaqVRVGgIqTh/oiOaD/kr0S3tZf7n564JoGvoM5w39Y2xyv7dy0CongSEu0bVPOpxhRUHjqZeazbSACkRn4TnP0191CiyN2vfIqVAfIGVeiYqN5eSH/kyw29rz1HQ7DzOqymkc8UJ7lFoaErTLC7QHdKYaBHXLr9PukJEjBOOnEwT/Xd7p/Gcv1PmcXtLbfCuftPRNWTikdwxhsTtOByf1XtPXIk51hjJyUvN/9hjMezysDahDlRR/HVjirDJbIDzz6iyO+ALLTRRlLalsuXC+6f3CYs4lO9lKkwRvfeVoWhRZNOFarz7tsaby+BetcEtYqBLntV5hQ/vdG2gvk5UIhNWdoVyqrlwd+qGg5r9iC+IR/XUS+oq5WpFiwuDacq6y8czAkMWE95GA2GQ1x3DS/ClpSPLn/WIuWhz23WQcTsRdm7cN1EpTT+zvyeEkrrM1nw9b4jq9GdRgJpm5Jx6Mp6qP94tBde+9DH4Kv4J6TFJhX9X39pWLCrAPsO0rnnZb64C6aWKaqObLc6XC4PaHVye2fBwCHcU9NTboi2cGu9ONCLzbRlmJV55dNzxcmnpsIWTTgcskYQ0YbdTvj1XvTgdr2fvysQyKv4QwfAnxE+yws7x0q0xVFIVeWrrAPJOe6xqd+ubRdK/HEaX0kXomkc8lw42Dxu7CzNjx72Rk1h0x2yx6Ry71oYFyXxj5SbfegzTyM4aVFSvarLgyBrzQznZEASTbogwjHbPIZ/Aj82yDFSzF6WK+a8vZfq+kT9FcfGqSGPI3TKTFO7Q5lx/yi+mttSPGW1wOb+9Ed195/IkDbt9TVZqhgI1kiOaVQz/1GswuMK/Plx6re8O7Hlmt5IgPcfA5xIELda9lFjqXX9qciQBFyaU1COw1p24q18Y33z8aTp476jEWk/7eR2xH8wWWiew4bC52T/aNPzwf8jf2MroYH8/7Xki5s7m8jd+NcvxwKw++CJ/Bsijq1eJS/1ZZUfnWk0VS7ih1RRs9tKFaJrfGo+WxcN4VdOh1fKKHP6Q/vMq3dyiQ4fwCoXMMBObAJ/wfKY6EPYyTt5NWEjfftOhvXjz7yZDL5uQZ1DN1zJPgKQzHDK0C+AnyO4HVsdVKvcn8UnfUKzqwfJO18ooItUcQ1JMremcGyhE22J560XfATwrU8WHWjOuM4uiDt85PbkmudgdSydDiuq6EiWi+r88a+aHenqmBGdJiALqH8uN+TznoA5+KSmJtAQeSyWmPzDdm66VgLu9g7SHJkY+OLXgMzTNhixjMVSoxOYtGGzSDn9k3Isf6qz1jWt9nW78Db6Jcq6yIpNbrFFqRlsmsol/KN9QNH2UcXil2KFZz/FVLuj/icDqqpM0kbo5KAWniDCQARN0fQHFylrj9zLw3nAtQpFk6bm7kBdY28SMPYaTX1jJzxyBGsToiLZjsOkBTdqI58A9hKfT5PU7S5EW5lke5ZoAPYAFlkq+29ajTjBUwJGeFXIdKuHxz9KYlWZczfI4SYplb8Dmkm9Bo1FvdDB6TvA5evMXUX+z2rvmGZKUNgNFxsPmXEOIGPXDbCKPbBusBnpO8TgHNaveg/HMgDH5Vd3D99WlWac9rNFDudyPLGH67v/bhYFoIOg2EXYqLqxjSypLuyD1hDQL4dnPPL2XR7uQYo0lPmKb3gVC/jSFNaDABzh93AKhxsiIefojilF6KE+o2yKCqeNUIqQVGSSYUJLUJKcMb4gQ8TgezEh9w+j2J3MSdEC1CEAyNryNuNwYejDLfDq057DZ6QwznPGzqz8jZgSn/s+BtysyNcCJglIBUSfGwz84wsLqzLq7qTqh4YgiPoGrxUlRUFmQVCBIirQAr/2HJD0TzxL264VXric8AaKDFJHWKWlXuMtghY9YLiomr3wUG4Cft3Wb1bHPrd/AiqrMR9d5evxzxTkrataJXXnZcRlbJdl4u3e3T7dW6Ar9BE1NDMUsPaTbwI+FIUprY7hDXJkQ5NGHy1KKuXXW852ObXP5YcSwse1xBfNhoEeL642byxoyl/J8uo8HSVyzfeBzsNLmmBqJbFpMLr3A8Y7fAV/8hKEon16538iE3Y/7fGMGUDVq8fgd+hnzIXl9XandAVbWUwZ0W1tHNKvg7a6kSdPFMyuqsbgv45YkdUIzs6cOHpg7kvGGq22rUs4njlpGU6DH3P13hvQ8UZxbBvJGkTYBhzfBnty8E3Wzk77tIvbGs3rVeBq8jLBYlWtc8z1H2P/3K7j0yMNOd37R7eOb5hYHe6aQ8UAmkouA70/Wu2/MbJxqLL3Ebbr49XpjOn6kki8oe81yrCH4MnsciyubARvtBgfOhqa3TDJA4KjHoTGx29SGPcP3Q0AUfhag+cW9qOl+uv3g4EAgP/NDvNnDhMa8RvxSedvBJNzc94I9J4GGaBwDg1EJfaajntlds93olmgGCvPFeYKZNnA7oYaPY9biL4TZnF/PJOPLf1cqCt5H/bqV+ifaGdW07LaJdQl+8/ukDOPNuXjZuGtpQzla3nB3wBc30+FMQ1sqpfH5YEsOx4g3BF+2MTrlW3j7SX179+H5PMHv1RQPuhbvyhfNVORFMfqMuyloNK3O20jeVZ15qAqBcUDOgupSy7VXLCk5MzjKy0Zk6gpet5qoUC3FiRjSSlLsYTIDQsNVD2EgH/GlIWuNLeIU8b93YvV977vgeuAnFA1VptagIwPLNunbpS8rXdCttswsx5nw8EO/qH6y6fG7KYbQ6GHpKlCrDs/1OX8hiNTLnxxrJYGJ8NlfoNZL2+455XZGh9V3d40aKU+yGUY7FYFC920C9uK2LWuajLo06cfsxaqWgpDqIEevnAG32hy3ZXtnhsengqtXA71zjJRngAV/1N7+FQ4cvR44WeX+3mQIsjtNGshGhjDjchynPaC+Df0ZcJlfUFxqRNKloP2lbvoVW46sgAj+0Fkuy4EpvWDjoCltNpsjILL4FcPmtwUBy9QxrMvuPU+Mpl+B75ty+qnP3A2WPTm81sLD5KVzvOl8ZP9788Sq9TVLjyaGd+csIQ1SbRpUIoom/fem98lmMomDKtiwHubVeE5ooaLvBV15vdzpsQkAWp06zlNVgdHpZ8JDFYtCJ03ue8XfdH7TYOIGxy07PxvChT8jJb5dGYpgW40vw48hul2q3uGSZRV85tmO+3aTVSo/i7RdZoOBALxknrFoEkjIYHMRFPWnw7xriuSgvvW4AspEggHdTUZenSR3UETzBcoQOPGzRGQiSz925CHJGa/OJkwf9DOdggl5hd9MIkkYH6P/cZmre7p27b58H9Rjtru/nKE4vIqwDS3HKAoWSFY8X+4FKDVpWFD98mnYs5aZDcCiPJBUZB+etyYLX6TRK5XA4kHE7rBaWNrH+tV4jwxozOtOc18GZTKXBgF1gGTPNGLwjIQiAkaN9piOGoawnevt4KqNseQ4jlTt+Ku000TpvuFhd08/5HZThhO2TgDDg8ZhVxf4LNO8p8S2141tF5aMAvOZhFbm8BAjtK4FOsGnSNcOicc00YHKcFD28TfDvmL2Q4728jeFoyua15DmPJRhPWsE5GyBoCF4YvPUH3Sxt5xguwI9eePhvXCwj2EySteFyWc7m7hpWcTVbXwOnwVfVpy/RaoADiCCl1K9Ju861F8Khn2V8wNN8M5UKuETWTVBoy2W7w/Gx4ZCTp0DlvCyBsu6YqflFo5T0sTRhZKxWm4ORMqmEnQK38ijnngWXwEPwEYxSZvBOe332SbOF5mxfAZeeQBzbjQe1mP8e+x54H3tP+TuEMBmogvcNTcrwXiaj5O5nwLMgqN5FIuzXEPlE51EfeNZWiFgc2kO+OaTfz4BnIVQ/o9wYC9eM2uFr34LY0inrOq/goysfGo5f+1cTyj6jYHqvc/51qIT/B+TMH0c7dg10xMUxNDv+G/wSth6dLFeLy393IC+vL6g2UeKgta0oKFNAe7lefmKnjTg4/MB6gxrqPRvJjULU170p3SOwdsFABHtDYvTTsbjOoIMEASG7yuTIQCOT6JV4se5kHls1cG8wpS0/sosP96D1Z2pa7o/6WEFgrRShY6rxM3rUYg0OnWGsecVkrOBmqjvn5gP/coPe2LzY/Lnstgk8Q1KkzpKO/TmQ0BxwrFWCevhlrIGtQ24vL2PFa+BW2Ep1iQW19qGiWQ6cVH6+7G+0iFQ82nZdHfvAbc+M+PYPI+Q04yR0nMdu1scLArFJv4WP+eubRNmDE7ROZ4DEQ8Bk72VSXX5ezIqP/FkIQJIw6NxMZcoNPtH8wQMPq/BpA0XiFhdN3whcRzj/6ml5iNQpblPg6meNphGqN+0WYs/tHjqHEyYjabAQOoN132Hs/wBRcJRHAAB4nLVU3WobRxQ+iiWVEAj0prSBwMlNsLEkLEEC0p1jV8FCCKHg5Hq1O7se2N1ZZmaDddn75Dl619fog/RF+s3R2HKatBeFeBnPN+fnOz9zNET0lP6gDslf59PRs4g79Lz7V8SP6IfejxEf0bT3OeIuPe8fRdyjJ/1pxH3If4Nlp/sYDj+LV8AdmnV/j/gRPe11Ij4i2/sl4i7Nen9G3KOf+i8i7tOs/ysd0zVt6AOd0Cm+AV2QoYZ2ZElTQTfkiWlMU/mYttDwP3yYLkmRE/sap5dR8hGrFLYKqAbTCJp3wAq7B3fYc/iVgtZgfUNLukIOIcY55All+LTwzpGTipYtMikhT3Fayh4iOPw/EU4DW44WdxoGNsCBz2MZkYeczrEzYjH2BpYptAm8GfhWGJp7jwGkwcaiKg17F+UsJ0YPLHxDtQqRQp1GdDV4SuSd3Ve/t8/F2wurBd77V9Fnn9UacgcbB45wL43Y72tco9fzL/oYuBOxSGONOnoHnzxyZsAp8rm7m6/9PE5a/FmquY1WRuZACYeWjoV72sV691k1kuehC61kUaO6b9UeehrutgCPhX0p83TI925WvnV//C93nSCHkNnuQVzzgOvr+rX0KMxsjqmg4+vNh5PT08GFaXZWFzeex9PplLc7jhq+VE4XNb8E+KhK01Sq9iN+pxT7G8W5LhWvr98sry74+LxMskzXPLfQrtttqVNe6lTVTp1wbiyX+wOnps6016Z2Iz53nLBrVKqTktVtqpqgGHCjbKWdA2btuLBJ7VXG3rCu07LNQnjIc1N7bqyBvoIGVGvjvEutbjwj4vpyvs/R3yQ+xHUaajY5LDOTtqGae51PdO3Yq1sf4mwVZ9o1ZbJDXFA1VksKrdN1cYg+YKuKxGalcsIbunKojx9UnTRNuRNfI1b38bV3qsxxGws8C29phX2BJ2eFy6owhGGsNrjIChKDB2pJQ5zDILWw9/IjpsXV29VicbrS1bZ1G1OtzHQ53KiivfIJ1Hf2pQwfBUWZAMzjcM5lwAoZmgkG4wz7DOv/Z7T3n+BZHdJrrAk4J/QKIdG0ubGF4snojGf8n5lDPxkPXw8nZ5NX37M/7+WxOzxzY+kBvVdWJnA8OvuO0f8GtZuL/nicbc05TkIBAADRxzeh0UQNIopLpYIKsrmDnbiBO6i41FJQ0NJ5AS5DJLZ6I2+A/wBOMu2MgNHvh9FQ0X/chkYEkcC4CZOmTIuZETcrYc68pAWLlixbsWpNStq6DZsysrbk5BXCesm2Hbv27DtwqKziyLGqE6fOnLtQU3fpyrWb8HznXkPTg0dPWp69ePWmb+DLp6FvP8ai751et136Axo1GnYAAAAAAf//AAIAAQAAAAwAAAAWAAAAAgABAAMAUAABAAQAAAACAAAAAHicY2BgYGQAgida35pAdI3qhgYYDQBGFwYqAAA=')format("woff");}.ff3{font-family:ff3;line-height:0.895000;font-style:normal;font-weight:normal;visibility:visible;}
+@font-face{font-family:ff4;src:url('data:application/font-woff;base64,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')format("woff");}.ff4{font-family:ff4;line-height:0.919000;font-style:normal;font-weight:normal;visibility:visible;}
+@font-face{font-family:ff5;src:url('data:application/font-woff;base64,d09GRgABAAAAABWoAA0AAAAAHIAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAAVjAAAABoAAAAc3HZXg0dERUYAABVsAAAAHgAAAB4AKQA8T1MvMgAAAaAAAABKAAAAVnnGFWFjbWFwAAAClAAAARwAAAI+UgcYxWdhc3AAABVkAAAACAAAAAj//wADZ2x5ZgAABCAAAA8SAAATgHixnwdoZWFkAAABMAAAAC4AAAA2W6GhBmhoZWEAAAFgAAAAIAAAACQHBQAIaG10eAAAAewAAACoAAAA2IIhCCFsb2NhAAADsAAAAG4AAABun5aazm1heHAAAAGAAAAAHgAAACAAfQBqbmFtZQAAEzQAAAEIAAAB/ni+/RRwb3N0AAAUPAAAASYAAAGD9snZinicY2BkAIPWZZm58fw2Xxm4mV+A+DWqGxrgNPufABZDpotALgcDE0gUADWvCp8AAHicY2BkYGC6+CeAgYHFgoHhvyeLIQNQBAWYAQBmbwQReJxjYGRgYDBjSGdgZQABJiBmZACJOYD5DAASbQDoAAB4nGNgZGph/MLAysDA1MW0h4GBoQdCMz5gMGRkAooysDEzgEEDAwMzB4PCAwYoCEhzTQFSCgacTBf/BABVXmTeAOQzguQAMwEMqwAAeJwtz60KAlEQBeAzM8LNtjWIL2CQZcMGuVEWxCgImi2KxeoDmMQkFqvvYFqDwiarr2AxCCaTZ8QLH+fcnwnXHvgtGQDGblMEvdEawSbMBR3ozP2c+USo5cwrlXTkeRNBTohSoIMKhaeuEPFBj5nLGKldEJ320aC2vJHoHi1NkPlbufOuRNeG3G/YHWf/vEfbIXPsrq4V55YYyYs5Q+r4lShbFF8qJSWoeJxjYGBgZoBgGQZGIMnAaAHkMYL5LIwyQNqEQYGBhUEESHowhDDEMNQybGTYznBdwUhxkuIlJQ4lISU5JS0lGyUPpVSlbKUmpelKS5W5VJ8ZcP7/D9StwODI4MMQyVCNoosBqEtcSROsK0UpC0kXx////x//Pwxyyf8Z/1P/J/x3vP/8Xsc9TwaGe/wMDHf/3H1998Hdo3cP3l19d/rdrrtqt7wvaEFczmDA4MCACiyA2I0BF+Bh4AXTfAz8YFqAQRBMCzHIgGlZIJYDYnmgL5TAIspQnSrAcGJjgFoLpJmABBOa6YyQYMULWFjZ2Dk4ubhBjgG6hY8f5AggEAQ5Ai8QFhElZDgmUBHT1EITUmbQwKNBHL95ADmoQAYAAAAAAAAAAAAAAIAA9AEqAYoB4gJOArgDQgOMA+YEQgSQBN4FMgVABXQFgAW0BdAF5AX+BhwGMgZOBmoGhgbMBuIHAgcQB3AHiAfSB+4IDAguCGgIggicCLwI3Aj6CTAJQglSCXgJigmcCawJwAAAeJxlVwlwG9d53vcW2AWI+9zFfXGxAHGfC5AgeIuXSBAUdVOkKPGQLEqUD1qHDx2x5SPjyB47di2nrlLRaes2qVXXiay6jmzJYRrFbjzj2ElrSzO2nE4706TytE3iSGDf2wVtxeUssYvFe/tf3/f9/xKQoFd+SU7CJ4hRYitBcFoQ8MdBVqB4itaSAX8wlxUYszWTLlNCMOCn0fcyEMoy/EULLWaGxkvyQj6TRosEhjLgxQKpBTQ+58lJ80Yr66bhxA6P0tJR3R4VBux0f8GRbuQYp9YmlylbTapImjUaQ/6cuzsQ2bKl2UJZ2jbw927mTwU7wlS/y66yPtJ33JpM+eOWoDG2/ZHd3pSsxxAaq6RLubSbLFYNTNRf8rerQZBWs34NCPP9TTE1NHK9cZ4DPVbnWqZfZZAdqr0bPamESePpCmk9SaA/EsX/H3AZ/g2RJ7qIKkEAM3bdgj+pgJ/HMfNlIEaHA4dCXvBTq3GXYQaZp7NiMnDAeTIbJwNS8Hm4PLwlcm73ox1M/N5SWu0wKumsU2aUO/JOWm5mrInNt7/ko/iO6uFj+UCxP+WfmEiwCZ9F5rNXj0dc4e58yNo5t/94317oCQ/H1I5dnXd10qRRZ5J7uuWDg17mwGhgbe6xfQUvWBMqTZd8MoNTcMdau6fW2eWTtf8MN7sNssUJITFOABTnP8Nj8E+JAI6RovO5bL2E2FXeDXDIYr3FaOGxsaC3KzFw30hsZrxyQMHYbrs/c/DEkbcX1hyCDY3tpKM5WeleeKR38uu7hmCTLTfaeObwwk8OogwSGFOfkOvhaSJF9GBrMvRc8ZBSiaBUlgsieqjAahqtUhZlNEqeG+JMrq/V3tK36WNn3B6jUrEmavRYrRotpQINaivLZXztJ7Y7aKUrM/3Nb7Tce/62w/Ns2M6qddBe3ezYuzF04rvgoTc/Bk1GGR/UW3hXlsnKEtGBpnyTGRb3d0a0sk53+46M7c+e2n8mkBjIDigXjkUol+HnYq5+DefgXxNtiBFmLemPQ4zxOCm5yuBkUQFeSiElZlBgcPZo6Qv6gUcpnEsO7Nw8PlJJPLbP1dhkTg6PRibbzVxFT5uq6eLuuzp9rIyy6/+uP3rv2vGvMaHccqaScDdo/T3JuYPWBr0z7Ij3cIagOmDQloCKSbb1Ca0dapmBrSazA1NHxsOGHMYw9vd1cgy+QYxI+BVzrZVbREJGgJYSoYwRTArIybxgzeS/IHC9BKBO4TLMWcmx9kGb/yG/2mrS6RSqiaMu0q96X8HqHZ5omffGgzK1IbI23WRR6CI2VmVsDB4UIrH1Q3G/Qsb23PlQzt2Uez9n4qKuBvg9e4wxGht9WVcCmmUpx6bCYLYQ0WucyrZNhzZGFW49+dwauaVpINntguvZ7EyLQm6XqW0mWoxrM3wV/gWxFsWFCUlrZViecDFQEcR4bgUtroq/XhYtkErxpWpJCgVfpcsKtUbf1Dm0q9k5NR0wUORkV6RSSnuVbX/SNb718at35e/o5pR0aF2qenqiWyi9puLcE0GqrcvL7mBDNjBlDjdoE/npPUNpjZ9lhlmys9LYPFQJlScWJxffu6czHazIDN2J5scuVIobHynKgwra26SmDfVaXSGX4c+IWRwTxDEpb0EQ9pQStHKphCSN7/GILTgKHBIjRY+jYSh6NSisTCBDLjeVrSYZBDpSLWsgaQgdNrWCNA+7WRtJKuQquRYCK21WG2jrmLXUxaqdTmaTT0/bi0IsZlJRchu3edYaHGp2jF7cbpAlWixdbvusPWmk8hbTPi982zHd2aelZTlVyhCx8k6/3u6XydnwmM/Q6AwzcX2WAjqZSi5riPZXtjhZTgWr33j4b6sJmcazY13GA9cFjUVzqUf15GtsoMGl+pGdidVz8iL8FTxL5OodqPFW1aWkytI5VFgMa5QytwxX8lf2wd6x2mvrXY1ybdmmFbSOkpk1hvI7OpIbB5zsqDVgM2hoBQicVswFRlo902u6BofH3bSnTzU3cGTLnq54ImKKKVWsq9PI+Zs9rdTPTkInbaCGJJ/ek6XgBaJF8onHGiCgiojSGYc8BUVW5e2AzwtuGWNlUFfMix0wk5al6P4gbbPJbd6FjVV9Pq/3Obtlrvv55h6rvvfFndpUiWwwNLBIm9i9rdWsrq2Vam9R5RqTMm5bT3HN+6n7xx/sSijDnvjDY2fVt9eeDxY0FHCB7m5Ox6aavX2qxSdt853TM3m/lnqgdvmndd39V/gW/A6RwcqFlAC1IliHEIINLzB53Lpvob0IpNUOVu9ab3XuPDwfodwOrX4moGqILLIKDyQ1Oi4geAtPLMQ02nA8XbwwHxwYbQ3NLqxhupqUieiOB8H19LocpzfMDrHOhEL+v7lgWIbkOpLekE1SoGexOeZUJMJr2vrblTa+k+safOrhkHamXv8fw3PwMiFIvQlDuk7mLxsEU+9VIhWQVjE4pPq1FZ4brw6GvQ2ytY295eENh59s3X6snHNveHr92GC5dWzA5fFODVaEyv3bw8723VP3gJ/uebu/y0bJ/dH+pq8dbDl5eFSnPv7yhuE7EzOa7GDv69WJnVTxOcm3a2Qb/Cs0H+CMQqmPUfW0YgVCx1e0FEqstJJtsa4SY9tp41hm2mLb0KjTeEpJPqhWOfUpZfu6SG9nsMmo92b77rizkPmnzBNaOTzFcialfmaidt7mjtFbTz7+IGN2qKxyvdbXHivp5LyndUvC4k/KJd9eI6PwXaKItUQSC3EaY6Q+hHQjvyqQGLSkRCoyb8SKQUZjXVzRmz07lbqQZyjFbCk63CwEggg20P0vWnVIRWrZqFvB7vN2qtsvko7JILwsnHpgqXn8aMrjmrWqTcaWEV9ypGemnFRR3Mc2lf9Rvy3VGWMVCoOrdiAJtB0MB5Gf5ZVJcA/CJUkQ8gDIgHuytd9mv0324hiSK1sBi/LbiH7zx8lWkA3yuTJA5zKZsfgpF0aEG0EfRQTYaLvXSPqCQR9p9LZHI3Eu3NQYj7zAuENW5TuNIT0whBvfUVpCboZu55ZzGY02mV3mOpCdvpVtxFH4AvaBCRgyRwuFM2SfaH8Lsv+X4lykxWYQa3LpPLKPOj52IxjAMya2D9hb7Ia5eETyBgBDCBm1YqMd3HI2pdWkc8tcO428siCvwiI3y+ijDCGhInTIUsASyAVymVzGkjH4cj5Yvla4ho4aWgiU3/9+4Y03aj/MitxYQ1wmXgHNhJIgTGZKLGXa+goXbPTGkWWby2lnfX60rrDyB9gNFej5BEfzNC8gugsMDbtDV67Uj6uB0NWroStX8edV/Ow0EQNh8D6hxdimSQzfrGDChAJh55LZRCsbdlkjtgh4ztdUu+nV6B0g0emXZo4ykSVPgHcIBfqCrKEgeIE8cclz4GYj/PCAB8B3fI8XHvfV18rR2hqh+WKtwNc3XHeuvXkI/qDUenMAPrTWCcAN17ZC/0BhmwelwrbyGUzDpwmaaCAIJQiQGVPGRAYYmK79j77WtOuVXQeeGYRP3xyHS7V/A7baDy9LvkVRrj1on54gwiDnS7cCZA2rBU61p6YB+321S6BkM9e+A/6dS1/nPjRaOYQMduUa+BD1IQfBE/G6gvp5OiDgrovgmGaEDMIiL06qiO9ClicRz8CHKm9yNBfxKVOG5ox4zXPKlL6Y+XN70J1wGCno+8T3bRt/HAyG1k8NpHSufPJ760JjUwNpnRNdvuts7Ggfi9pPV37z3OjN3zgwXjzoYxEuIa8oMXYg95ngYu1Tc+2XkKydfBUu4bA31rpRvFlCAa6BzwkTqj2uYb4FWNBkSvssPjdoAeDa+bmTJ+fOvz4wrwB7at9U7u95XfHUT55Kz/SnB6bF+nwKy8CFucGJaMQ4/LRQr10beBa8SXSLGMHTOWAkcY4D3oyvsMGcqIxiQxHEaRm1FcBkg+IVXmQRVRE8a1TP2pk5tcmiUaZb1IzBbXaqSrkGjcmo2Mto1reg+5kWNWvQ6U31H8CwsYF26DRehcqgtUSytHOnSWcyuWfcVCZs1uo1co+Gdrl16Lcc7dqJXo+Meu2Mh8qGrdj/0o0R+BFRQBgiOCVGnwPAj2of1X6/R33h0ieFGyzkQ5bZ2iSpk94Hs0QZUfocYSGCiB+4HyEIrIooCoHJr76sIFlCs0mei4PVt4A86ZuuLEzxB/K9ldlKy+2Bu6Z6h4qdQnDWTrp1Xtbj1WXytRdcu2NZoUMIzgHtyNGT+U1TfdUjY8Wvb7+75bZKSBaxhKx2VXe5cEdPDt2QakDAEdiK8ewLGKS3DgO6QEpggSOZ+zZvPJJ5/hffAsXRI4c21ZZBbt+pZxf+eB8QtcOQMUgvKIYMHPnWL57PHNm4+b4MUCw8e2ofyNWWNx06MgqKYt0LxFnYA6oYUwAXG+KZDJcV4tmrhz3u60qU7MMhc/CAuytVto+5Qe/T/pB/k+IBf9g/L2pegRhEz/gBYSS4rz4F4Ik3J6Lo1lvowcfEB1eC5uDdwbER7zq3iT0WHlvrrQQtwQPSHfDdZ5CNzYoHBWHvz8EzQl66lHR25UdIZ8uINUgzYiDHWTTA8gWoa9vBaXzu+y/zZ4WLF8/n/v8eIM+hbXJDfQ9avx3tw8JcxFuK12uHcuhbFmnaDnAD7dGs2oGcaI3ccfMPUF4bB0u1D1av5J+ZrxcuXipIJ+Kr+znRpgaKlvF+tHcc7fxg9eq3nxUuXSxcN0snQuI87EOc12POYgpmENslHPpgX+1jzHjgrl2pLiwOAr9I97uro4soXjlhWHkP7oFxxAkNqg1DuNBdicdpBo83jCzL00wCUGZGzuNxDO45+7uzZ38X6t+6rXcJcWpp6dpSqQR2LS31btsK7v/8pZc+f2l3qbR03/neJfTXe77Xu7RUIlax+ygMYv5hLUYI9MFHb/49aCjg49c1I1qzaWUbqKLeLMfzAVqRAdXfl/4R9ecb/13vnb3gZfAPqLdZ64ysk5H68g0cvLx3qDI/XxnamxwtNFerzUUAhufnh4f27j1xR7VabB6RekMa2Squ2iJNGRIUkx98kHzzDFjCqf7qGkAGTGQGFNGKN5MA4FqCpXr/I15E/Q/FJaBubkCd/MVsoZD99Cw4dRYjDD2jT5w3aCkqEv2DvkLhx+LkceMcmj6I/wO8qPEMAAB4nI2QwUrDQBRFT9o0KBVx1fXgxkXTkExoF11LS42GruoPNJSCNpCkUH/KL/Bz/AwXXtOhiLjoDMOcN3PffW8GuOYdj+O44daxR5/McYeAwnGXOz4c+9J8Oe7R94zjQHwvpedfKjJt1g97DEgdd7ji2XGXnBfHvjSfjnsMvAvHgThkpT4qaraU7OScEhETiuYseYRVUdXbcmfSKA7NfKmTBxa6zDUzhjQclP6m48U8z7Nhc6gVPMl2LdM9rwqK9XavfdbWaNq9YiOJwbb1DFOt/42Pd5aEERMtK71lLLty18zKalMYG8Vman41oMgmo8nIxnZ8XsN//yFp+zq9Ponis3y+AUuZSQx4nG1PyU0DQRCstlmfa5sbAuA0DxAg+CCRCTC7btsjz7GamQWcBkcIiAiIgIAgAxjvhw8ltdSlOqRCDRV+PnCK/3ARj1BDHTvYxR72cYBDDHGEY5zgDOe4xBWucYNb3OEZn/imGtVpiRJqUJNa1MYXdfCGJ+pSSj284wWv1KcBLdMKrdIardMGbdIWbSeFk5o7wjn74ORkGnrVO8pUxdqlkffsvFBdfpQ+sAlSqBbrIsw9h8SITIkmK9ZRSUU0OOlnWoRpKk0knvMgrUlijTVNL7VUwrUUe6/LfNqdOBbRtfjTwtkiBsos9vZz6fJYWqogCzXvRaFgM5J5GePtsbLWKR6HTkyYrFQqJoSZZE7kMw4LZfBHqx0NLQofbCMTLk77BX7ja9IAAAAAAAH//wACAAEAAAAMAAAAFgAAAAIAAQADADUAAQAEAAAAAgAAAAB4nGNgYGBkAIInWt+aQHSN6oYGGA0ARhcGKgAA')format("woff");}.ff5{font-family:ff5;line-height:1.665000;font-style:normal;font-weight:normal;visibility:visible;}
+@font-face{font-family:ff6;src:url('data:application/font-woff;base64,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')format("woff");}.ff6{font-family:ff6;line-height:0.899000;font-style:normal;font-weight:normal;visibility:visible;}
+@font-face{font-family:ff7;src:url('data:application/font-woff;base64,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')format("woff");}.ff7{font-family:ff7;line-height:0.844000;font-style:normal;font-weight:normal;visibility:visible;}
+.m0{transform:matrix(0.250000,0.000000,0.000000,0.250000,0,0);-ms-transform:matrix(0.250000,0.000000,0.000000,0.250000,0,0);-webkit-transform:matrix(0.250000,0.000000,0.000000,0.250000,0,0);}
+.v0{vertical-align:0.000000px;}
+.lse{letter-spacing:-0.669514px;}
+.ls6{letter-spacing:-0.015941px;}
+.ls4{letter-spacing:-0.011956px;}
+.ls5{letter-spacing:-0.007970px;}
+.ls3{letter-spacing:-0.003985px;}
+.ls1{letter-spacing:0.000000px;}
+.lsb{letter-spacing:0.003985px;}
+.ls2{letter-spacing:0.004784px;}
+.lsd{letter-spacing:0.007970px;}
+.lsa{letter-spacing:0.011956px;}
+.ls7{letter-spacing:0.015941px;}
+.ls0{letter-spacing:7.172000px;}
+.lsc{letter-spacing:11.712503px;}
+.ls8{letter-spacing:12.417883px;}
+.ls9{letter-spacing:13.366361px;}
+.sc_{text-shadow:none;}
+.sc0{text-shadow:-0.015em 0 transparent,0 0.015em transparent,0.015em 0 transparent,0 -0.015em  transparent;}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.sc_{-webkit-text-stroke:0px transparent;}
+.sc0{-webkit-text-stroke:0.015em transparent;text-shadow:none;}
+}
+.ws0{word-spacing:0.000000px;}
+._a{margin-left:-12.433824px;}
+._c{margin-left:-3.514946px;}
+._6{margin-left:-1.239397px;}
+._7{width:1.024196px;}
+._12{width:2.084260px;}
+._4{width:4.423572px;}
+._5{width:6.503846px;}
+._e{width:7.536013px;}
+._d{width:8.926848px;}
+._10{width:10.042704px;}
+._2{width:11.158560px;}
+._3{width:12.198697px;}
+._1{width:13.948200px;}
+._8{width:15.861096px;}
+._b{width:16.905218px;}
+._9{width:18.124690px;}
+._11{width:19.136930px;}
+._0{width:21.516000px;}
+._f{width:419.243040px;}
+._13{width:532.087963px;}
+.fc0{color:rgb(0,0,0);}
+.fs4{font-size:27.896000px;}
+.fs3{font-size:39.852000px;}
+.fs2{font-size:47.840000px;}
+.fs1{font-size:63.760000px;}
+.fs0{font-size:71.720000px;}
+.y0{bottom:0.000000px;}
+.y37{bottom:80.189472px;}
+.y6d{bottom:80.250995px;}
+.y36{bottom:93.141372px;}
+.y6c{bottom:93.202895px;}
+.y35{bottom:106.093272px;}
+.y6b{bottom:106.154795px;}
+.y34{bottom:119.045172px;}
+.y6a{bottom:119.106695px;}
+.y33{bottom:131.997072px;}
+.y69{bottom:132.058595px;}
+.y32{bottom:144.948972px;}
+.y68{bottom:145.010495px;}
+.y66{bottom:161.300000px;}
+.y31{bottom:165.432900px;}
+.y67{bottom:168.134618px;}
+.y65{bottom:174.840384px;}
+.y30{bottom:178.384800px;}
+.y64{bottom:191.100000px;}
+.y62{bottom:191.134337px;}
+.y2f{bottom:191.336700px;}
+.y63{bottom:194.800000px;}
+.y61{bottom:204.086237px;}
+.y2e{bottom:204.288600px;}
+.y60{bottom:217.038137px;}
+.y2d{bottom:217.240500px;}
+.y5d{bottom:229.948100px;}
+.y5f{bottom:230.000000px;}
+.y2c{bottom:230.192400px;}
+.y5e{bottom:233.600000px;}
+.y5b{bottom:240.525646px;}
+.y5c{bottom:242.900000px;}
+.y59{bottom:242.984800px;}
+.y2b{bottom:243.144300px;}
+.y5a{bottom:246.600000px;}
+.y58{bottom:255.936700px;}
+.y2a{bottom:256.096200px;}
+.y57{bottom:268.888600px;}
+.y29{bottom:269.048100px;}
+.y56{bottom:281.840500px;}
+.y28{bottom:282.000000px;}
+.y26{bottom:282.048100px;}
+.y27{bottom:285.700000px;}
+.y55{bottom:294.792400px;}
+.y23{bottom:294.988600px;}
+.y25{bottom:295.000000px;}
+.y24{bottom:298.600000px;}
+.y54{bottom:307.744300px;}
+.y22{bottom:307.940500px;}
+.y8a{bottom:313.332900px;}
+.y8c{bottom:313.400000px;}
+.y8b{bottom:317.000000px;}
+.y53{bottom:320.696200px;}
+.y21{bottom:320.892400px;}
+.y89{bottom:326.284800px;}
+.y52{bottom:333.648100px;}
+.y20{bottom:333.844300px;}
+.y88{bottom:339.236700px;}
+.y4f{bottom:346.548100px;}
+.y51{bottom:346.600000px;}
+.y1f{bottom:346.796200px;}
+.y50{bottom:350.200000px;}
+.y87{bottom:352.188600px;}
+.y4e{bottom:359.500000px;}
+.y4c{bottom:359.540500px;}
+.y1e{bottom:359.748100px;}
+.y4d{bottom:363.100000px;}
+.y86{bottom:365.140500px;}
+.y4b{bottom:372.492400px;}
+.y1b{bottom:372.648100px;}
+.y1d{bottom:372.700000px;}
+.y1c{bottom:376.300000px;}
+.y85{bottom:378.092400px;}
+.y4a{bottom:385.444300px;}
+.y1a{bottom:385.600000px;}
+.y18{bottom:385.648100px;}
+.y19{bottom:389.300000px;}
+.y84{bottom:391.044300px;}
+.y49{bottom:398.396200px;}
+.y17{bottom:398.600000px;}
+.y15{bottom:398.648100px;}
+.y16{bottom:402.200000px;}
+.y83{bottom:403.996200px;}
+.y14{bottom:410.100000px;}
+.y48{bottom:411.348100px;}
+.y11{bottom:411.586237px;}
+.y13{bottom:411.600000px;}
+.y12{bottom:415.200000px;}
+.y82{bottom:416.948100px;}
+.y45{bottom:424.298290px;}
+.y47{bottom:424.300000px;}
+.y10{bottom:424.538137px;}
+.y46{bottom:427.900000px;}
+.y81{bottom:429.900000px;}
+.y7f{bottom:429.948100px;}
+.y80{bottom:433.500000px;}
+.y44{bottom:437.250190px;}
+.yd{bottom:437.448100px;}
+.yf{bottom:437.500000px;}
+.ye{bottom:441.100000px;}
+.y7c{bottom:442.892400px;}
+.y7e{bottom:442.900000px;}
+.y7d{bottom:446.500000px;}
+.y43{bottom:450.202090px;}
+.yc{bottom:450.400000px;}
+.ya{bottom:450.448100px;}
+.yb{bottom:454.000000px;}
+.y7b{bottom:455.844300px;}
+.y42{bottom:463.153990px;}
+.y7{bottom:463.348100px;}
+.y9{bottom:463.400000px;}
+.y8{bottom:467.000000px;}
+.y7a{bottom:468.796200px;}
+.y41{bottom:476.105890px;}
+.y5{bottom:476.300000px;}
+.y6{bottom:479.900000px;}
+.y79{bottom:481.748100px;}
+.y78{bottom:494.700000px;}
+.y40{bottom:494.726737px;}
+.y4{bottom:497.224200px;}
+.y76{bottom:507.648100px;}
+.y3f{bottom:507.678637px;}
+.y77{bottom:511.300000px;}
+.y75{bottom:520.600000px;}
+.y73{bottom:520.618200px;}
+.y3e{bottom:520.630537px;}
+.y74{bottom:524.200000px;}
+.y72{bottom:533.580063px;}
+.y3d{bottom:533.592400px;}
+.y2{bottom:546.500000px;}
+.y71{bottom:546.531963px;}
+.y3c{bottom:546.544300px;}
+.y3{bottom:552.300000px;}
+.y70{bottom:559.483863px;}
+.y3b{bottom:559.496200px;}
+.y6f{bottom:572.435763px;}
+.y3a{bottom:572.448100px;}
+.y6e{bottom:585.387663px;}
+.y1{bottom:585.400000px;}
+.y38{bottom:606.300000px;}
+.y39{bottom:610.200000px;}
+.hb{height:19.052968px;}
+.h7{height:19.136656px;}
+.ha{height:19.834056px;}
+.h9{height:27.019656px;}
+.hc{height:27.577584px;}
+.h6{height:28.334772px;}
+.h8{height:28.733292px;}
+.h4{height:32.818240px;}
+.h5{height:34.109920px;}
+.h3{height:45.333360px;}
+.h2{height:50.992920px;}
+.h1{height:646.000000px;}
+.h0{height:646.200000px;}
+.w0{width:430.800000px;}
+.w1{width:431.000000px;}
+.x0{left:0.000000px;}
+.x5{left:59.460000px;}
+.x12{left:66.100000px;}
+.x23{left:69.366100px;}
+.x2b{left:71.640000px;}
+.x13{left:73.530000px;}
+.xc{left:78.940000px;}
+.xd{left:85.790000px;}
+.x31{left:109.300000px;}
+.x32{left:116.300000px;}
+.x18{left:119.300000px;}
+.x19{left:123.300000px;}
+.x8{left:126.000000px;}
+.x9{left:130.000000px;}
+.x28{left:136.900000px;}
+.x2{left:141.900000px;}
+.x29{left:150.800000px;}
+.x2a{left:154.800000px;}
+.x1{left:165.500000px;}
+.xe{left:168.400000px;}
+.x1d{left:171.300000px;}
+.xf{left:172.400000px;}
+.x14{left:174.200000px;}
+.x1e{left:175.300000px;}
+.x15{left:181.200000px;}
+.x1c{left:186.700000px;}
+.x10{left:189.900000px;}
+.x4{left:192.608960px;}
+.x11{left:193.800000px;}
+.x2c{left:195.700000px;}
+.x30{left:197.400000px;}
+.x26{left:208.800000px;}
+.x27{left:212.800000px;}
+.x21{left:214.300000px;}
+.x16{left:217.800000px;}
+.x22{left:221.800000px;}
+.x1f{left:223.900000px;}
+.x17{left:225.200000px;}
+.x20{left:230.800000px;}
+.x2f{left:234.697745px;}
+.x24{left:256.600000px;}
+.xa{left:263.900000px;}
+.xb{left:267.900000px;}
+.x3{left:281.400000px;}
+.x33{left:291.700000px;}
+.x36{left:298.400000px;}
+.x34{left:300.200000px;}
+.x37{left:305.100000px;}
+.x2d{left:306.600000px;}
+.x2e{left:311.500000px;}
+.x1a{left:320.700000px;}
+.x25{left:322.100000px;}
+.x1b{left:324.700000px;}
+.x6{left:326.000000px;}
+.x7{left:330.000000px;}
+.x38{left:331.800000px;}
+.x39{left:335.800000px;}
+.x35{left:366.300000px;}
+@media print{
+.v0{vertical-align:0.000000pt;}
+.lse{letter-spacing:-0.892685pt;}
+.ls6{letter-spacing:-0.021254pt;}
+.ls4{letter-spacing:-0.015941pt;}
+.ls5{letter-spacing:-0.010627pt;}
+.ls3{letter-spacing:-0.005314pt;}
+.ls1{letter-spacing:0.000000pt;}
+.lsb{letter-spacing:0.005314pt;}
+.ls2{letter-spacing:0.006379pt;}
+.lsd{letter-spacing:0.010627pt;}
+.lsa{letter-spacing:0.015941pt;}
+.ls7{letter-spacing:0.021254pt;}
+.ls0{letter-spacing:9.562667pt;}
+.lsc{letter-spacing:15.616670pt;}
+.ls8{letter-spacing:16.557178pt;}
+.ls9{letter-spacing:17.821814pt;}
+.ws0{word-spacing:0.000000pt;}
+._a{margin-left:-16.578432pt;}
+._c{margin-left:-4.686595pt;}
+._6{margin-left:-1.652530pt;}
+._7{width:1.365595pt;}
+._12{width:2.779013pt;}
+._4{width:5.898096pt;}
+._5{width:8.671795pt;}
+._e{width:10.048018pt;}
+._d{width:11.902464pt;}
+._10{width:13.390272pt;}
+._2{width:14.878080pt;}
+._3{width:16.264930pt;}
+._1{width:18.597600pt;}
+._8{width:21.148128pt;}
+._b{width:22.540291pt;}
+._9{width:24.166253pt;}
+._11{width:25.515907pt;}
+._0{width:28.688000pt;}
+._f{width:558.990720pt;}
+._13{width:709.450618pt;}
+.fs4{font-size:37.194667pt;}
+.fs3{font-size:53.136000pt;}
+.fs2{font-size:63.786667pt;}
+.fs1{font-size:85.013333pt;}
+.fs0{font-size:95.626667pt;}
+.y0{bottom:0.000000pt;}
+.y37{bottom:106.919296pt;}
+.y6d{bottom:107.001327pt;}
+.y36{bottom:124.188496pt;}
+.y6c{bottom:124.270527pt;}
+.y35{bottom:141.457696pt;}
+.y6b{bottom:141.539727pt;}
+.y34{bottom:158.726896pt;}
+.y6a{bottom:158.808927pt;}
+.y33{bottom:175.996096pt;}
+.y69{bottom:176.078127pt;}
+.y32{bottom:193.265296pt;}
+.y68{bottom:193.347327pt;}
+.y66{bottom:215.066667pt;}
+.y31{bottom:220.577200pt;}
+.y67{bottom:224.179491pt;}
+.y65{bottom:233.120512pt;}
+.y30{bottom:237.846400pt;}
+.y64{bottom:254.800000pt;}
+.y62{bottom:254.845783pt;}
+.y2f{bottom:255.115600pt;}
+.y63{bottom:259.733333pt;}
+.y61{bottom:272.114983pt;}
+.y2e{bottom:272.384800pt;}
+.y60{bottom:289.384183pt;}
+.y2d{bottom:289.654000pt;}
+.y5d{bottom:306.597467pt;}
+.y5f{bottom:306.666667pt;}
+.y2c{bottom:306.923200pt;}
+.y5e{bottom:311.466667pt;}
+.y5b{bottom:320.700861pt;}
+.y5c{bottom:323.866667pt;}
+.y59{bottom:323.979733pt;}
+.y2b{bottom:324.192400pt;}
+.y5a{bottom:328.800000pt;}
+.y58{bottom:341.248933pt;}
+.y2a{bottom:341.461600pt;}
+.y57{bottom:358.518133pt;}
+.y29{bottom:358.730800pt;}
+.y56{bottom:375.787333pt;}
+.y28{bottom:376.000000pt;}
+.y26{bottom:376.064133pt;}
+.y27{bottom:380.933333pt;}
+.y55{bottom:393.056533pt;}
+.y23{bottom:393.318133pt;}
+.y25{bottom:393.333333pt;}
+.y24{bottom:398.133333pt;}
+.y54{bottom:410.325733pt;}
+.y22{bottom:410.587333pt;}
+.y8a{bottom:417.777200pt;}
+.y8c{bottom:417.866667pt;}
+.y8b{bottom:422.666667pt;}
+.y53{bottom:427.594933pt;}
+.y21{bottom:427.856533pt;}
+.y89{bottom:435.046400pt;}
+.y52{bottom:444.864133pt;}
+.y20{bottom:445.125733pt;}
+.y88{bottom:452.315600pt;}
+.y4f{bottom:462.064133pt;}
+.y51{bottom:462.133333pt;}
+.y1f{bottom:462.394933pt;}
+.y50{bottom:466.933333pt;}
+.y87{bottom:469.584800pt;}
+.y4e{bottom:479.333333pt;}
+.y4c{bottom:479.387333pt;}
+.y1e{bottom:479.664133pt;}
+.y4d{bottom:484.133333pt;}
+.y86{bottom:486.854000pt;}
+.y4b{bottom:496.656533pt;}
+.y1b{bottom:496.864133pt;}
+.y1d{bottom:496.933333pt;}
+.y1c{bottom:501.733333pt;}
+.y85{bottom:504.123200pt;}
+.y4a{bottom:513.925733pt;}
+.y1a{bottom:514.133333pt;}
+.y18{bottom:514.197467pt;}
+.y19{bottom:519.066667pt;}
+.y84{bottom:521.392400pt;}
+.y49{bottom:531.194933pt;}
+.y17{bottom:531.466667pt;}
+.y15{bottom:531.530800pt;}
+.y16{bottom:536.266667pt;}
+.y83{bottom:538.661600pt;}
+.y14{bottom:546.800000pt;}
+.y48{bottom:548.464133pt;}
+.y11{bottom:548.781649pt;}
+.y13{bottom:548.800000pt;}
+.y12{bottom:553.600000pt;}
+.y82{bottom:555.930800pt;}
+.y45{bottom:565.731053pt;}
+.y47{bottom:565.733333pt;}
+.y10{bottom:566.050849pt;}
+.y46{bottom:570.533333pt;}
+.y81{bottom:573.200000pt;}
+.y7f{bottom:573.264133pt;}
+.y80{bottom:578.000000pt;}
+.y44{bottom:583.000253pt;}
+.yd{bottom:583.264133pt;}
+.yf{bottom:583.333333pt;}
+.ye{bottom:588.133333pt;}
+.y7c{bottom:590.523200pt;}
+.y7e{bottom:590.533333pt;}
+.y7d{bottom:595.333333pt;}
+.y43{bottom:600.269453pt;}
+.yc{bottom:600.533333pt;}
+.ya{bottom:600.597467pt;}
+.yb{bottom:605.333333pt;}
+.y7b{bottom:607.792400pt;}
+.y42{bottom:617.538653pt;}
+.y7{bottom:617.797467pt;}
+.y9{bottom:617.866667pt;}
+.y8{bottom:622.666667pt;}
+.y7a{bottom:625.061600pt;}
+.y41{bottom:634.807853pt;}
+.y5{bottom:635.066667pt;}
+.y6{bottom:639.866667pt;}
+.y79{bottom:642.330800pt;}
+.y78{bottom:659.600000pt;}
+.y40{bottom:659.635649pt;}
+.y4{bottom:662.965600pt;}
+.y76{bottom:676.864133pt;}
+.y3f{bottom:676.904849pt;}
+.y77{bottom:681.733333pt;}
+.y75{bottom:694.133333pt;}
+.y73{bottom:694.157600pt;}
+.y3e{bottom:694.174049pt;}
+.y74{bottom:698.933333pt;}
+.y72{bottom:711.440084pt;}
+.y3d{bottom:711.456533pt;}
+.y2{bottom:728.666667pt;}
+.y71{bottom:728.709284pt;}
+.y3c{bottom:728.725733pt;}
+.y3{bottom:736.400000pt;}
+.y70{bottom:745.978484pt;}
+.y3b{bottom:745.994933pt;}
+.y6f{bottom:763.247684pt;}
+.y3a{bottom:763.264133pt;}
+.y6e{bottom:780.516884pt;}
+.y1{bottom:780.533333pt;}
+.y38{bottom:808.400000pt;}
+.y39{bottom:813.600000pt;}
+.hb{height:25.403957pt;}
+.h7{height:25.515541pt;}
+.ha{height:26.445408pt;}
+.h9{height:36.026208pt;}
+.hc{height:36.770112pt;}
+.h6{height:37.779696pt;}
+.h8{height:38.311056pt;}
+.h4{height:43.757653pt;}
+.h5{height:45.479893pt;}
+.h3{height:60.444480pt;}
+.h2{height:67.990560pt;}
+.h1{height:861.333333pt;}
+.h0{height:861.600000pt;}
+.w0{width:574.400000pt;}
+.w1{width:574.666667pt;}
+.x0{left:0.000000pt;}
+.x5{left:79.280000pt;}
+.x12{left:88.133333pt;}
+.x23{left:92.488133pt;}
+.x2b{left:95.520000pt;}
+.x13{left:98.040000pt;}
+.xc{left:105.253333pt;}
+.xd{left:114.386667pt;}
+.x31{left:145.733333pt;}
+.x32{left:155.066667pt;}
+.x18{left:159.066667pt;}
+.x19{left:164.400000pt;}
+.x8{left:168.000000pt;}
+.x9{left:173.333333pt;}
+.x28{left:182.533333pt;}
+.x2{left:189.200000pt;}
+.x29{left:201.066667pt;}
+.x2a{left:206.400000pt;}
+.x1{left:220.666667pt;}
+.xe{left:224.533333pt;}
+.x1d{left:228.400000pt;}
+.xf{left:229.866667pt;}
+.x14{left:232.266667pt;}
+.x1e{left:233.733333pt;}
+.x15{left:241.600000pt;}
+.x1c{left:248.933333pt;}
+.x10{left:253.200000pt;}
+.x4{left:256.811947pt;}
+.x11{left:258.400000pt;}
+.x2c{left:260.933333pt;}
+.x30{left:263.200000pt;}
+.x26{left:278.400000pt;}
+.x27{left:283.733333pt;}
+.x21{left:285.733333pt;}
+.x16{left:290.400000pt;}
+.x22{left:295.733333pt;}
+.x1f{left:298.533333pt;}
+.x17{left:300.266667pt;}
+.x20{left:307.733333pt;}
+.x2f{left:312.930327pt;}
+.x24{left:342.133333pt;}
+.xa{left:351.866667pt;}
+.xb{left:357.200000pt;}
+.x3{left:375.200000pt;}
+.x33{left:388.933333pt;}
+.x36{left:397.866667pt;}
+.x34{left:400.266667pt;}
+.x37{left:406.800000pt;}
+.x2d{left:408.800000pt;}
+.x2e{left:415.333333pt;}
+.x1a{left:427.600000pt;}
+.x25{left:429.466667pt;}
+.x1b{left:432.933333pt;}
+.x6{left:434.666667pt;}
+.x7{left:440.000000pt;}
+.x38{left:442.400000pt;}
+.x39{left:447.733333pt;}
+.x35{left:488.400000pt;}
+}
+</style>
+<script>
+/*
+ Copyright 2012 Mozilla Foundation 
+ Copyright 2013 Lu Wang <coolwanglu@gmail.com>
+ Apachine License Version 2.0 
+*/
+(function(){function b(a,b,e,f){var c=(a.className||"").split(/\s+/g);""===c[0]&&c.shift();var d=c.indexOf(b);0>d&&e&&c.push(b);0<=d&&f&&c.splice(d,1);a.className=c.join(" ");return 0<=d}if(!("classList"in document.createElement("div"))){var e={add:function(a){b(this.element,a,!0,!1)},contains:function(a){return b(this.element,a,!1,!1)},remove:function(a){b(this.element,a,!1,!0)},toggle:function(a){b(this.element,a,!0,!0)}};Object.defineProperty(HTMLElement.prototype,"classList",{get:function(){if(this._classList)return this._classList;
+var a=Object.create(e,{element:{value:this,writable:!1,enumerable:!0}});Object.defineProperty(this,"_classList",{value:a,writable:!1,enumerable:!1});return a},enumerable:!0})}})();
+</script>
+<script>
+(function(){/*
+ pdf2htmlEX.js: Core UI functions for pdf2htmlEX 
+ Copyright 2012,2013 Lu Wang <coolwanglu@gmail.com> and other contributors 
+ https://github.com/pdf2htmlEX/pdf2htmlEX/blob/master/share/LICENSE 
+*/
+var pdf2htmlEX=window.pdf2htmlEX=window.pdf2htmlEX||{},CSS_CLASS_NAMES={page_frame:"pf",page_content_box:"pc",page_data:"pi",background_image:"bi",link:"l",input_radio:"ir",__dummy__:"no comma"},DEFAULT_CONFIG={container_id:"page-container",sidebar_id:"sidebar",outline_id:"outline",loading_indicator_cls:"loading-indicator",preload_pages:3,render_timeout:100,scale_step:0.9,key_handler:!0,hashchange_handler:!0,view_history_handler:!0,__dummy__:"no comma"},EPS=1E-6;
+function invert(a){var b=a[0]*a[3]-a[1]*a[2];return[a[3]/b,-a[1]/b,-a[2]/b,a[0]/b,(a[2]*a[5]-a[3]*a[4])/b,(a[1]*a[4]-a[0]*a[5])/b]}function transform(a,b){return[a[0]*b[0]+a[2]*b[1]+a[4],a[1]*b[0]+a[3]*b[1]+a[5]]}function get_page_number(a){return parseInt(a.getAttribute("data-page-no"),16)}function disable_dragstart(a){for(var b=0,c=a.length;b<c;++b)a[b].addEventListener("dragstart",function(){return!1},!1)}
+function clone_and_extend_objs(a){for(var b={},c=0,e=arguments.length;c<e;++c){var h=arguments[c],d;for(d in h)h.hasOwnProperty(d)&&(b[d]=h[d])}return b}
+function Page(a){if(a){this.shown=this.loaded=!1;this.page=a;this.num=get_page_number(a);this.original_height=a.clientHeight;this.original_width=a.clientWidth;var b=a.getElementsByClassName(CSS_CLASS_NAMES.page_content_box)[0];b&&(this.content_box=b,this.original_scale=this.cur_scale=this.original_height/b.clientHeight,this.page_data=JSON.parse(a.getElementsByClassName(CSS_CLASS_NAMES.page_data)[0].getAttribute("data-data")),this.ctm=this.page_data.ctm,this.ictm=invert(this.ctm),this.loaded=!0)}}
+Page.prototype={hide:function(){this.loaded&&this.shown&&(this.content_box.classList.remove("opened"),this.shown=!1)},show:function(){this.loaded&&!this.shown&&(this.content_box.classList.add("opened"),this.shown=!0)},rescale:function(a){this.cur_scale=0===a?this.original_scale:a;this.loaded&&(a=this.content_box.style,a.msTransform=a.webkitTransform=a.transform="scale("+this.cur_scale.toFixed(3)+")");a=this.page.style;a.height=this.original_height*this.cur_scale+"px";a.width=this.original_width*this.cur_scale+
+"px"},view_position:function(){var a=this.page,b=a.parentNode;return[b.scrollLeft-a.offsetLeft-a.clientLeft,b.scrollTop-a.offsetTop-a.clientTop]},height:function(){return this.page.clientHeight},width:function(){return this.page.clientWidth}};function Viewer(a){this.config=clone_and_extend_objs(DEFAULT_CONFIG,0<arguments.length?a:{});this.pages_loading=[];this.init_before_loading_content();var b=this;document.addEventListener("DOMContentLoaded",function(){b.init_after_loading_content()},!1)}
+Viewer.prototype={scale:1,cur_page_idx:0,first_page_idx:0,init_before_loading_content:function(){this.pre_hide_pages()},initialize_radio_button:function(){for(var a=document.getElementsByClassName(CSS_CLASS_NAMES.input_radio),b=0;b<a.length;b++)a[b].addEventListener("click",function(){this.classList.toggle("checked")})},init_after_loading_content:function(){this.sidebar=document.getElementById(this.config.sidebar_id);this.outline=document.getElementById(this.config.outline_id);this.container=document.getElementById(this.config.container_id);
+this.loading_indicator=document.getElementsByClassName(this.config.loading_indicator_cls)[0];for(var a=!0,b=this.outline.childNodes,c=0,e=b.length;c<e;++c)if("ul"===b[c].nodeName.toLowerCase()){a=!1;break}a||this.sidebar.classList.add("opened");this.find_pages();if(0!=this.pages.length){disable_dragstart(document.getElementsByClassName(CSS_CLASS_NAMES.background_image));this.config.key_handler&&this.register_key_handler();var h=this;this.config.hashchange_handler&&window.addEventListener("hashchange",
+function(a){h.navigate_to_dest(document.location.hash.substring(1))},!1);this.config.view_history_handler&&window.addEventListener("popstate",function(a){a.state&&h.navigate_to_dest(a.state)},!1);this.container.addEventListener("scroll",function(){h.update_page_idx();h.schedule_render(!0)},!1);[this.outline].concat(Array.from(this.container.querySelectorAll("a.l"))).forEach(function(a){a.addEventListener("click",h.link_handler.bind(h),!1)});this.initialize_radio_button();this.render()}},find_pages:function(){for(var a=
+[],b={},c=this.container.childNodes,e=0,h=c.length;e<h;++e){var d=c[e];d.nodeType===Node.ELEMENT_NODE&&d.classList.contains(CSS_CLASS_NAMES.page_frame)&&(d=new Page(d),a.push(d),b[d.num]=a.length-1)}this.pages=a;this.page_map=b},load_page:function(a,b,c){var e=this.pages;if(!(a>=e.length||(e=e[a],e.loaded||this.pages_loading[a]))){var e=e.page,h=e.getAttribute("data-page-url");if(h){this.pages_loading[a]=!0;var d=e.getElementsByClassName(this.config.loading_indicator_cls)[0];"undefined"===typeof d&&
+(d=this.loading_indicator.cloneNode(!0),d.classList.add("active"),e.appendChild(d));var f=this,g=new XMLHttpRequest;g.open("GET",h,!0);g.onload=function(){if(200===g.status||0===g.status){var b=document.createElement("div");b.innerHTML=g.responseText;for(var d=null,b=b.childNodes,e=0,h=b.length;e<h;++e){var p=b[e];if(p.nodeType===Node.ELEMENT_NODE&&p.classList.contains(CSS_CLASS_NAMES.page_frame)){d=p;break}}b=f.pages[a];f.container.replaceChild(d,b.page);b=new Page(d);f.pages[a]=b;b.hide();b.rescale(f.scale);
+disable_dragstart(d.getElementsByClassName(CSS_CLASS_NAMES.background_image));f.schedule_render(!1);c&&c(b)}delete f.pages_loading[a]};g.send(null)}void 0===b&&(b=this.config.preload_pages);0<--b&&(f=this,setTimeout(function(){f.load_page(a+1,b)},0))}},pre_hide_pages:function(){var a="@media screen{."+CSS_CLASS_NAMES.page_content_box+"{display:none;}}",b=document.createElement("style");b.styleSheet?b.styleSheet.cssText=a:b.appendChild(document.createTextNode(a));document.head.appendChild(b)},render:function(){for(var a=
+this.container,b=a.scrollTop,c=a.clientHeight,a=b-c,b=b+c+c,c=this.pages,e=0,h=c.length;e<h;++e){var d=c[e],f=d.page,g=f.offsetTop+f.clientTop,f=g+f.clientHeight;g<=b&&f>=a?d.loaded?d.show():this.load_page(e):d.hide()}},update_page_idx:function(){var a=this.pages,b=a.length;if(!(2>b)){for(var c=this.container,e=c.scrollTop,c=e+c.clientHeight,h=-1,d=b,f=d-h;1<f;){var g=h+Math.floor(f/2),f=a[g].page;f.offsetTop+f.clientTop+f.clientHeight>=e?d=g:h=g;f=d-h}this.first_page_idx=d;for(var g=h=this.cur_page_idx,
+k=0;d<b;++d){var f=a[d].page,l=f.offsetTop+f.clientTop,f=f.clientHeight;if(l>c)break;f=(Math.min(c,l+f)-Math.max(e,l))/f;if(d===h&&Math.abs(f-1)<=EPS){g=h;break}f>k&&(k=f,g=d)}this.cur_page_idx=g}},schedule_render:function(a){if(void 0!==this.render_timer){if(!a)return;clearTimeout(this.render_timer)}var b=this;this.render_timer=setTimeout(function(){delete b.render_timer;b.render()},this.config.render_timeout)},register_key_handler:function(){var a=this;window.addEventListener("DOMMouseScroll",function(b){if(b.ctrlKey){b.preventDefault();
+var c=a.container,e=c.getBoundingClientRect(),c=[b.clientX-e.left-c.clientLeft,b.clientY-e.top-c.clientTop];a.rescale(Math.pow(a.config.scale_step,b.detail),!0,c)}},!1);window.addEventListener("keydown",function(b){var c=!1,e=b.ctrlKey||b.metaKey,h=b.altKey;switch(b.keyCode){case 61:case 107:case 187:e&&(a.rescale(1/a.config.scale_step,!0),c=!0);break;case 173:case 109:case 189:e&&(a.rescale(a.config.scale_step,!0),c=!0);break;case 48:e&&(a.rescale(0,!1),c=!0);break;case 33:h?a.scroll_to(a.cur_page_idx-
+1):a.container.scrollTop-=a.container.clientHeight;c=!0;break;case 34:h?a.scroll_to(a.cur_page_idx+1):a.container.scrollTop+=a.container.clientHeight;c=!0;break;case 35:a.container.scrollTop=a.container.scrollHeight;c=!0;break;case 36:a.container.scrollTop=0,c=!0}c&&b.preventDefault()},!1)},rescale:function(a,b,c){var e=this.scale;this.scale=a=0===a?1:b?e*a:a;c||(c=[0,0]);b=this.container;c[0]+=b.scrollLeft;c[1]+=b.scrollTop;for(var h=this.pages,d=h.length,f=this.first_page_idx;f<d;++f){var g=h[f].page;
+if(g.offsetTop+g.clientTop>=c[1])break}g=f-1;0>g&&(g=0);var g=h[g].page,k=g.clientWidth,f=g.clientHeight,l=g.offsetLeft+g.clientLeft,m=c[0]-l;0>m?m=0:m>k&&(m=k);k=g.offsetTop+g.clientTop;c=c[1]-k;0>c?c=0:c>f&&(c=f);for(f=0;f<d;++f)h[f].rescale(a);b.scrollLeft+=m/e*a+g.offsetLeft+g.clientLeft-m-l;b.scrollTop+=c/e*a+g.offsetTop+g.clientTop-c-k;this.schedule_render(!0)},fit_width:function(){var a=this.cur_page_idx;this.rescale(this.container.clientWidth/this.pages[a].width(),!0);this.scroll_to(a)},fit_height:function(){var a=
+this.cur_page_idx;this.rescale(this.container.clientHeight/this.pages[a].height(),!0);this.scroll_to(a)},get_containing_page:function(a){for(;a;){if(a.nodeType===Node.ELEMENT_NODE&&a.classList.contains(CSS_CLASS_NAMES.page_frame)){a=get_page_number(a);var b=this.page_map;return a in b?this.pages[b[a]]:null}a=a.parentNode}return null},link_handler:function(a){var b=a.target,c=b.getAttribute("data-dest-detail");c||(b=a.currentTarget,c=b.getAttribute("data-dest-detail"));if(c){if(this.config.view_history_handler)try{var e=
+this.get_current_view_hash();window.history.replaceState(e,"","#"+e);window.history.pushState(c,"","#"+c)}catch(h){}this.navigate_to_dest(c,this.get_containing_page(b));a.preventDefault()}},navigate_to_dest:function(a,b){try{var c=JSON.parse(a)}catch(e){return}if(c instanceof Array){var h=c[0],d=this.page_map;if(h in d){for(var f=d[h],h=this.pages[f],d=2,g=c.length;d<g;++d){var k=c[d];if(null!==k&&"number"!==typeof k)return}for(;6>c.length;)c.push(null);var g=b||this.pages[this.cur_page_idx],d=g.view_position(),
+d=transform(g.ictm,[d[0],g.height()-d[1]]),g=this.scale,l=[0,0],m=!0,k=!1,n=this.scale;switch(c[1]){case "XYZ":l=[null===c[2]?d[0]:c[2]*n,null===c[3]?d[1]:c[3]*n];g=c[4];if(null===g||0===g)g=this.scale;k=!0;break;case "Fit":case "FitB":l=[0,0];k=!0;break;case "FitH":case "FitBH":l=[0,null===c[2]?d[1]:c[2]*n];k=!0;break;case "FitV":case "FitBV":l=[null===c[2]?d[0]:c[2]*n,0];k=!0;break;case "FitR":l=[c[2]*n,c[5]*n],m=!1,k=!0}if(k){this.rescale(g,!1);var p=this,c=function(a){l=transform(a.ctm,l);m&&
+(l[1]=a.height()-l[1]);p.scroll_to(f,l)};h.loaded?c(h):(this.load_page(f,void 0,c),this.scroll_to(f))}}}},scroll_to:function(a,b){var c=this.pages;if(!(0>a||a>=c.length)){c=c[a].view_position();void 0===b&&(b=[0,0]);var e=this.container;e.scrollLeft+=b[0]-c[0];e.scrollTop+=b[1]-c[1]}},get_current_view_hash:function(){var a=[],b=this.pages[this.cur_page_idx];a.push(b.num);a.push("XYZ");var c=b.view_position(),c=transform(b.ictm,[c[0],b.height()-c[1]]);a.push(c[0]/this.scale);a.push(c[1]/this.scale);
+a.push(this.scale);return JSON.stringify(a)}};pdf2htmlEX.Viewer=Viewer;})();
+</script>
+<script>
+try{
+pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
+}catch(e){}
+</script>
+<title></title>
+</head>
+<body>
+<div id="sidebar">
+<div id="outline">
+</div>
+</div>
+<div id="page-container">
+<div id="pf15" class="pf w0 h0" data-page-no="15"><div class="pc pc15 w0 h0"><img class="bi x0 y0 w1 h1" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA14AAAUMCAIAAACvLNRjAAAACXBIWXMAABYlAAAWJQFJUiTwAAATzUlEQVR42u3ZwQmAQBRDwaz4+294IR7sQNCLMyXk9CCrbQAAIDlMAACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAPip0wRv23vPjB0A4LG2RvjGsjUAADeHMgAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0NAEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgCANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhiYAAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCAAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQBAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0tAEAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAAAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBqaAAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAAkOQCEBIWE0lzeFcAAAAASUVORK5CYII="/><div class="t m0 x1 h2 y1 ff1 fs0 fc0 sc0 ls0 ws0">PART<span class="_ _0"> </span>ONE</div><div class="t m0 x2 h3 y2 ff1 fs1 fc0 sc0 ls1 ws0">Radon<span class="_"> </span>measures<span class="_"> </span>on<span class="_"> </span><span class="ff2">R</span></div><div class="t m0 x3 h4 y3 ff3 fs2 fc0 sc0 ls1 ws0">n</div><div class="t m0 x4 h5 y4 ff4 fs2 fc0 sc0 ls2 ws0">Synopsis</div><div class="t m0 x5 h6 y5 ff1 fs3 fc0 sc0 ls3 ws0">In<span class="_ _1"> </span>this<span class="_ _1"> </span>part<span class="_ _1"> </span>we<span class="_ _1"> </span>discuss<span class="_ _1"> </span>the<span class="_ _1"> </span>basic<span class="_ _1"> </span>theory<span class="_ _1"> </span>of<span class="_ _1"> </span>Radon<span class="_ _1"> </span>measures<span class="_ _1"> </span>on<span class="_ _1"> </span><span class="ff2 ls1">R</span></div><div class="t m0 x6 h7 y6 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x7 h6 y5 ff1 fs3 fc0 sc0 ls4 ws0">.<span class="_ _1"> </span>Roughly</div><div class="t m0 x5 h8 y7 ff1 fs3 fc0 sc0 ls5 ws0">speaking,<span class="_ _2"> </span>if<span class="_ _2"> </span><span class="ff5 ls1">P<span class="ff1">(<span class="ff2">R</span></span></span></div><div class="t m0 x8 h7 y8 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x9 h6 y9 ff1 fs3 fc0 sc0 ls5 ws0">)<span class="_ _2"> </span>denotes<span class="_ _2"> </span>the<span class="_ _2"> </span>set<span class="_"> </span>of<span class="_ _2"> </span>the<span class="_ _2"> </span>parts<span class="_ _2"> </span>of<span class="_ _2"> </span><span class="ff2 ls1">R</span></div><div class="t m0 xa h7 y8 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 xb h6 y9 ff1 fs3 fc0 sc0 ls4 ws0">,<span class="_ _2"> </span>then<span class="_ _2"> </span>a<span class="_"> </span>Radon<span class="_ _2"> </span>measure<span class="_ _2"> </span><span class="ff6 ls1">µ</span></div><div class="t m0 x5 h6 ya ff1 fs3 fc0 sc0 ls6 ws0">on<span class="_ _2"> </span><span class="ff2 ls1">R</span></div><div class="t m0 xc h7 yb ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 xd h8 yc ff1 fs3 fc0 sc0 ls3 ws0">is<span class="_ _2"> </span>a<span class="_ _2"> </span>function<span class="_ _3"> </span><span class="ff6 ls1">µ<span class="_ _4"></span><span class="ff1">:<span class="_ _1"> </span><span class="ff5">P</span>(<span class="ff2">R</span></span></span></div><div class="t m0 xe h7 yb ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 xf h8 yc ff1 fs3 fc0 sc0 ls1 ws0">)<span class="_ _1"> </span><span class="ff5">→<span class="_ _1"> </span></span><span class="ls7">[0</span><span class="ff6">,<span class="_ _5"> </span><span class="ff5">∞</span></span><span class="ls3">],<span class="_ _2"> </span>which<span class="_ _2"> </span>is<span class="_ _2"> </span>countably<span class="_ _3"> </span>additiv<span class="_ _6"></span>e<span class="_ _2"> </span>(at<span class="_ _2"> </span>least)</span></div><div class="t m0 x5 h6 yd ff1 fs3 fc0 sc0 ls5 ws0">on<span class="_ _3"> </span>the<span class="_ _3"> </span>family<span class="_ _3"> </span>of<span class="_ _1"> </span>Borel<span class="_ _2"> </span>s<span class="_ _7"></span>ets<span class="_ _3"> </span>of<span class="_ _3"> </span><span class="ff2 ls1">R</span></div><div class="t m0 x10 h7 ye ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x11 h6 yf ff1 fs3 fc0 sc0 ls5 ws0">,<span class="_ _3"> </span>takes<span class="_ _3"> </span>ﬁnite<span class="_ _3"> </span>values<span class="_ _3"> </span>on<span class="_ _3"> </span>bounded<span class="_ _1"> </span>sets,<span class="_ _2"> </span>and<span class="_ _1"> </span>is</div><div class="t m0 x5 h6 y10 ff1 fs3 fc0 sc0 ls5 ws0">completely<span class="_ _1"> </span>identiﬁed<span class="_ _8"> </span>by<span class="_ _1"> </span>its<span class="_ _8"> </span>v<span class="_ _6"></span>alues<span class="_ _8"> </span>on<span class="_ _1"> </span>open<span class="_ _1"> </span>sets.<span class="_ _8"> </span>The<span class="_ _1"> </span>Lebesgue<span class="_ _8"> </span>measure<span class="_ _1"> </span>on</div><div class="t m0 x5 h9 y11 ff2 fs3 fc0 sc0 ls1 ws0">R</div><div class="t m0 x12 h7 y12 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x13 h6 y13 ff1 fs3 fc0 sc0 ls5 ws0">and<span class="_ _1"> </span>the<span class="_ _1"> </span>Dirac<span class="_ _1"> </span>measure<span class="_ _1"> </span><span class="ff6 ls1">δ</span></div><div class="t m0 x14 h7 y14 ff3 fs4 fc0 sc0 ls1 ws0">x</div><div class="t m0 x15 h8 y13 ff1 fs3 fc0 sc0 ls6 ws0">at<span class="_ _8"> </span><span class="ff3 ls1">x<span class="_ _9"> </span><span class="ff5">∈<span class="_ _9"> </span><span class="ff2">R</span></span></span></div><div class="t m0 x16 h7 y12 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x17 h6 y13 ff1 fs3 fc0 sc0 ls5 ws0">are<span class="_ _1"> </span>well-kno<span class="_ _6"></span>wn<span class="_ _1"> </span>examples<span class="_ _3"> </span>of<span class="_ _1"> </span>Radon</div><div class="t m0 x5 h6 y15 ff1 fs3 fc0 sc0 ls5 ws0">measures<span class="_ _3"> </span>on<span class="_ _3"> </span><span class="ff2 ls1">R</span></div><div class="t m0 x18 h7 y16 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x19 h6 y17 ff1 fs3 fc0 sc0 ls5 ws0">.<span class="_ _3"> </span>Moreov<span class="_ _6"></span>er<span class="_ _6"></span>,<span class="_ _3"> </span>any<span class="_ _2"> </span>locally<span class="_ _1"> </span>summable<span class="_ _2"> </span>function<span class="_ _3"> </span>on<span class="_ _1"> </span><span class="ff2 ls1">R</span></div><div class="t m0 x1a h7 y16 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x1b h6 y17 ff1 fs3 fc0 sc0 ls8 ws0">,a<span class="_ _a"></span>sw<span class="_ _a"></span>e<span class="_ _a"></span>l<span class="_ _a"></span>la<span class="_ _a"></span>s</div><div class="t m0 x5 h6 y18 ff1 fs3 fc0 sc0 ls6 ws0">any<span class="_ _3"> </span><span class="ff3 ls1">k<span class="_ _7"></span></span><span class="ls3">-dimensional<span class="_ _1"> </span>surface<span class="_ _3"> </span>in<span class="_ _1"> </span><span class="ff2 ls1">R</span></span></div><div class="t m0 x1c h7 y19 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x10 h8 y1a ff1 fs3 fc0 sc0 ls9 ws0">,1<span class="_ _4"></span><span class="ff5 ls1">≤<span class="_ _b"> </span><span class="ff3">k<span class="_ _9"> </span></span>≤<span class="_ _b"> </span><span class="ff3">n<span class="_ _2"> </span></span>−<span class="_ _2"> </span></span><span class="ls5">1,<span class="_ _1"> </span>can<span class="_ _1"> </span>be<span class="_ _3"> </span>naturally<span class="_ _1"> </span>identiﬁed</span></div><div class="t m0 x5 h6 y1b ff1 fs3 fc0 sc0 ls3 ws0">with<span class="_ _2"> </span>a<span class="_ _2"> </span>Radon<span class="_ _2"> </span>measure<span class="_ _2"> </span>on<span class="_ _2"> </span><span class="ff2 ls1">R</span></div><div class="t m0 x1d h7 y1c ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x1e h6 y1d ff1 fs3 fc0 sc0 ls3 ws0">.<span class="_ _2"> </span>There<span class="_ _2"> </span>are<span class="_ _2"> </span>good<span class="_ _2"> </span>reasons<span class="_ _2"> </span>to<span class="_ _2"> </span>look<span class="_ _2"> </span>at<span class="_ _2"> </span>such<span class="_ _2"> </span>familiar</div><div class="t m0 x5 h6 y1e ff1 fs3 fc0 sc0 ls5 ws0">objects<span class="_ _1"> </span>from<span class="_ _3"> </span>this<span class="_ _1"> </span>particular<span class="_ _1"> </span>point<span class="_ _3"> </span>of<span class="_ _1"> </span>view<span class="_ _c"></span>.<span class="_ _1"> </span>Indeed,<span class="_ _3"> </span>the<span class="_ _1"> </span>natural<span class="_ _1"> </span>notion<span class="_ _3"> </span>of<span class="_ _1"> </span>con-</div><div class="t m0 x5 h6 y1f ff1 fs3 fc0 sc0 ls5 ws0">ver<span class="_ _6"></span>gence<span class="_"> </span>for<span class="_"> </span>sequences<span class="_"> </span>of<span class="_"> </span>Radon<span class="_"> </span>measures<span class="_"> </span>satisﬁes<span class="_"> </span>v<span class="_ _6"></span>ery<span class="_"> </span>ﬂexible<span class="_"> </span>compactness</div><div class="t m0 x5 h6 y20 ff1 fs3 fc0 sc0 ls5 ws0">properties.<span class="_ _d"> </span>As<span class="_ _d"> </span>a<span class="_ _d"> </span>consequence,<span class="_ _d"> </span>the<span class="_ _d"> </span>theory<span class="_ _d"> </span>of<span class="_ _d"> </span>Radon<span class="_ _d"> </span>measures<span class="_ _d"> </span>provides<span class="_ _d"> </span>a<span class="_ _d"> </span>uniﬁed</div><div class="t m0 x5 h6 y21 ff1 fs3 fc0 sc0 ls5 ws0">frame<span class="_ _6"></span>work<span class="_ _e"> </span>for<span class="_ _e"> </span>dealing<span class="_ _e"> </span>with<span class="_ _e"> </span>the<span class="_ _e"> </span>various<span class="_ _5"> </span>conv<span class="_ _6"></span>ergence<span class="_ _5"> </span>and<span class="_ _e"> </span>compactness<span class="_ _e"> </span>phenom-</div><div class="t m0 x5 h6 y22 ff1 fs3 fc0 sc0 ls5 ws0">ena<span class="_ _d"> </span>that<span class="_ _e"> </span>one<span class="_"> </span>faces<span class="_ _e"> </span>in<span class="_"> </span>the<span class="_ _e"> </span>study<span class="_ _d"> </span>of<span class="_ _d"> </span>geometric<span class="_ _e"> </span>variational<span class="_ _d"> </span>problems.<span class="_ _e"> </span>For<span class="_ _d"> </span>example,</div><div class="t m0 x5 h6 y23 ff1 fs3 fc0 sc0 ls4 ws0">a<span class="_ _2"> </span>sequence<span class="_ _3"> </span>of<span class="_ _3"> </span>continuous<span class="_ _2"> </span>functions<span class="_ _3"> </span>on<span class="_ _3"> </span><span class="ff2 ls1">R</span></div><div class="t m0 x1f h7 y24 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x20 h6 y25 ff1 fs3 fc0 sc0 ls4 ws0">that<span class="_ _2"> </span>(as<span class="_ _3"> </span>a<span class="_ _3"> </span>sequence<span class="_ _2"> </span>of<span class="_ _3"> </span>Radon<span class="_ _3"> </span>mea-</div><div class="t m0 x5 h6 y26 ff1 fs3 fc0 sc0 ls1 ws0">sures)<span class="_ _1"> </span>is<span class="_ _1"> </span>conv<span class="_ _6"></span>er<span class="_ _6"></span>ging<span class="_ _1"> </span>to<span class="_ _8"> </span>a<span class="_ _1"> </span>surface<span class="_ _1"> </span>in<span class="_ _1"> </span><span class="ff2">R</span></div><div class="t m0 x21 h7 y27 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x22 h6 y28 ff1 fs3 fc0 sc0 ls4 ws0">is<span class="_ _1"> </span>something<span class="_ _1"> </span>that<span class="_ _8"> </span>cannot<span class="_ _1"> </span>be<span class="_ _1"> </span>handled</div><div class="t m0 x5 h6 y29 ff1 fs3 fc0 sc0 ls5 ws0">with<span class="_ _1"> </span>the<span class="_ _3"> </span>notions<span class="_ _1"> </span>of<span class="_ _1"> </span>con<span class="_ _6"></span>ver<span class="_ _6"></span>gence<span class="_ _1"> </span>usually<span class="_ _3"> </span>considered<span class="_ _1"> </span>on<span class="_ _1"> </span>spaces<span class="_ _1"> </span>of<span class="_ _3"> </span>continuous</div><div class="t m0 x5 h6 y2a ff1 fs3 fc0 sc0 ls5 ws0">functions<span class="_ _1"> </span>or<span class="_ _3"> </span>on<span class="_ _1"> </span>Lebesgue<span class="_ _1"> </span>spaces.<span class="_ _1"> </span>Similarly<span class="_ _c"></span>,<span class="_ _1"> </span>the<span class="_ _1"> </span>existence<span class="_ _3"> </span>of<span class="_ _1"> </span>a<span class="_ _1"> </span>tangent<span class="_ _1"> </span>plane</div><div class="t m0 x5 h6 y2b ff1 fs3 fc0 sc0 ls4 ws0">to<span class="_ _3"> </span>a<span class="_ _1"> </span>surface<span class="_ _3"> </span>at<span class="_ _3"> </span>one<span class="_ _1"> </span>of<span class="_ _3"> </span>its<span class="_ _1"> </span>points<span class="_ _3"> </span>can<span class="_ _3"> </span>be<span class="_ _1"> </span>understood<span class="_ _3"> </span>as<span class="_ _1"> </span>the<span class="_ _3"> </span>con<span class="_ _6"></span>ver<span class="_ _6"></span>gence<span class="_ _3"> </span>of<span class="_ _1"> </span>the</div><div class="t m0 x5 h6 y2c ff1 fs3 fc0 sc0 ls5 ws0">(Radon<span class="_"> </span>measures<span class="_ _2"> </span>naturally<span class="_ _2"> </span>associated<span class="_ _2"> </span>with)<span class="_"> </span>re-scaled<span class="_ _2"> </span>and<span class="_ _2"> </span>translated<span class="_"> </span>copies<span class="_ _2"> </span>of</div><div class="t m0 x5 h6 y2d ff1 fs3 fc0 sc0 ls5 ws0">the<span class="_"> </span>surface<span class="_"> </span>to<span class="_"> </span>the<span class="_"> </span>(Radon<span class="_"> </span>measure<span class="_"> </span>naturally<span class="_"> </span>associated<span class="_ _d"> </span>with<span class="_"> </span>the)<span class="_"> </span>tangent<span class="_"> </span>plane</div><div class="t m0 x5 h6 y2e ff1 fs3 fc0 sc0 ls5 ws0">itself.<span class="_"> </span>This<span class="_"> </span>peculiar<span class="_ _d"> </span>point<span class="_"> </span>of<span class="_"> </span>vie<span class="_ _6"></span>w<span class="_ _d"> </span>opens<span class="_"> </span>the<span class="_"> </span>door<span class="_ _d"> </span>for<span class="_"> </span>a<span class="_ _d"> </span>geometrically<span class="_"> </span>meaning-</div><div class="t m0 x5 h6 y2f ff1 fs3 fc0 sc0 ls3 ws0">ful<span class="_ _1"> </span>(and<span class="_ _1"> </span>analytically<span class="_ _1"> </span>po<span class="_ _6"></span>werful)<span class="_ _1"> </span>extension<span class="_ _1"> </span>of<span class="_ _3"> </span>the<span class="_ _1"> </span>notion<span class="_ _1"> </span>of<span class="_ _1"> </span>di<span class="ff7 ls1">ﬀ<span class="ff1">erentiability<span class="_ _1"> </span>to</span></span></div><div class="t m0 x5 h6 y30 ff1 fs3 fc0 sc0 ls3 ws0">the<span class="_"> </span>wide<span class="_ _2"> </span>class<span class="_ _2"> </span>of<span class="_"> </span>objects,<span class="_ _2"> </span>the<span class="_ _2"> </span>family<span class="_"> </span>of<span class="_"> </span>rectiﬁable<span class="_ _2"> </span>sets,<span class="_ _2"> </span>that<span class="_"> </span>one<span class="_ _2"> </span>must<span class="_ _2"> </span>consider</div><div class="t m0 x5 h6 y31 ff1 fs3 fc0 sc0 ls3 ws0">in<span class="_"> </span>solving<span class="_"> </span>geometric<span class="_"> </span>variational<span class="_"> </span>problems.</div><div class="t m0 x23 h6 y32 ff1 fs3 fc0 sc0 ls3 ws0">Part<span class="_"> </span>I<span class="_ _2"> </span>is<span class="_ _2"> </span>di<span class="_ _6"></span>vided<span class="_ _2"> </span>into<span class="_"> </span>two<span class="_ _2"> </span>main<span class="_ _2"> </span>portions.<span class="_"> </span>The<span class="_ _2"> </span>ﬁrst<span class="_ _2"> </span>one<span class="_ _2"> </span>(Chapters<span class="_ _2"> </span>1–6)<span class="_ _2"> </span>is<span class="_"> </span>de-</div><div class="t m0 x5 h6 y33 ff1 fs3 fc0 sc0 ls5 ws0">voted<span class="_ _d"> </span>to<span class="_"> </span>the<span class="_ _d"> </span>more<span class="_"> </span>abstract<span class="_ _d"> </span>aspects<span class="_"> </span>of<span class="_ _e"> </span>the<span class="_"> </span>theory<span class="_ _6"></span>.<span class="_ _d"> </span>In<span class="_"> </span>Chapters<span class="_ _d"> </span>1–4,<span class="_"> </span>we<span class="_ _d"> </span>introduce</div><div class="t m0 x5 h6 y34 ff1 fs3 fc0 sc0 ls5 ws0">the<span class="_ _e"> </span>main<span class="_ _e"> </span>deﬁnitions,<span class="_ _e"> </span>present<span class="_ _d"> </span>the<span class="_ _5"> </span>most<span class="_ _d"> </span>basic<span class="_ _e"> </span>examples,<span class="_ _5"> </span>and<span class="_ _e"> </span>prove<span class="_ _5"> </span>the<span class="_ _d"> </span>fundamen-</div><div class="t m0 x5 h6 y35 ff1 fs3 fc0 sc0 ls5 ws0">tal<span class="_ _1"> </span>representation<span class="_ _1"> </span>and<span class="_ _1"> </span>compactness<span class="_ _1"> </span>theorems<span class="_ _1"> </span>about<span class="_ _1"> </span>Radon<span class="_ _1"> </span>measures.<span class="_ _1"> </span>(These</div><div class="t m0 x5 h6 y36 ff1 fs3 fc0 sc0 ls1 ws0">results<span class="_"> </span>already<span class="_ _d"> </span>su<span class="ff7">ﬃ</span><span class="ls5">ce<span class="_ _d"> </span>to<span class="_"> </span>gi<span class="_ _6"></span>v<span class="_ _6"></span>e<span class="_"> </span>an<span class="_ _d"> </span>understanding<span class="_"> </span>of<span class="_ _d"> </span>the<span class="_"> </span>basic<span class="_ _e"> </span>theory<span class="_"> </span>of<span class="_"> </span>sets<span class="_ _d"> </span>of<span class="_"> </span>ﬁ-</span></div><div class="t m0 x5 h6 y37 ff1 fs3 fc0 sc0 ls3 ws0">nite<span class="_"> </span>perimeter<span class="_ _e"> </span>as<span class="_"> </span>presented<span class="_"> </span>in<span class="_ _d"> </span>the<span class="_ _d"> </span>ﬁrst<span class="_"> </span>three<span class="_ _e"> </span>chapters<span class="_"> </span>of<span class="_"> </span>P<span class="_ _6"></span>art<span class="_"> </span>II.)<span class="_ _e"> </span>Di<span class="ff7 ls1">ﬀ</span>erentiation</div></div><div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div></div>
+<div id="pf16" class="pf w0 h0" data-page-no="16"><div class="pc pc16 w0 h0"><img class="bi x0 y0 w1 h1" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA14AAAUMCAIAAACvLNRjAAAACXBIWXMAABYlAAAWJQFJUiTwAAATzklEQVR42u3YsQ3AIBAEwX9E/y2fA+QGnADyTAccyUInKQAAqBomAABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAAAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANLQBAAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAamgAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQBAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQxMAACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAAAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAMDtpgmA7br7D8dM4q6Bw/k1BADgfat7xQIAsPg1BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGJgAAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAJCGAABIQwAApCEAANIQAABpCACANAQAQBoCACANAQCQhgAASEMAAKQhAADSEAAAaQgAgDQEAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAIA0BABAGgIAIA0BAEAaAgAgDQEAkIYAAEhDAACkIQAA0hAAAGkIAMAHD564ExN3kr72AAAAAElFTkSuQmCC"/><div class="t m0 x5 h6 y38 ff1 fs3 fc0 sc0 ls1 ws0">2<span class="_ _f"> </span><span class="ff3 ls4">Radon<span class="_ _10"> </span>measur<span class="_ _6"></span>es<span class="_ _d"> </span>on<span class="_ _10"> </span><span class="ff2 ls1">R</span></span></div><div class="t m0 x24 h7 y39 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x5 h6 y1 ff1 fs3 fc0 sc0 ls3 ws0">theory<span class="_ _c"></span>,<span class="_ _11"> </span>and<span class="_ _9"> </span>its<span class="_ _9"> </span>applications,<span class="_ _9"> </span>are<span class="_ _9"> </span>discussed<span class="_ _9"> </span>in<span class="_ _9"> </span>Chapters<span class="_ _9"> </span>5–6.<span class="_ _9"> </span>In<span class="_ _9"> </span>the<span class="_ _9"> </span>second</div><div class="t m0 x5 h6 y3a ff1 fs3 fc0 sc0 ls5 ws0">portion<span class="_ _3"> </span>of<span class="_ _3"> </span>Part<span class="_ _3"> </span>I<span class="_ _3"> </span>(Chapters<span class="_ _3"> </span>7–11),<span class="_ _1"> </span>we<span class="_ _2"> </span>consider<span class="_ _3"> </span>Radon<span class="_ _1"> </span>measures<span class="_ _2"> </span>from<span class="_ _1"> </span>a<span class="_ _2"> </span>more</div><div class="t m0 x5 h6 y3b ff1 fs3 fc0 sc0 ls5 ws0">geometric<span class="_"> </span>vie<span class="_ _6"></span>wpoint,<span class="_"> </span>focusing<span class="_"> </span>on<span class="_ _d"> </span>the<span class="_"> </span>interaction<span class="_"> </span>between<span class="_"> </span>Euclidean<span class="_ _d"> </span>geometry</div><div class="t m0 x5 h6 y3c ff1 fs3 fc0 sc0 ls5 ws0">and<span class="_ _3"> </span>Measure<span class="_ _1"> </span>Theory<span class="_ _c"></span>,<span class="_ _3"> </span>and<span class="_ _1"> </span>cov<span class="_ _6"></span>ering<span class="_ _3"> </span>topics<span class="_ _3"> </span>such<span class="_ _1"> </span>as<span class="_ _3"> </span>Lipschitz<span class="_ _3"> </span>functions,<span class="_ _1"> </span>Haus-</div><div class="t m0 x5 h6 y3d ff1 fs3 fc0 sc0 ls6 ws0">dor<span class="ff7 ls1">ﬀ<span class="_ _d"> </span></span><span class="ls3">measures,<span class="_"> </span>area<span class="_"> </span>formulae,<span class="_"> </span>rectiﬁable<span class="_"> </span>sets,<span class="_"> </span>and<span class="_"> </span>measure-theoretic<span class="_"> </span>di<span class="ff7 ls1">ﬀ</span><span class="ls5">eren-</span></span></div><div class="t m0 x5 h6 y3e ff1 fs3 fc0 sc0 ls3 ws0">tiability<span class="_ _c"></span>.<span class="_ _1"> </span>These<span class="_ _2"> </span>are<span class="_ _3"> </span>prerequisites<span class="_ _3"> </span>to<span class="_ _3"> </span>more<span class="_ _1"> </span>adv<span class="_ _6"></span>anced<span class="_ _2"> </span>parts<span class="_ _3"> </span>of<span class="_ _1"> </span>the<span class="_ _2"> </span>theory<span class="_ _3"> </span>of<span class="_ _3"> </span>sets</div><div class="t m0 x5 h6 y3f ff1 fs3 fc0 sc0 ls5 ws0">of<span class="_ _3"> </span>ﬁnite<span class="_ _3"> </span>perimeter,<span class="_ _2"> </span>and<span class="_ _1"> </span>can<span class="_ _3"> </span>be<span class="_ _3"> </span>safely<span class="_ _3"> </span>postponed<span class="_ _1"> </span>until<span class="_ _3"> </span>really<span class="_ _3"> </span>needed.<span class="_ _1"> </span>W<span class="_ _c"></span>e<span class="_ _3"> </span>no<span class="_ _6"></span>w</div><div class="t m0 x5 h6 y40 ff1 fs3 fc0 sc0 ls5 ws0">examine<span class="_"> </span>more<span class="_"> </span>closely<span class="_"> </span>each<span class="_"> </span>chapter<span class="_ _c"></span>.</div><div class="t m0 x23 h6 y41 ff1 fs3 fc0 sc0 ls5 ws0">In<span class="_"> </span>Chapters<span class="_ _e"> </span>1–2<span class="_"> </span>we<span class="_ _d"> </span>introduce<span class="_"> </span>the<span class="_ _e"> </span>notions<span class="_"> </span>of<span class="_"> </span>Borel<span class="_ _e"> </span>and<span class="_"> </span>Radon<span class="_ _d"> </span>measure.<span class="_"> </span>This</div><div class="t m0 x5 h6 y42 ff1 fs3 fc0 sc0 ls3 ws0">is<span class="_"> </span>done<span class="_"> </span>in<span class="_"> </span>the<span class="_"> </span>context<span class="_"> </span>of<span class="_"> </span><span class="ff3 ls4">outer<span class="_ _10"> </span>measur<span class="_ _6"></span>es<span class="ff1 ls3">,<span class="_"> </span>rather<span class="_"> </span>than<span class="_"> </span>in<span class="_"> </span>the<span class="_"> </span>classical<span class="_"> </span>context<span class="_"> </span>of</span></span></div><div class="t m0 x5 h6 y43 ff1 fs3 fc0 sc0 ls5 ws0">standard<span class="_"> </span>measures<span class="_ _e"> </span>deﬁned<span class="_"> </span>on<span class="_"> </span><span class="ff6 ls1">σ</span><span class="ls3">-algebras.<span class="_ _d"> </span>W<span class="_ _c"></span>e<span class="_"> </span>simultaneously<span class="_ _e"> </span>develop<span class="_ _e"> </span>both<span class="_"> </span>the</span></div><div class="t m0 x5 h6 y44 ff1 fs3 fc0 sc0 ls5 ws0">basic<span class="_"> </span>properties<span class="_"> </span>relating<span class="_"> </span>Borel<span class="_"> </span>and<span class="_"> </span>Radon<span class="_ _2"> </span>measures<span class="_"> </span>to<span class="_"> </span>the<span class="_"> </span>Euclidean<span class="_"> </span>topology</div><div class="t m0 x5 h6 y45 ff1 fs3 fc0 sc0 ls6 ws0">of<span class="_ _1"> </span><span class="ff2 ls1">R</span></div><div class="t m0 xc h7 y46 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 xd h6 y47 ff1 fs3 fc0 sc0 ls5 ws0">and<span class="_ _1"> </span>the<span class="_ _8"> </span>basic<span class="_ _1"> </span>examples<span class="_ _1"> </span>of<span class="_ _1"> </span>the<span class="_ _8"> </span>theory<span class="_ _1"> </span>that<span class="_ _1"> </span>are<span class="_ _8"> </span>obtained<span class="_ _1"> </span>by<span class="_ _8"> </span>combining</div><div class="t m0 x5 h6 y48 ff1 fs3 fc0 sc0 ls4 ws0">the<span class="_ _8"> </span>deﬁnitions<span class="_ _8"> </span>of<span class="_ _8"> </span>Lebesgue<span class="_ _8"> </span>and<span class="_ _8"> </span>Hausdor<span class="ff7 ls1">ﬀ<span class="_ _8"> </span></span><span class="ls5">measures<span class="_ _8"> </span>with<span class="_ _8"> </span>the<span class="_ _1"> </span>operations<span class="_ _8"> </span>of</span></div><div class="t m0 x5 h6 y49 ff1 fs3 fc0 sc0 ls3 ws0">restriction<span class="_"> </span>to<span class="_"> </span>a<span class="_"> </span>set<span class="_"> </span>and<span class="_"> </span>push-forward<span class="_"> </span>through<span class="_"> </span>a<span class="_"> </span>function.</div><div class="t m0 x23 h6 y4a ff1 fs3 fc0 sc0 ls5 ws0">In<span class="_ _8"> </span>Chapter<span class="_ _8"> </span>3<span class="_ _8"> </span>we<span class="_ _8"> </span>look<span class="_ _8"> </span>more<span class="_ _8"> </span>closely<span class="_ _8"> </span>at<span class="_ _8"> </span>Hausdor<span class="ff7 ls1">ﬀ<span class="_ _8"> </span><span class="ff1">measures.<span class="_ _8"> </span>W<span class="_ _c"></span>e<span class="_ _8"> </span>establish</span></span></div><div class="t m0 x5 h6 y4b ff1 fs3 fc0 sc0 ls5 ws0">their<span class="_ _3"> </span>most<span class="_ _3"> </span>basic<span class="_ _3"> </span>properties<span class="_ _1"> </span>and<span class="_ _2"> </span>introduce<span class="_ _1"> </span>the<span class="_ _2"> </span>notion<span class="_ _1"> </span>of<span class="_ _2"> </span>Hausdor<span class="ff7 ls1">ﬀ<span class="_ _1"> </span></span>dimension.</div><div class="t m0 x5 h6 y4c ff1 fs3 fc0 sc0 ls4 ws0">Next,<span class="_ _2"> </span>we<span class="_ _1"> </span>sho<span class="_ _6"></span>w<span class="_ _2"> </span>equiv<span class="_ _6"></span>alence<span class="_ _3"> </span>between<span class="_ _1"> </span>the<span class="_ _2"> </span>Lebesgue<span class="_ _3"> </span>measure<span class="_ _1"> </span>on<span class="_ _3"> </span><span class="ff2 ls1">R</span></div><div class="t m0 x25 h7 y4d ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x7 h6 y4e ff1 fs3 fc0 sc0 ls4 ws0">and<span class="_ _3"> </span>the<span class="_ _3"> </span><span class="ff3 ls1">n<span class="ff1">-</span></span></div><div class="t m0 x5 h6 y4f ff1 fs3 fc0 sc0 ls5 ws0">dimensional<span class="_ _2"> </span>Hausdor<span class="ff7 ls1">ﬀ<span class="_ _2"> </span></span><span class="ls3">measure<span class="_ _2"> </span>on<span class="_ _2"> </span><span class="ff2 ls1">R</span></span></div><div class="t m0 x26 h7 y50 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x27 h6 y51 ff1 fs3 fc0 sc0 ls5 ws0">,<span class="_ _2"> </span>and<span class="_ _2"> </span>we<span class="_ _2"> </span>study<span class="_ _2"> </span>the<span class="_ _10"> </span>relation<span class="_ _2"> </span>between<span class="_ _3"> </span>the</div><div class="t m0 x5 h6 y52 ff1 fs3 fc0 sc0 ls5 ws0">elementary<span class="_ _e"> </span>notion<span class="_ _e"> </span>of<span class="_"> </span>length<span class="_ _5"> </span>of<span class="_ _e"> </span>a<span class="_ _d"> </span>curve,<span class="_ _5"> </span>based<span class="_ _d"> </span>on<span class="_ _e"> </span>the<span class="_ _e"> </span>existence<span class="_ _e"> </span>of<span class="_ _d"> </span>a<span class="_ _e"> </span>parametriza-</div><div class="t m0 x5 h6 y53 ff1 fs3 fc0 sc0 ls5 ws0">tion,<span class="_"> </span>and<span class="_"> </span>the<span class="_"> </span>notion<span class="_"> </span>induced<span class="_"> </span>by<span class="_"> </span>one-dimensional<span class="_"> </span>Hausdor<span class="ff7 ls1">ﬀ<span class="_ _10"> </span></span><span class="ls3">measures.</span></div><div class="t m0 x23 h6 y54 ff1 fs3 fc0 sc0 ls5 ws0">In<span class="_ _3"> </span>Chapter<span class="_ _3"> </span>4<span class="_ _3"> </span>we<span class="_ _3"> </span>further<span class="_ _3"> </span>develop<span class="_ _2"> </span>the<span class="_ _3"> </span>general<span class="_ _3"> </span>theory<span class="_ _1"> </span>of<span class="_ _2"> </span>Radon<span class="_ _3"> </span>measures.<span class="_ _3"> </span>In</div><div class="t m0 x5 h6 y55 ff1 fs3 fc0 sc0 ls5 ws0">particular<span class="_ _6"></span>,<span class="_ _1"> </span>the<span class="_ _1"> </span>deep<span class="_ _8"> </span>link<span class="_ _1"> </span>between<span class="_ _1"> </span>Radon<span class="_ _8"> </span>measures<span class="_ _1"> </span>and<span class="_ _1"> </span>continuous<span class="_ _8"> </span>functions</div><div class="t m0 x5 h6 y56 ff1 fs3 fc0 sc0 ls5 ws0">with<span class="_ _3"> </span>compact<span class="_ _1"> </span>support<span class="_ _3"> </span>is<span class="_ _3"> </span>presented,<span class="_ _1"> </span>leading<span class="_ _3"> </span>to<span class="_ _3"> </span>the<span class="_ _1"> </span>deﬁnition<span class="_ _2"> </span>of<span class="_ _1"> </span><span class="ff3">vector-valued</span></div><div class="t m0 x5 h6 y57 ff1 fs3 fc0 sc0 ls5 ws0">Radon<span class="_ _8"> </span>measures,<span class="_ _8"> </span>of<span class="_ _b"> </span>weak-star<span class="_ _8"> </span>con<span class="_ _6"></span>ver<span class="_ _6"></span>gence<span class="_ _8"> </span>of<span class="_ _8"> </span>Radon<span class="_ _b"> </span>measures,<span class="_ _8"> </span>and<span class="_ _8"> </span>to<span class="_ _b"> </span>the</div><div class="t m0 x5 h6 y58 ff1 fs3 fc0 sc0 ls5 ws0">proof<span class="_ _3"> </span>of<span class="_ _3"> </span>the<span class="_ _1"> </span>fundamental<span class="_ _3"> </span>Riesz’<span class="_ _6"></span>s<span class="_ _2"> </span>representation<span class="_ _1"> </span>theorem:<span class="_ _3"> </span>ev<span class="_ _6"></span>ery<span class="_ _3"> </span>bounded<span class="_ _3"> </span>lin-</div><div class="t m0 x5 h6 y59 ff1 fs3 fc0 sc0 ls4 ws0">ear<span class="_"> </span>functional<span class="_ _2"> </span>on<span class="_"> </span><span class="ff3 ls1">C</span></div><div class="t m0 x28 ha y5a ff1 fs4 fc0 sc0 ls1 ws0">0</div><div class="t m0 x28 ha y5b ff1 fs4 fc0 sc0 ls1 ws0">c</div><div class="t m0 x2 h6 y5c ff1 fs3 fc0 sc0 ls1 ws0">(<span class="ff2">R</span></div><div class="t m0 x29 h7 y5a ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x2a h6 y5c ff1 fs3 fc0 sc0 ls1 ws0">;<span class="_ _5"> </span><span class="ff2">R</span></div><div class="t m0 x1 h7 y5a ff3 fs4 fc0 sc0 ls1 ws0">m</div><div class="t m0 x1d h6 y5c ff1 fs3 fc0 sc0 ls3 ws0">)<span class="_"> </span>is<span class="_ _2"> </span>representable<span class="_ _2"> </span>as<span class="_"> </span>integration<span class="_"> </span>with<span class="_ _2"> </span>respect<span class="_ _2"> </span>to<span class="_"> </span>an</div><div class="t m0 x5 h9 y5d ff2 fs3 fc0 sc0 ls1 ws0">R</div><div class="t m0 x12 h7 y5e ff3 fs4 fc0 sc0 ls1 ws0">m</div><div class="t m0 x2b h6 y5f ff1 fs3 fc0 sc0 ls5 ws0">-v<span class="_ _6"></span>alued<span class="_ _8"> </span>Radon<span class="_ _1"> </span>measure<span class="_ _1"> </span>on<span class="_ _8"> </span><span class="ff2 ls1">R</span></div><div class="t m0 x4 h7 y5e ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x2c h6 y5f ff1 fs3 fc0 sc0 ls3 ws0">.<span class="_ _1"> </span>This<span class="_ _8"> </span>last<span class="_ _1"> </span>result,<span class="_ _8"> </span>in<span class="_ _1"> </span>turn,<span class="_ _1"> </span>is<span class="_ _8"> </span>the<span class="_ _1"> </span>key<span class="_ _1"> </span>to<span class="_ _1"> </span>the</div><div class="t m0 x5 h6 y60 ff1 fs3 fc0 sc0 ls5 ws0">weak-star<span class="_"> </span>compactness<span class="_"> </span>criterion<span class="_"> </span>for<span class="_"> </span>sequences<span class="_"> </span>of<span class="_"> </span>Radon<span class="_"> </span>measures.</div><div class="t m0 x23 h6 y61 ff1 fs3 fc0 sc0 ls5 ws0">Chapters<span class="_"> </span>5–6<span class="_ _2"> </span>present<span class="_"> </span>di<span class="ff7 ls1">ﬀ</span><span class="ls3">erentiation<span class="_ _2"> </span>theory<span class="_"> </span>and<span class="_ _10"> </span>its<span class="_ _2"> </span>applications.<span class="_"> </span>The<span class="_ _2"> </span>goal<span class="_"> </span>is</span></div><div class="t m0 x5 h8 y62 ff1 fs3 fc0 sc0 ls5 ws0">to<span class="_"> </span>compare<span class="_"> </span>two<span class="_"> </span>Radon<span class="_"> </span>measures<span class="_"> </span><span class="ff6 ls1">ν<span class="_ _d"> </span></span><span class="ls6">and<span class="_"> </span><span class="ff6 ls1">µ<span class="_ _10"> </span></span><span class="ls4">by<span class="_"> </span>looking,<span class="_"> </span>as<span class="_ _10"> </span><span class="ff3 ls1">r<span class="_ _3"> </span><span class="ff5">→<span class="_ _2"> </span><span class="ff1">0</span></span></span></span></span></div><div class="t m0 x2d hb y63 ff7 fs4 fc0 sc0 ls1 ws0">+</div><div class="t m0 x2e h6 y64 ff1 fs3 fc0 sc0 ls3 ws0">,<span class="_"> </span>at<span class="_"> </span>the<span class="_"> </span>ratios</div><div class="t m0 x11 h6 y65 ff6 fs3 fc0 sc0 ls1 ws0">ν<span class="ff1">(<span class="_ _7"></span><span class="ff3">B</span>(<span class="_ _12"></span><span class="ff3">x</span></span>,<span class="_ _5"> </span><span class="ff3">r<span class="_ _7"></span><span class="ff1 lsa">))</span></span></div><div class="t m0 x11 h6 y66 ff6 fs3 fc0 sc0 ls1 ws0">µ<span class="ff1">(<span class="_ _7"></span><span class="ff3">B</span>(<span class="_ _7"></span><span class="ff3">x<span class="_"> </span></span></span>,<span class="_ _e"> </span><span class="ff3">r<span class="ff1 lsa">))</span></span></div><div class="t m0 x2f hc y67 ff6 fs3 fc0 sc0 ls1 ws0">,</div><div class="t m0 x5 h6 y68 ff1 fs3 fc0 sc0 ls5 ws0">which<span class="_"> </span>are<span class="_ _e"> </span>deﬁned<span class="_"> </span>at<span class="_"> </span>those<span class="_"> </span><span class="ff3 ls1">x<span class="_ _10"> </span></span>where<span class="_"> </span><span class="ff6 ls1">µ<span class="_ _d"> </span><span class="ff1">is<span class="_"> </span>supported<span class="_ _e"> </span>(i.e.,<span class="_"> </span></span>µ<span class="ff1">(<span class="_ _7"></span><span class="ff3">B</span>(<span class="_ _7"></span><span class="ff3">x</span></span>,<span class="_ _e"> </span><span class="ff3">r</span></span><span class="ls7">))<span class="_ _2"> </span><span class="ff6 ls1">&gt;<span class="_ _2"> </span></span></span>0<span class="_"> </span>for<span class="_"> </span>e<span class="_ _6"></span>v<span class="_ _6"></span>ery</div><div class="t m0 x5 h6 y69 ff3 fs3 fc0 sc0 ls1 ws0">r<span class="_ _1"> </span><span class="ff6">&gt;<span class="_ _2"> </span><span class="ff1 ls5">0).<span class="_ _2"> </span>The<span class="_"> </span>Besicovitch–Lebesgue<span class="_ _2"> </span>di</span><span class="ff7">ﬀ<span class="ff1 ls5">erentiation<span class="_"> </span>theorem<span class="_ _2"> </span>ensures<span class="_"> </span>that,<span class="_ _2"> </span>for<span class="_ _2"> </span></span></span>µ<span class="ff1">-</span></span></div><div class="t m0 x5 h6 y6a ff1 fs3 fc0 sc0 ls4 ws0">a.e.<span class="_ _1"> </span><span class="ff3 ls1">x<span class="_ _2"> </span></span><span class="ls3">in<span class="_ _3"> </span>the<span class="_ _3"> </span>support<span class="_ _3"> </span>of<span class="_ _3"> </span><span class="ff6 ls1">µ</span>,<span class="_ _2"> </span>these<span class="_ _3"> </span>ratios<span class="_ _3"> </span>con<span class="_ _6"></span>ver<span class="_ _6"></span>ge<span class="_ _2"> </span>to<span class="_ _3"> </span>a<span class="_ _3"> </span>ﬁnite<span class="_ _3"> </span>limit<span class="_ _2"> </span><span class="ff3 ls1">u<span class="ff1">(<span class="_ _12"></span></span>x</span><span class="ls5">),<span class="_ _3"> </span>and<span class="_ _3"> </span>that</span></span></div><div class="t m0 x5 h6 y6b ff1 fs3 fc0 sc0 lsb ws0">restriction<span class="_ _1"> </span>of<span class="_ _3"> </span><span class="ff6 ls1">ν<span class="_ _1"> </span></span><span class="ls3">to<span class="_ _1"> </span>the<span class="_ _1"> </span>support<span class="_ _1"> </span>of<span class="_ _3"> </span><span class="ff6 ls1">µ<span class="_ _1"> </span></span>equals<span class="_ _1"> </span>integration<span class="_ _3"> </span>of<span class="_ _1"> </span><span class="ff3 ls1">u<span class="_ _1"> </span><span class="ff1">with<span class="_ _1"> </span>respect<span class="_ _1"> </span>to<span class="_ _3"> </span><span class="ff6">µ</span>.</span></span></span></div><div class="t m0 x5 h6 y6c ff1 fs3 fc0 sc0 ls5 ws0">Di<span class="ff7 ls1">ﬀ</span><span class="ls3">erentiation<span class="_ _3"> </span>theory<span class="_ _1"> </span>plays<span class="_ _3"> </span>a<span class="_ _1"> </span>crucial<span class="_ _3"> </span>role<span class="_ _1"> </span>in<span class="_ _3"> </span>proving<span class="_ _3"> </span>the<span class="_ _1"> </span>v<span class="_ _6"></span>alidity<span class="_ _3"> </span>of<span class="_ _1"> </span>classical</span></div><div class="t m0 x5 h6 y6d ff1 fs3 fc0 sc0 ls5 ws0">(or<span class="_"> </span>generalized)<span class="_"> </span>di<span class="ff7 ls1">ﬀ</span><span class="ls3">erentiability<span class="_"> </span>properties<span class="_"> </span>in<span class="_"> </span>many<span class="_"> </span>situations.</span></div></div><div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div></div>
+<div id="pf17" class="pf w0 h0" data-page-no="17"><div class="pc pc17 w0 h0"><img class="bi x0 y0 w1 h1" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA14AAAUMCAIAAACvLNRjAAAACXBIWXMAABYlAAAWJQFJUiTwAAATt0lEQVR42u3WMQEAAAjDsIF/z+PARiKhV6dtAAAgWQkAALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgCANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANZQAAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMJAACwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCAAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQDAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDWUAAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgCANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDCQAAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1BADAGgIAYA0BALCGAABYQwAArCEAANYQAABrCACANQQAwBoCAGANAQCwhgAAWEMAAKwhAADWEAAAawgAgDUEAMAaAgBgDQEAsIYAAFhDAACsIQAA1hAAAGsIAIA1lAAAgHckFg0VH2HxuAAAAABJRU5ErkJggg=="/><div class="t m0 x30 h6 y38 ff3 fs3 fc0 sc0 ls5 ws0">Synopsis<span class="_ _13"> </span><span class="ff1 ls1">3</span></div><div class="t m0 x23 h6 y6e ff1 fs3 fc0 sc0 ls3 ws0">In<span class="_ _3"> </span>Chapter<span class="_ _3"> </span>7<span class="_ _1"> </span>we<span class="_ _2"> </span>study<span class="_ _1"> </span>the<span class="_ _2"> </span>basic<span class="_ _1"> </span>properties<span class="_ _3"> </span>of<span class="_ _3"> </span>Lipschitz<span class="_ _3"> </span>functions,<span class="_ _1"> </span>pro<span class="_ _6"></span>ving</div><div class="t m0 x5 h6 y6f ff1 fs3 fc0 sc0 ls5 ws0">Rademacher’<span class="_ _6"></span>s<span class="_"> </span>theorem<span class="_ _2"> </span>about<span class="_ _2"> </span>the<span class="_"> </span>almost<span class="_ _2"> </span>everywhere<span class="_"> </span>classical<span class="_ _2"> </span>di<span class="ff7 ls1">ﬀ<span class="ff1">erentiability</span></span></div><div class="t m0 x5 h6 y70 ff1 fs3 fc0 sc0 ls5 ws0">of<span class="_ _3"> </span>Lipschitz<span class="_ _3"> </span>functions,<span class="_ _1"> </span>and<span class="_ _3"> </span>Kirszbraun’<span class="_ _6"></span>s<span class="_ _2"> </span>theorem<span class="_ _1"> </span>concerning<span class="_ _3"> </span>the<span class="_ _3"> </span>optimal<span class="_ _1"> </span>e<span class="_ _6"></span>x-</div><div class="t m0 x5 h6 y71 ff1 fs3 fc0 sc0 ls3 ws0">tension<span class="_"> </span>problem<span class="_"> </span>for<span class="_"> </span>vector<span class="_ _6"></span>-v<span class="_ _6"></span>alued<span class="_"> </span>Lipschitz<span class="_"> </span>maps.</div><div class="t m0 x23 h6 y72 ff1 fs3 fc0 sc0 ls5 ws0">Chapter<span class="_ _1"> </span>8<span class="_ _3"> </span>presents<span class="_ _1"> </span>the<span class="_ _1"> </span>area<span class="_ _3"> </span>formula,<span class="_ _1"> </span>which<span class="_ _1"> </span>relates<span class="_ _1"> </span>the<span class="_ _3"> </span>Hausdor<span class="ff7 ls1">ﬀ<span class="_ _1"> </span></span><span class="ls3">measure</span></div><div class="t m0 x5 h6 y73 ff1 fs3 fc0 sc0 ls5 ws0">of<span class="_ _2"> </span>a<span class="_ _3"> </span>set<span class="_ _2"> </span>in<span class="_ _3"> </span><span class="ff2 ls1">R</span></div><div class="t m0 x31 h7 y74 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x32 h6 y75 ff1 fs3 fc0 sc0 ls3 ws0">with<span class="_ _2"> </span>that<span class="_ _3"> </span>of<span class="_ _2"> </span>its<span class="_ _3"> </span>Lipschitz<span class="_ _2"> </span>images<span class="_ _3"> </span>into<span class="_ _2"> </span>any<span class="_ _2"> </span><span class="ff2 ls1">R</span></div><div class="t m0 x33 h7 y74 ff3 fs4 fc0 sc0 ls1 ws0">m</div><div class="t m0 x34 h8 y75 ff1 fs3 fc0 sc0 lsb ws0">with<span class="_ _2"> </span><span class="ff3 ls1">m<span class="_ _1"> </span><span class="ff5">≥<span class="_ _8"> </span></span>n</span><span class="lsc">.A<span class="_ _a"></span>sa</span></div><div class="t m0 x5 h6 y76 ff1 fs3 fc0 sc0 ls5 ws0">consequence,<span class="_ _2"> </span>the<span class="_ _3"> </span>classical<span class="_ _3"> </span>notion<span class="_ _3"> </span>of<span class="_ _2"> </span>area<span class="_ _3"> </span>of<span class="_ _3"> </span>a<span class="_ _2"> </span><span class="ff3 ls1">k<span class="_ _7"></span></span><span class="ls3">-dimensional<span class="_ _3"> </span>surface<span class="_ _1"> </span><span class="ff3 ls1">M<span class="_ _3"> </span></span><span class="lsd">in<span class="_ _3"> </span><span class="ff2 ls1">R</span></span></span></div><div class="t m0 x35 h7 y77 ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x5 h6 y78 ff1 fs3 fc0 sc0 ls3 ws0">is<span class="_"> </span>seen<span class="_"> </span>to<span class="_"> </span>coincide<span class="_"> </span>with<span class="_"> </span>the<span class="_"> </span><span class="ff3 ls1">k<span class="_ _7"></span></span><span class="ls5">-dimensional<span class="_"> </span>Hausdor<span class="ff7 ls1">ﬀ<span class="_ _10"> </span></span></span>measure<span class="_"> </span>of<span class="_ _3"> </span><span class="ff3 ls1">M<span class="_ _7"></span></span><span class="ls6">.<span class="_ _2"> </span>Some<span class="_"> </span>ap-</span></div><div class="t m0 x5 h6 y79 ff1 fs3 fc0 sc0 ls3 ws0">plications<span class="_"> </span>of<span class="_ _2"> </span>the<span class="_"> </span>area<span class="_ _2"> </span>formula<span class="_"> </span>are<span class="_"> </span>presented<span class="_ _2"> </span>in<span class="_"> </span>Chapter<span class="_ _2"> </span>9,<span class="_"> </span>where,<span class="_ _2"> </span>in<span class="_"> </span>particular,</div><div class="t m0 x5 h6 y7a ff1 fs3 fc0 sc0 ls3 ws0">the<span class="_"> </span>classical<span class="_"> </span>Gauss–Green<span class="_"> </span>theorem<span class="_"> </span>is<span class="_"> </span>prov<span class="_ _6"></span>ed.</div><div class="t m0 x23 h6 y7b ff1 fs3 fc0 sc0 ls5 ws0">In<span class="_"> </span>Chapter<span class="_"> </span>10<span class="_"> </span>we<span class="_"> </span>introduce<span class="_"> </span>one<span class="_ _d"> </span>of<span class="_"> </span>the<span class="_"> </span>most<span class="_"> </span>important<span class="_ _d"> </span>notions<span class="_"> </span>of<span class="_"> </span>Geometric</div><div class="t m0 x5 h6 y7c ff1 fs3 fc0 sc0 ls5 ws0">Measure<span class="_"> </span>Theory<span class="_ _6"></span>,<span class="_"> </span>that<span class="_ _2"> </span>of<span class="_ _2"> </span>a<span class="_ _2"> </span><span class="ff3 ls1">k</span><span class="ls3">-dimensional<span class="_ _2"> </span>rectiﬁable<span class="_ _2"> </span>set<span class="_ _10"> </span>in<span class="_ _2"> </span><span class="ff2 ls1">R</span></span></div><div class="t m0 x36 h7 y7d ff3 fs4 fc0 sc0 ls1 ws0">n</div><div class="t m0 x37 h8 y7e ff1 fs3 fc0 sc0 lsa ws0">(1<span class="_ _3"> </span><span class="ff5 ls1">≤<span class="_ _1"> </span><span class="ff3">k<span class="_ _3"> </span></span>≤<span class="_ _1"> </span><span class="ff3">n<span class="_ _d"> </span></span>−<span class="_ _d"> </span><span class="ff1">1).</span></span></div><div class="t m0 x5 h6 y7f ff1 fs3 fc0 sc0 ls5 ws0">This<span class="_ _d"> </span>is<span class="_ _e"> </span>a<span class="_"> </span>v<span class="_ _6"></span>ery<span class="_ _d"> </span>broad<span class="_ _e"> </span>generalization<span class="_"> </span>of<span class="_ _e"> </span>the<span class="_"> </span>concept<span class="_ _e"> </span>of<span class="_"> </span><span class="ff3 ls1">k</span>-dimensional<span class="_ _e"> </span><span class="ff3 ls1">C</span></div><div class="t m0 x38 ha y80 ff1 fs4 fc0 sc0 ls1 ws0">1</div><div class="t m0 x39 h6 y81 ff1 fs3 fc0 sc0 ls3 ws0">-surface,</div><div class="t m0 x5 h6 y82 ff1 fs3 fc0 sc0 ls3 ws0">allo<span class="_ _6"></span>wing<span class="_ _3"> </span>for<span class="_ _1"> </span>complex<span class="_ _2"> </span>singularities<span class="_ _1"> </span>b<span class="_ _6"></span>ut,<span class="_ _3"> </span>at<span class="_ _1"> </span>the<span class="_ _3"> </span>same<span class="_ _3"> </span>time,<span class="_ _1"> </span>retaining<span class="_ _3"> </span>tangential</div><div class="t m0 x5 h6 y83 ff1 fs3 fc0 sc0 ls6 ws0">di<span class="ff7 ls1">ﬀ</span><span class="ls3">erentiability<span class="_ _2"> </span>properties,<span class="_ _2"> </span>at<span class="_ _2"> </span>least<span class="_ _2"> </span>in<span class="_ _2"> </span>a<span class="_ _2"> </span>measure-theoretic<span class="_ _2"> </span>sense.<span class="_ _3"> </span>A<span class="_ _2"> </span>crucial<span class="_ _2"> </span>re-</span></div><div class="t m0 x5 h6 y84 ff1 fs3 fc0 sc0 ls1 ws0">sult<span class="_"> </span>is<span class="_ _e"> </span>the<span class="_"> </span>follo<span class="_ _6"></span>wing:<span class="_"> </span>if<span class="_ _e"> </span>the<span class="_"> </span><span class="ff3">k</span><span class="ls5">-dimensional<span class="_"> </span>blo<span class="_ _6"></span>w-ups<span class="_"> </span>of<span class="_ _e"> </span>a<span class="_"> </span>Radon<span class="_"> </span>measure<span class="_ _e"> </span><span class="ff6 ls1">µ<span class="_ _10"> </span></span><span class="ls6">con-</span></span></div><div class="t m0 x5 h6 y85 ff1 fs3 fc0 sc0 lse ws0">verg<span class="_ _7"></span>e<span class="_ _1"> </span>to<span class="_ _1"> </span><span class="ff3 ls1">k</span><span class="ls5">-dimensional<span class="_ _1"> </span>linear<span class="_ _3"> </span>spaces<span class="_ _3"> </span>(seen<span class="_ _1"> </span>as<span class="_ _3"> </span>Radon<span class="_ _3"> </span>measures),<span class="_ _1"> </span>then<span class="_ _3"> </span>it<span class="_ _3"> </span>turns</span></div><div class="t m0 x5 h6 y86 ff1 fs3 fc0 sc0 ls4 ws0">out<span class="_ _2"> </span>that<span class="_ _2"> </span><span class="ff6 ls1">µ<span class="_ _2"> </span><span class="ff1">itself<span class="_ _2"> </span>is<span class="_ _2"> </span>the<span class="_ _2"> </span>restriction<span class="_ _2"> </span>of<span class="_ _2"> </span>the<span class="_ _2"> </span><span class="ff3">k<span class="_ _7"></span></span><span class="ls5">-dimensional<span class="_ _2"> </span>Hausdor</span><span class="ff7">ﬀ<span class="_ _2"> </span></span><span class="ls3">measure<span class="_ _2"> </span>to<span class="_ _2"> </span>a</span></span></span></div><div class="t m0 x5 h6 y87 ff3 fs3 fc0 sc0 ls1 ws0">k<span class="ff1 ls3">-dimensional<span class="_"> </span>rectiﬁable<span class="_"> </span>set.</span></div><div class="t m0 x23 h6 y88 ff1 fs3 fc0 sc0 ls5 ws0">In<span class="_ _1"> </span>Chapter<span class="_ _1"> </span>11,<span class="_ _8"> </span>we<span class="_ _1"> </span>introduce<span class="_ _1"> </span>the<span class="_ _1"> </span>notion<span class="_ _8"> </span>of<span class="_ _1"> </span>tangential<span class="_ _1"> </span>di<span class="ff7 ls1">ﬀ</span><span class="ls3">erentiability<span class="_ _1"> </span>of<span class="_ _8"> </span>a</span></div><div class="t m0 x5 h6 y89 ff1 fs3 fc0 sc0 ls3 ws0">Lipschitz<span class="_ _2"> </span>function<span class="_ _2"> </span>with<span class="_ _3"> </span>respect<span class="_ _2"> </span>to<span class="_ _2"> </span>a<span class="_ _3"> </span>rectiﬁable<span class="_ _2"> </span>set,<span class="_ _2"> </span>extend<span class="_ _2"> </span>the<span class="_ _3"> </span>area<span class="_ _2"> </span>formula<span class="_ _2"> </span>to</div><div class="t m0 x5 h6 y8a ff1 fs3 fc0 sc0 ls5 ws0">this<span class="_ _e"> </span>context,<span class="_ _d"> </span>and<span class="_ _e"> </span>prove<span class="_ _e"> </span>the<span class="_ _e"> </span>diver<span class="_ _6"></span>gence<span class="_ _e"> </span>theorem<span class="_"> </span>on<span class="_ _5"> </span><span class="ff3 ls1">C</span></div><div class="t m0 xa ha y8b ff1 fs4 fc0 sc0 ls1 ws0">2</div><div class="t m0 xb h6 y8c ff1 fs3 fc0 sc0 ls3 ws0">-surfaces<span class="_ _e"> </span>with<span class="_ _d"> </span>boundary<span class="_ _c"></span>.</div></div><div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div></div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+      </div>
+      
+      
+      
+    </div>
+  <ul class="breadcrumb">
+            <li><a href="/Blog/Geometric%20Measure%20Theory/">GEOMETRIC MEASURE THEORY</a></li>
+          <li>PART I - RADON MEASURES ON RN</li>
+  </ul>
+
+    
+    
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2014 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">NexT</span>
+  </div>
+  <div class="powered-by">Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9taXN0Lw==">NexT.Mist</span>
+  </div><div class="footer-custom">
+Website source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL1hpeW91LVd1L0Jsb2c=">here</span>
+</div>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL1hpeW91LVd1L0Jsb2c=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
