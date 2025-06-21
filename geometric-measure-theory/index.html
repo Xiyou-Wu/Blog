@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T15:58:34.216Z">
+<meta property="article:modified_time" content="2025-06-21T16:01:13.020Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -296,7 +296,7 @@
 
 /* PDF外层包装器 - 用于居中和控制整体大小 */
 .pdf-wrapper {
-  width: 60vw; /* 直接设置为60%而不是100vw */
+  width: 100vw; /* 直接设置为60%而不是100vw */
   max-width: 60vw;
   height: auto;
   display: flex;
@@ -496,6 +496,7 @@ html {
     
     // 应用60%宽度布局
 // 应用60%宽度布局 → 修改为应用60%宽度布局（左右边距各20%）
+// 应用自定义宽度布局
 function applyLayout() {
     const container = document.getElementById('page-container');
     const pdfPages = document.querySelectorAll('.pf');
@@ -515,105 +516,116 @@ function applyLayout() {
     
     // 获取设备宽度和目标宽度
     const displayWidth = getDisplayWidth();
-    const targetWidth = Math.floor(displayWidth * 0.6); // 60% 内容宽度，左右边距各20%
-        
-        // 获取PDF容器的原始宽度
-        container.style.transform = 'none';
-        const originalWidth = container.scrollWidth || container.offsetWidth;
-        
-        if (originalWidth === 0) {
-            log('PDF尚未渲染完成，稍后重试...');
-            setTimeout(applyLayout, 200);
-            return;
-        }
-        
-        // // 计算缩放比例
-        // const scale = targetWidth / originalWidth;
-        // const finalScale = Math.max(0.1, Math.min(scale, 2.0)); // 限制缩放范围
-        
-        // // 应用缩放到整个容器
-        // container.style.transform = `scale(${finalScale})`;
-        // container.style.transformOrigin = 'center top';
-        
-        // // 调整包装器的高度以适应缩放后的内容
-        // const scaledHeight = container.scrollHeight * finalScale;
-        // wrapper.style.minHeight = `${scaledHeight + 40}px`;
-        
-        // // 计算实际的边距
-        // const scaledWidth = originalWidth * finalScale;
-        // const leftMargin = (displayWidth - scaledWidth) / 2;
-        // const marginPercentage = (leftMargin / displayWidth) * 100;
-        
-        // log('布局计算结果:', {
-        //     displayWidth,
-        //     originalWidth,
-        //     targetWidth,
-        //     scale: finalScale.toFixed(3),
-        //     scaledWidth: scaledWidth.toFixed(0),
-        //     leftMargin: leftMargin.toFixed(0),
-        //     marginPercentage: marginPercentage.toFixed(1) + '%'
-        // });
-        
-        // // 显示调试信息
-        // showDebugInfo({
-        //     displayWidth,
-        //     originalWidth,
-        //     targetWidth,
-        //     scale: finalScale,
-        //     scaledWidth,
-        //     leftMargin,
-        //     marginPercentage
-        // });
-        
-        log('PDF布局应用完成');
+    
+    // 设置目标内容宽度为60%，左右边距各20%
+    const contentPercentage = 0.6; // 60%内容
+    const targetWidth = Math.floor(displayWidth * contentPercentage);
+    
+    // 获取PDF容器的原始宽度
+    container.style.transform = 'none';
+    const originalWidth = container.scrollWidth || container.offsetWidth;
+    
+    if (originalWidth === 0) {
+        log('PDF尚未渲染完成，稍后重试...');
+        setTimeout(applyLayout, 200);
+        return;
     }
+    
+    // 计算缩放比例
+    const scale = targetWidth / originalWidth;
+    const finalScale = Math.max(0.1, Math.min(scale, 3.0)); // 扩大缩放范围
+    
+    // 应用缩放到整个容器
+    container.style.transform = `scale(${finalScale})`;
+    container.style.transformOrigin = 'center top';
+    
+    // 调整包装器的高度以适应缩放后的内容
+    const scaledHeight = container.scrollHeight * finalScale;
+    wrapper.style.minHeight = `${scaledHeight + 40}px`;
+    
+    // 计算实际的边距
+    const scaledWidth = originalWidth * finalScale;
+    const leftMargin = (displayWidth - scaledWidth) / 2;
+    const marginPercentage = (leftMargin / displayWidth) * 100;
+    
+    // 确保居中显示
+    wrapper.style.paddingLeft = `${leftMargin}px`;
+    wrapper.style.paddingRight = `${leftMargin}px`;
+    wrapper.style.paddingTop = '20px';
+    wrapper.style.paddingBottom = '20px';
+    
+    log('布局计算结果:', {
+        displayWidth,
+        originalWidth,
+        targetWidth,
+        contentPercentage: (contentPercentage * 100) + '%',
+        scale: finalScale.toFixed(3),
+        scaledWidth: scaledWidth.toFixed(0),
+        leftMargin: leftMargin.toFixed(0),
+        marginPercentage: marginPercentage.toFixed(1) + '%'
+    });
     
     // 显示调试信息
-    function showDebugInfo(info) {
-        if (!DEBUG) return;
-        
-        let panel = document.getElementById('pdf-debug-panel');
-        if (!panel) {
-            panel = document.createElement('div');
-            panel.id = 'pdf-debug-panel';
-            panel.style.cssText = `
-                position: fixed;
-                top: 10px;
-                right: 10px;
-                background: rgba(0,0,0,0.9);
-                color: white;
-                padding: 15px;
-                border-radius: 8px;
-                font-size: 12px;
-                font-family: 'Courier New', monospace;
-                z-index: 10000;
-                max-width: 320px;
-                border: 1px solid #333;
-                cursor: pointer;
-            `;
-            document.body.appendChild(panel);
-            
-            panel.addEventListener('click', function() {
-                this.style.display = 'none';
-            });
-        }
-        
-        const percentage = ((info.scaledWidth / info.displayWidth) * 100).toFixed(1);
-        
-        panel.innerHTML = `
-            <strong>📊 PDF布局调试信息</strong><br><br>
-            🖥️ 设备显示宽度: ${info.displayWidth}px<br>
-            📄 PDF原始宽度: ${info.originalWidth}px<br>
-            🎯 目标宽度(60%): ${info.targetWidth}px<br>
-            📏 实际宽度: ${info.scaledWidth.toFixed(0)}px (${percentage}%)<br>
-            📐 缩放比例: ${info.scale.toFixed(3)}<br>
-            ⬅️ 左边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
-            ➡️ 右边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
-            <br>
-            <small>💡 点击关闭此面板</small>
+    showDebugInfo({
+        displayWidth,
+        originalWidth,
+        targetWidth,
+        contentPercentage,
+        scale: finalScale,
+        scaledWidth,
+        leftMargin,
+        marginPercentage
+    });
+    
+    log('PDF布局应用完成 - JavaScript控制');
+}
+    
+// 显示调试信息
+function showDebugInfo(info) {
+    if (!DEBUG) return;
+    
+    let panel = document.getElementById('pdf-debug-panel');
+    if (!panel) {
+        panel = document.createElement('div');
+        panel.id = 'pdf-debug-panel';
+        panel.style.cssText = `
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            z-index: 10000;
+            max-width: 320px;
+            border: 1px solid #333;
+            cursor: pointer;
         `;
+        document.body.appendChild(panel);
+        
+        panel.addEventListener('click', function() {
+            this.style.display = 'none';
+        });
     }
     
+    const actualContentPercent = ((info.scaledWidth / info.displayWidth) * 100).toFixed(1);
+    const expectedContentPercent = (info.contentPercentage * 100).toFixed(0);
+    
+    panel.innerHTML = `
+        <strong>📊 JavaScript控制的PDF布局</strong><br><br>
+        🖥️ 设备显示宽度: ${info.displayWidth}px<br>
+        📄 PDF原始宽度: ${info.originalWidth}px<br>
+        🎯 目标内容宽度: ${info.targetWidth}px (${expectedContentPercent}%)<br>
+        📏 实际内容宽度: ${info.scaledWidth.toFixed(0)}px (${actualContentPercent}%)<br>
+        📐 缩放比例: ${info.scale.toFixed(3)}<br>
+        ⬅️ 左边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
+        ➡️ 右边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
+        <br>
+        <small>💡 使用JavaScript控制 | 点击关闭</small>
+    `;
+}
     // 响应窗口变化
     let resizeTimeout;
     function handleResize() {
@@ -652,20 +664,39 @@ function applyLayout() {
         log('事件监听器已设置');
     }
     
-    // 全局调试接口
-    window.PDFDebugger = {
-        reapply: applyLayout,
-        getDisplayWidth: getDisplayWidth,
-        toggleDebug: function() {
-            const panel = document.getElementById('pdf-debug-panel');
-            if (panel) {
-                panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-            }
-        },
-        showInfo: function() {
-            document.getElementById('pdf-debug-panel').style.display = 'block';
+// 添加到全局调试接口
+window.PDFDebugger = {
+    reapply: applyLayout,
+    getDisplayWidth: getDisplayWidth,
+    
+    // 动态调整内容宽度
+    setContentWidth: function(percentage) {
+        if (percentage < 30 || percentage > 90) {
+            console.warn('内容宽度应在30%-90%之间');
+            return;
         }
-    };
+        
+        // 修改全局变量
+        window.CONTENT_PERCENTAGE = percentage / 100;
+        applyLayout();
+        console.log(`已设置内容宽度为${percentage}%`);
+    },
+    
+    toggleDebug: function() {
+        const panel = document.getElementById('pdf-debug-panel');
+        if (panel) {
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+    },
+    
+    showInfo: function() {
+        const panel = document.getElementById('pdf-debug-panel');
+        if (panel) panel.style.display = 'block';
+    }
+};
+
+// 设置默认内容宽度为60%
+window.CONTENT_PERCENTAGE = 0.6;
     
     // 启动系统
     init();
