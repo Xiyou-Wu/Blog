@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T16:22:41.089Z">
+<meta property="article:modified_time" content="2025-06-21T16:23:16.253Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -330,7 +330,11 @@
   unicode-bidi: bidi-override;
 }
 
-
+/* 禁用所有图片和背景的点击事件 */
+.bi, .bf, #page-container img {
+  pointer-events: none !important;
+  cursor: default !important;
+}
 
 
 
