@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T19:09:43.736Z">
+<meta property="article:modified_time" content="2025-06-21T19:23:30.937Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -292,8 +292,8 @@
   align-items: flex-start !important;
   margin: 20px 0 !important;
   
-  /* 保持原始页面宽度 */
-  width: 50vw !important;
+  /* 修改：让页面容器占满父元素宽度，以便内容可以居中 */
+  width: 100% !important;
   max-width: none !important;
   
   /* 不对页面容器进行缩放 */
@@ -311,13 +311,17 @@
   /* 这里会通过JavaScript设置缩放 */
   transform-origin: center top !important;
   
-  /* 基础宽度控制 */
+  /* 修改：移除与JS冲突的宽度控制 */
   width: auto !important;
-  max-width: 60vw !important;
 }
 
 .pc.opened { 
-  display: block !important; 
+// ... existing code ...
+        // 获取设备宽度和目标宽度
+        const displayWidth = getDisplayWidth();
+        const targetWidth = Math.floor(displayWidth * 0.6); // 修改：修正为60%
+        
+        let processedPages = 0;
 }
 
 /* 文字渲染 - 保持原始设置 */
@@ -474,7 +478,7 @@ html {
         
         // 获取设备宽度和目标宽度
         const displayWidth = getDisplayWidth();
-        const targetWidth = Math.floor(displayWidth * 0.3); // 精确 60%
+        const targetWidth = Math.floor(displayWidth * 0.4); // 精确 60%
         
         let processedPages = 0;
         
