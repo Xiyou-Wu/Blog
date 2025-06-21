@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T21:23:59.219Z">
+<meta property="article:modified_time" content="2025-06-21T21:24:52.224Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -256,7 +256,7 @@
 
 /* PDF外层包装器 */
 .pdf-wrapper {
-  width: 120%; /* 使用 100% 替代 100vw，以适应博客主题的容器宽度 */
+  width: 100%; /* 使用 100% 替代 100vw，以适应博客主题的容器宽度 */
   height: auto;
   padding: 0;
   box-sizing: border-box;
@@ -267,7 +267,7 @@
   position: relative;
   left: 0 !important;
   height: auto !important;
-  overflow-x: hidden !important; /* 允许在需要时显示水平滚动条 */
+  overflow-x: auto !important; /* 允许在需要时显示水平滚动条 */
   
   /* 使用 Flexbox 布局来居中页面 */
   display: flex !important;
@@ -397,7 +397,6 @@ html {
 
 </style>
 
-
 <script type="text/javascript">
 // 每页独立居中的 PDF 显示系统
 (function() {
@@ -457,20 +456,11 @@ html {
         return wrapper;
     }
     
-    // 为每页应用独立的60%宽度居中布局
-    function applyPageCenterLayout() {
+        function applyPageCenterLayout() {
         const container = document.getElementById('page-container');
         const pdfPages = document.querySelectorAll('.pf');
         
-        if (!container || pdfPages.length === 0) {
-            log('等待PDF元素加载...');
-            setTimeout(applyPageCenterLayout, 100);
-            return;
-        }
-        
-        // 确保包装器存在
-        const wrapper = createWrapper();
-        if (!wrapper) {
+// ... existing code ...
             log('无法创建包装器');
             return;
         }
@@ -485,55 +475,30 @@ html {
         pdfPages.forEach((page, index) => {
             const pageContent = page.querySelector('.pc');
             if (!pageContent) return;
-
-            // 重置内容容器(.pc)样式，以确保JS可以精确控制其尺寸
+            
+            // --- 由JS驱动的动态布局 ---
+            // 以下的 Flex 布局代码不再需要，由父容器 #page-container 的 CSS 负责
+            /*
+            page.style.display = 'flex';
+            page.style.justifyContent = 'center';
+            page.style.alignItems = 'flex-start';
+            page.style.width = '100%';
+            */
+            
+            // 2. 重置内容容器(.pc)样式，以确保JS可以精确控制其尺寸
             pageContent.style.maxWidth = 'none';
-            pageContent.style.width = 'auto';
-            
-            // 重置当前页面的变换
-            pageContent.style.transform = 'none';
-            
-            // 强制重新计算布局
-            pageContent.offsetHeight;
-            
-            // 获取当前页面的原始宽度
-            const originalWidth = Math.max(
-                pageContent.scrollWidth,
-                pageContent.offsetWidth,
-                pageContent.getBoundingClientRect().width
-            );
-            
-            if (originalWidth === 0) {
-                log(`第${index + 1}页尚未渲染完成`);
-                return;
-            }
-            
-            // 计算缩放比例
-            const scale = targetWidth / originalWidth;
-            const finalScale = Math.max(0.1, Math.min(scale, 3.0));
-            
-            // 应用缩放到页面内容
-            pageContent.style.transform = `scale(${finalScale})`;
-            pageContent.style.transformOrigin = 'center top';
-            
-            // 调整页面容器高度以适应缩放后的内容
+// ... existing code ...
+                        // 调整页面容器高度以适应缩放后的内容
             const scaledHeight = pageContent.scrollHeight * finalScale;
             page.style.minHeight = `${scaledHeight + 10}px`;
             
+            // 下一行 minWidth 也不再需要，因为居中由 CSS Flexbox 处理
+            // page.style.minWidth = `${scaledWidth}px`; 
             pageContent.style.width = `${originalWidth}px`;
             pageContent.style.margin = '0 auto';
             
             processedPages++;
-            
-            log(`第${index + 1}页处理完成:`, {
-                originalWidth: originalWidth.toFixed(1),
-                targetWidth,
-                scale: finalScale.toFixed(4),
-                scaledWidth: (originalWidth * finalScale).toFixed(1),
-                scaledHeight: scaledHeight.toFixed(1)
-            });
-        });
-        
+// ... existing code ...
         log(`共处理了${processedPages}页`);
         
         // 显示调试信息
@@ -546,34 +511,8 @@ html {
     }
     
     // 显示调试信息
-    function showDebugInfo(info) {
-        if (!DEBUG) return;
-        
-        let panel = document.getElementById('pdf-debug-panel');
-        if (!panel) {
-            panel = document.createElement('div');
-            panel.id = 'pdf-debug-panel';
-            panel.style.cssText = `
-                position: fixed;
-                top: 10px;
-                right: 10px;
-                background: rgba(0,0,0,0.9);
-                color: white;
-                padding: 15px;
-                border-radius: 8px;
-                font-size: 12px;
-                font-family: 'Courier New', monospace;
-                z-index: 10000;
-                max-width: 350px;
-                border: 1px solid #333;
-                cursor: pointer;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            `;
-            document.body.appendChild(panel);
-            
-            panel.addEventListener('click', function() {
-                this.style.display = 'none';
-            });
+// ... existing code ...
+            );
         }
         
         panel.innerHTML = `
@@ -586,7 +525,7 @@ html {
             <br>
             <small>💡 点击关闭此面板</small>
         `;
-    }
+    
     
     // 响应窗口变化
     let resizeTimeout;
