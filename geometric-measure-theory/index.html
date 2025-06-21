@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T16:55:12.413Z">
+<meta property="article:modified_time" content="2025-06-21T16:57:49.785Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -280,64 +280,340 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-<!--— 必须放在 <head> 或页面最前部 —-->
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-
-<style>
-:root{
-  /* 由 JS 动态维护，初始值仅供首次渲染时使用 */
-  --dynamic-width: 60vw;
+<style type="text/css">
+/* 重置页面默认样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* 页面基础样式：居中显示，无额外留白 */
-body{
-  margin:0;
-  padding:0;
-  display:flex;
-  justify-content:center;     /* 水平居中 */
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    background-color: #f5f5f5;
 }
 
-/* 主内容容器 */
-#content-wrapper{
-  width:var(--dynamic-width); /* 始终为屏幕的 60% */
-  max-width:100%;
-  box-sizing:border-box;
+/* 主容器样式 */
+.pdf-container {
+    width: 60vw; /* 使用视口宽度的60% */
+    min-width: 300px; /* 设置最小宽度避免过小 */
+    max-width: 1200px; /* 设置最大宽度避免过大 */
+    margin: 20px auto; /* 居中显示 */
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    position: relative;
+    transform-origin: top left;
+    transition: transform 0.3s ease;
 }
 
-/* PDF / 其他嵌入内容自适应宽高 */
-#content-wrapper iframe,
-#content-wrapper embed,
-#content-wrapper object{
-  width:100%;
-  height:100vh;               /* 纵向占满可视高度，可自行调整 */
-  border:none;
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .pdf-container {
+        width: 90vw; /* 移动设备上使用90%宽度 */
+        margin: 10px auto;
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .pdf-container {
+        width: 95vw; /* 小屏幕设备使用95%宽度 */
+        margin: 5px auto;
+        padding: 10px;
+    }
+}
+
+/* 控制按钮容器 */
+.controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(255,255,255,0.9);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.control-btn {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 40px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.control-btn:hover {
+    background: #0056b3;
+}
+
+/* 缩放和拖拽功能样式 */
+.draggable {
+    cursor: move;
+}
+
+.dragging {
+    cursor: grabbing;
+}
+
+/* 确保PDF内容正确显示 */
+.pdf-container > * {
+    max-width: 100%;
+    height: auto;
 }
 </style>
 
-<!--— 页面主体 —-->
-<div id="content-wrapper">
-  <!-- 将下行替换成自己的 PDF、Markdown 生成内容或其他组件 -->
-  <iframe src="example.pdf#zoom=100"></iframe>
-</div>
-
-<script>
-/* 仅 ~15 行代码，快速无阻塞 */
-(function () {
-  'use strict';
-
-  const root = document.documentElement;
-
-  function updateWidth(){
-    // 实时计算屏幕 60% 宽度并写入 CSS 变量
-    root.style.setProperty('--dynamic-width', (window.innerWidth * 0.6) + 'px');
-  }
-
-  /* 初次加载与窗口尺寸变动时均更新 */
-  updateWidth();
-  window.addEventListener('resize', updateWidth);
-})();
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取当前屏幕宽度
+    function getScreenWidth() {
+        return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    }
+    
+    // 获取当前屏幕高度
+    function getScreenHeight() {
+        return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    }
+    
+    // 查找PDF内容并包装
+    function wrapPdfContent() {
+        const bodyChildren = document.body.children;
+        let pdfContent = null;
+        
+        // 查找<head>后的内容
+        for (let i = 0; i < bodyChildren.length; i++) {
+            const child = bodyChildren[i];
+            // 跳过script、style、meta等标签
+            if (child.tagName && !['SCRIPT', 'STYLE', 'META', 'LINK', 'TITLE'].includes(child.tagName)) {
+                pdfContent = child;
+                break;
+            }
+        }
+        
+        // 如果没有找到合适的内容，创建包装器包含所有内容
+        if (!pdfContent) {
+            pdfContent = document.createElement('div');
+            while (document.body.firstChild) {
+                if (!['SCRIPT', 'STYLE', 'META', 'LINK', 'TITLE'].includes(document.body.firstChild.tagName)) {
+                    pdfContent.appendChild(document.body.firstChild);
+                } else {
+                    document.body.removeChild(document.body.firstChild);
+                }
+            }
+            document.body.appendChild(pdfContent);
+        }
+        
+        // 添加容器类名
+        if (!pdfContent.classList.contains('pdf-container')) {
+            pdfContent.classList.add('pdf-container');
+        }
+        
+        return pdfContent;
+    }
+    
+    // 创建控制按钮
+    function createControls() {
+        const controls = document.createElement('div');
+        controls.className = 'controls';
+        controls.innerHTML = `
+            <button class="control-btn" id="zoomIn" title="放大">+</button>
+            <button class="control-btn" id="zoomOut" title="缩小">-</button>
+            <button class="control-btn" id="resetZoom" title="重置">⌂</button>
+        `;
+        document.body.appendChild(controls);
+        return controls;
+    }
+    
+    // 初始化
+    const pdfContainer = wrapPdfContent();
+    const controls = createControls();
+    
+    // 缩放和移动相关变量
+    let currentScale = 1;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let translateX = 0;
+    let translateY = 0;
+    
+    // 更新变换
+    function updateTransform() {
+        pdfContainer.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+    }
+    
+    // 缩放功能
+    function zoomIn() {
+        currentScale = Math.min(currentScale * 1.2, 3); // 最大3倍
+        updateTransform();
+    }
+    
+    function zoomOut() {
+        currentScale = Math.max(currentScale / 1.2, 0.3); // 最小0.3倍
+        updateTransform();
+    }
+    
+    function resetZoom() {
+        currentScale = 1;
+        translateX = 0;
+        translateY = 0;
+        updateTransform();
+    }
+    
+    // 绑定按钮事件
+    document.getElementById('zoomIn').addEventListener('click', zoomIn);
+    document.getElementById('zoomOut').addEventListener('click', zoomOut);
+    document.getElementById('resetZoom').addEventListener('click', resetZoom);
+    
+    // 鼠标滚轮缩放
+    pdfContainer.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // 拖拽功能
+    pdfContainer.addEventListener('mousedown', function(e) {
+        if (currentScale > 1) { // 只有放大时才允许拖拽
+            isDragging = true;
+            startX = e.clientX - translateX;
+            startY = e.clientY - translateY;
+            pdfContainer.classList.add('dragging');
+            e.preventDefault();
+        }
+    });
+    
+    document.addEventListener('mousemove', function(e) {
+        if (isDragging) {
+            translateX = e.clientX - startX;
+            translateY = e.clientY - startY;
+            updateTransform();
+        }
+    });
+    
+    document.addEventListener('mouseup', function() {
+        if (isDragging) {
+            isDragging = false;
+            pdfContainer.classList.remove('dragging');
+        }
+    });
+    
+    // 触摸设备支持
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let initialDistance = 0;
+    let initialScale = 1;
+    
+    pdfContainer.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 1) {
+            // 单指拖拽
+            if (currentScale > 1) {
+                const touch = e.touches[0];
+                touchStartX = touch.clientX - translateX;
+                touchStartY = touch.clientY - translateY;
+                isDragging = true;
+            }
+        } else if (e.touches.length === 2) {
+            // 双指缩放
+            const touch1 = e.touches[0];
+            const touch2 = e.touches[1];
+            initialDistance = Math.sqrt(
+                Math.pow(touch2.clientX - touch1.clientX, 2) +
+                Math.pow(touch2.clientY - touch1.clientY, 2)
+            );
+            initialScale = currentScale;
+        }
+        e.preventDefault();
+    });
+    
+    pdfContainer.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 1 && isDragging) {
+            // 单指拖拽
+            const touch = e.touches[0];
+            translateX = touch.clientX - touchStartX;
+            translateY = touch.clientY - touchStartY;
+            updateTransform();
+        } else if (e.touches.length === 2) {
+            // 双指缩放
+            const touch1 = e.touches[0];
+            const touch2 = e.touches[1];
+            const currentDistance = Math.sqrt(
+                Math.pow(touch2.clientX - touch1.clientX, 2) +
+                Math.pow(touch2.clientY - touch1.clientY, 2)
+            );
+            const scaleRatio = currentDistance / initialDistance;
+            currentScale = Math.max(0.3, Math.min(3, initialScale * scaleRatio));
+            updateTransform();
+        }
+        e.preventDefault();
+    });
+    
+    pdfContainer.addEventListener('touchend', function() {
+        isDragging = false;
+    });
+    
+    // 窗口大小变化时重新计算
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            // 重置位置避免内容跑出屏幕
+            if (currentScale === 1) {
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+            }
+        }, 100);
+    });
+    
+    // 键盘快捷键
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey || e.metaKey) {
+            switch(e.key) {
+                case '=':
+                case '+':
+                    e.preventDefault();
+                    zoomIn();
+                    break;
+                case '-':
+                    e.preventDefault();
+                    zoomOut();
+                    break;
+                case '0':
+                    e.preventDefault();
+                    resetZoom();
+                    break;
+            }
+        }
+    });
+    
+    // 防止右键菜单干扰拖拽
+    pdfContainer.addEventListener('contextmenu', function(e) {
+        if (isDragging) {
+            e.preventDefault();
+        }
+    });
+    
+    console.log('PDF缩放和移动功能已初始化');
+});
 </script>
+
 <!-- <!DOCTYPE html>
 <!-- Created by pdf2htmlEX (https://github.com/pdf2htmlEX/pdf2htmlEX) -->
 <head>
