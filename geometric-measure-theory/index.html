@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T16:44:48.074Z">
+<meta property="article:modified_time" content="2025-06-21T16:52:30.887Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -281,416 +281,432 @@
     
     <div class="post-body" itemprop="articleBody">
 
+<!-- 将以下代码插入到您的 <head> 标签内 -->
+<style>
+/* 主容器样式 - 居中并设置响应式宽度 */
+.pdf-content-container {
+    width: 60%;
+    max-width: none;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background: white;
+    min-height: 600px;
+}
 
+/* 内容包装器 - 支持缩放和移动 */
+.pdf-content-wrapper {
+    transform-origin: 0 0;
+    transition: transform 0.1s ease-out;
+    cursor: grab;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.pdf-content-wrapper:active {
+    cursor: grabbing;
+}
+
+/* 控制按钮容器 */
+.pdf-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: rgba(255,255,255,0.9);
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.pdf-controls button {
+    margin: 2px;
+    padding: 5px 8px;
+    border: none;
+    background: #007cba;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.pdf-controls button:hover {
+    background: #005a87;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 1200px) {
+    .pdf-content-container {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .pdf-content-container {
+        width: 90%;
+    }
+    
+    .pdf-controls {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .pdf-content-container {
+        width: 95%;
+    }
+}
+
+/* 禁用原有的固定宽度，确保内容适配 */
+.pdf-content-wrapper * {
+    max-width: none !important;
+}
+
+/* 确保图片和其他媒体内容不会溢出 */
+.pdf-content-wrapper img,
+.pdf-content-wrapper svg,
+.pdf-content-wrapper canvas {
+    max-width: 100%;
+    height: auto;
+}
+</style>
+
+<script>
+class PDFViewer {
+    constructor() {
+        this.scale = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+        this.isDragging = false;
+        this.startX = 0;
+        this.startY = 0;
+        this.initialDistance = 0;
+        this.initialScale = 1;
+        
+        this.init();
+    }
+    
+    init() {
+        // 等待DOM加载完成
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.setupContent();
+            });
+        } else {
+            this.setupContent();
+        }
+    }
+    
+    setupContent() {
+        // 查找包含{% raw %}内容的区域
+        const rawStartComment = document.createComment('{% raw %}');
+        const rawEndComment = document.createComment('{% endraw %}');
+<pre><code>    // 寻找所有的文本节点和注释节点来定位{% raw %}标签
+        const walker = document.createTreeWalker(
+            document.body,
+            NodeFilter.SHOW_ALL,
+            null,
+            false
+        );
+        
+        let rawStart = null;
+        let rawEnd = null;
+        let currentNode;
+        
+        while (currentNode = walker.nextNode()) {
+            if (currentNode.nodeType === Node.COMMENT_NODE) {
+                if (currentNode.textContent.includes('raw')) {
+                    if (!rawStart) {
+                        rawStart = currentNode;
+                    } else {
+                        rawEnd = currentNode;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        // 如果找不到注释，查找包含PDF内容的元素
+        if (!rawStart) {
+            // 查找可能包含PDF内容的容器
+            const possibleContainers = [
+                document.querySelector('article'),
+                document.querySelector('.content'),
+                document.querySelector('.post-content'),
+                document.querySelector('main'),
+                document.querySelector('body > div:first-child')
+            ];
+            
+            for (let container of possibleContainers) {
+                if (container && (container.innerHTML.includes('<head>') || container.innerHTML.includes('.ff'))) {
+                    this.wrapContent(container);
+                    return;
+                }
+            }
+        } else {
+            this.wrapRawContent(rawStart, rawEnd);
+        }
+    }
+    
+    wrapContent(container) {
+        const originalContent = container.innerHTML;
+        
+        container.innerHTML = `
+            <div class="pdf-content-container">
+                <div class="pdf-controls">
+                    <button onclick="pdfViewer.zoomIn()">放大</button>
+                    <button onclick="pdfViewer.zoomOut()">缩小</button>
+                    <button onclick="pdfViewer.resetView()">重置</button>
+                </div>
+                <div class="pdf-content-wrapper">
+                    ${originalContent}
+                </div>
+            </div>
+        `;
+        
+        this.container = container.querySelector('.pdf-content-container');
+        this.wrapper = container.querySelector('.pdf-content-wrapper');
+        
+        this.bindEvents();
+        this.fitToContainer();
+    }
+    
+    wrapRawContent(startNode, endNode) {
+        if (!startNode) return;
+        
+        const range = document.createRange();
+        range.setStartAfter(startNode);
+        if (endNode) {
+            range.setEndBefore(endNode);
+        } else {
+            range.setEndAfter(startNode.parentNode.lastChild);
+        }
+        
+        const contents = range.extractContents();
+        
+        const wrapper = document.createElement('div');
+        wrapper.className = 'pdf-content-container';
+        wrapper.innerHTML = `
+            <div class="pdf-controls">
+                <button onclick="pdfViewer.zoomIn()">放大</button>
+                <button onclick="pdfViewer.zoomOut()">缩小</button>
+                <button onclick="pdfViewer.resetView()">重置</button>
+            </div>
+            <div class="pdf-content-wrapper"></div>
+        `;
+        
+        wrapper.querySelector('.pdf-content-wrapper').appendChild(contents);
+        
+        startNode.parentNode.insertBefore(wrapper, startNode.nextSibling);
+        
+        this.container = wrapper;
+        this.wrapper = wrapper.querySelector('.pdf-content-wrapper');
+        
+        this.bindEvents();
+        this.fitToContainer();
+    }
+    
+    bindEvents() {
+        if (!this.container || !this.wrapper) return;
+        
+        // 鼠标滚轮缩放
+        this.container.addEventListener('wheel', this.handleWheel.bind(this), { passive: false });
+        
+        // 鼠标拖拽
+        this.container.addEventListener('mousedown', this.handleMouseDown.bind(this));
+        document.addEventListener('mousemove', this.handleMouseMove.bind(this));
+        document.addEventListener('mouseup', this.handleMouseUp.bind(this));
+        
+        // 触摸事件 (移动设备)
+        this.container.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: false });
+        this.container.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+        this.container.addEventListener('touchend', this.handleTouchEnd.bind(this));
+        
+        // 窗口大小调整
+        window.addEventListener('resize', this.handleResize.bind(this));
+        
+        // 阻止默认的拖拽行为
+        this.container.addEventListener('dragstart', e => e.preventDefault());
+        this.container.addEventListener('selectstart', e => e.preventDefault());
+    }
+    
+    handleWheel(e) {
+        e.preventDefault();
+        
+        const delta = e.deltaY > 0 ? 0.9 : 1.1;
+        const newScale = Math.max(0.1, Math.min(5, this.scale * delta));
+        
+        if (newScale !== this.scale) {
+            const rect = this.container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            this.zoomAt(x, y, newScale);
+        }
+    }
+    
+    handleMouseDown(e) {
+        if (e.button === 0) {
+            this.isDragging = true;
+            this.startX = e.clientX - this.translateX;
+            this.startY = e.clientY - this.translateY;
+            e.preventDefault();
+        }
+    }
+    
+    handleMouseMove(e) {
+        if (this.isDragging) {
+            this.translateX = e.clientX - this.startX;
+            this.translateY = e.clientY - this.startY;
+            this.updateTransform();
+            e.preventDefault();
+        }
+    }
+    
+    handleMouseUp() {
+        this.isDragging = false;
+    }
+    
+    handleTouchStart(e) {
+        if (e.touches.length === 1) {
+            const touch = e.touches[0];
+            this.isDragging = true;
+            this.startX = touch.clientX - this.translateX;
+            this.startY = touch.clientY - this.translateY;
+        } else if (e.touches.length === 2) {
+            this.isDragging = false;
+            this.initialDistance = this.getDistance(e.touches[0], e.touches[1]);
+            this.initialScale = this.scale;
+        }
+        e.preventDefault();
+    }
+    
+    handleTouchMove(e) {
+        if (e.touches.length === 1 && this.isDragging) {
+            const touch = e.touches[0];
+            this.translateX = touch.clientX - this.startX;
+            this.translateY = touch.clientY - this.startY;
+            this.updateTransform();
+        } else if (e.touches.length === 2) {
+            const currentDistance = this.getDistance(e.touches[0], e.touches[1]);
+            const scaleChange = currentDistance / this.initialDistance;
+            const newScale = Math.max(0.1, Math.min(5, this.initialScale * scaleChange));
+            
+            const centerX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+            const centerY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+            const rect = this.container.getBoundingClientRect();
+            
+            this.zoomAt(centerX - rect.left, centerY - rect.top, newScale);
+        }
+        e.preventDefault();
+    }
+    
+    handleTouchEnd() {
+        this.isDragging = false;
+    }
+    
+    handleResize() {
+        setTimeout(() => this.fitToContainer(), 100);
+    }
+    
+    getDistance(touch1, touch2) {
+        const dx = touch1.clientX - touch2.clientX;
+        const dy = touch1.clientY - touch2.clientY;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+    
+    zoomAt(x, y, newScale) {
+        const scaleChange = newScale / this.scale;
+        
+        this.translateX = x - (x - this.translateX) * scaleChange;
+        this.translateY = y - (y - this.translateY) * scaleChange;
+        this.scale = newScale;
+        
+        this.updateTransform();
+    }
+    
+    updateTransform() {
+        if (this.wrapper) {
+            this.wrapper.style.transform = 
+                `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+        }
+    }
+    
+    fitToContainer() {
+        if (!this.wrapper || !this.container) return;
+        
+        // 重置变换
+        this.scale = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+        this.updateTransform();
+        
+        // 短暂延迟以确保容器尺寸已更新
+        setTimeout(() => {
+            const containerRect = this.container.getBoundingClientRect();
+            const wrapperRect = this.wrapper.getBoundingClientRect();
+            
+            if (wrapperRect.width > 0 && wrapperRect.height > 0) {
+                const scaleX = (containerRect.width * 0.9) / wrapperRect.width;
+                const scaleY = (containerRect.height * 0.9) / wrapperRect.height;
+                const optimalScale = Math.min(scaleX, scaleY, 1);
+                
+                this.scale = optimalScale;
+                this.translateX = (containerRect.width - wrapperRect.width * optimalScale) / 2;
+                this.translateY = Math.max(0, (containerRect.height - wrapperRect.height * optimalScale) / 2);
+                
+                this.updateTransform();
+            }
+        }, 100);
+    }
+    
+    // 公共方法
+    resetView() {
+        this.fitToContainer();
+    }
+    
+    zoomIn() {
+        const newScale = Math.min(5, this.scale * 1.2);
+        this.zoomAt(
+            this.container.offsetWidth / 2,
+            this.container.offsetHeight / 2,
+            newScale
+        );
+    }
+    
+    zoomOut() {
+        const newScale = Math.max(0.1, this.scale * 0.8);
+        this.zoomAt(
+            this.container.offsetWidth / 2,
+            this.container.offsetHeight / 2,
+            newScale
+        );
+    }
+}
+
+// 创建全局实例
+let pdfViewer;
+
+// 初始化
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        pdfViewer = new PDFViewer();
+    });
+} else {
+    pdfViewer = new PDFViewer();
+}
+</script>
 <!-- <!DOCTYPE html>
 <!-- Created by pdf2htmlEX (https://github.com/pdf2htmlEX/pdf2htmlEX) -->
 <head>
-<style type="text/css">
-/*! 
- * Base CSS for pdf2htmlEX
- * Copyright 2012,2013 Lu Wang <coolwanglu@gmail.com> 
- * https://github.com/pdf2htmlEX/pdf2htmlEX/blob/master/share/LICENSE
- */
-/* Remove sidebar completely */
-#sidebar { display: none !important; }
 
-/* PDF外层包装器 - 用于居中和控制整体大小 */
-.pdf-wrapper {
-  width: 60vw; /* 直接设置为60%而不是100vw */
-  max-width: 80vw;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px 0;
-  box-sizing: border-box;
-  margin: 0 auto; /* 居中显示 */
-}
-
-/* PDF容器 - 保持原始PDF尺寸，通过wrapper控制位置 */
-#page-container {
-  position: relative;
-  left: 0 !important;
-  height: auto !important;
-  overflow: visible !important;
-  
-  /* 保持原始容器属性 */
-  display: block;
-  margin: 0 !important;
-  padding: 0 !important;
-  
-  /* 让JavaScript控制尺寸和缩放 */
-  width: auto !important;
-  max-width: none !important;
-  min-width: auto !important;
-  
-  /* 变换原点设置为中心顶部 */
-  transform-origin: 0 100% !important;
-  
-  /* 移除可能干扰的属性 */
-  left: auto !important;
-  right: auto !important;
-}
-
-/* PDF页面 - 保持原始样式 */
-.pf {
-  position: relative !important;
-  overflow: visible !important;
-  display: block !important;
-  margin: 0 auto 20px auto !important;
-  
-  /* 保持原始宽度，不要强制修改 */
-  width: auto !important;
-  max-width: none !important;
-  
-  /* 不对单独页面进行缩放 */
-  transform: none !important;
-  transform-origin: 0 100% !important;
-}
-
-/* 页面内容容器 - 保持原始样式 */
-.pc {
-  position: relative !important;
-  display: block !important;
-  margin: 0 !important;
-  width: auto !important;
-  overflow: visible !important;
-  transform-origin: 0 100%;
-}
-
-.pc.opened { display: block !important; }
-
-/* 确保所有PDF内部元素保持原始定位 */
-/* Text rendering */
-.t {
-  position: absolute;
-  white-space: pre;
-  transform-origin: 0 100%;
-  -ms-transform-origin: 0 100%;
-  -webkit-transform-origin: 0 100%;
-  unicode-bidi: bidi-override;
-}
-
-/* 为图片添加统一的变换原点 */
-.bi, .bf, #page-container img {
-  pointer-events: none !important;
-  cursor: default !important;
-  transform-origin: 0 100% !important;  /* 添加这一行 */
-  -ms-transform-origin: 0 100% !important;
-  -webkit-transform-origin: 0 100% !important;
-}
-
-/* 确保所有PDF内容元素使用相同的变换原点 */
-.d {
-  position: absolute;
-  transform-origin: 0 100% !important;  /* 确保一致性 */
-}
-
-
-
-/* Essential utility classes - 保持不变 */
-.c { position: absolute; border: 0; padding: 0; margin: 0; overflow: hidden; display: block; }
-._ { display: inline-block; color: transparent; z-index: -1; }
-
-/* 选择高亮 */
-::selection { background: rgba(127,255,255,0.4); }
-::-moz-selection { background: rgba(127,255,255,0.4); }
-
-/* 页面布局 */
-body {
-  overflow-x: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-html {
-  overflow-x: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* 博客内容容器 */
-.post-content, .article-entry {
-  overflow: visible !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* 打印样式 */
-@media print {
-  .pdf-wrapper {
-    width: 100% !important;
-    padding: 0 !important;
-  }
-  
-
-  
-  .pf {
-    margin-bottom: 1cm !important;
-  }
-}
-
-/* 在现有CSS末尾添加 */
-
-/* 强制所有PDF元素使用统一变换原点 */
-#page-container * {
-  transform-origin: 0 100% !important;
-  -webkit-transform-origin: 0 100% !important;
-  -ms-transform-origin: 0 100% !important;
-}
-
-/* 确保文字元素与图片同步缩放 */
-.t, .bi, .bf, .d, .c {
-  transform-origin: 0 100% !important;
-  -webkit-transform-origin: 0 100% !important;
-  -ms-transform-origin: 0 100% !important;
-}
-
-</style>
-
-<script type="text/javascript">
-// PDF智能60%宽度居中显示系统
-(function() {
-    'use strict';
-    
-    // 调试模式
-    const DEBUG = true;
-    
-    function log(...args) {
-        if (DEBUG) {
-            console.log('[PDF布局]', ...args);
-        }
-    }
-    
-    // 获取设备真实显示宽度
-    function getDisplayWidth() {
-        // 优先级顺序的检测方法
-        const methods = [
-            () => screen.width,
-            () => screen.availWidth, 
-            () => window.outerWidth,
-            () => document.documentElement.clientWidth,
-            () => window.innerWidth
-        ];
-        
-        let width = 0;
-        for (const method of methods) {
-            try {
-                const result = method();
-                if (result && result > width) {
-                    width = result;
-                }
-            } catch (e) {
-                continue;
-            }
-        }
-        
-        // 确保有一个合理的默认值
-        if (width < 320) {
-            width = Math.max(window.innerWidth, 1024);
-        }
-        
-        log('检测到的显示宽度:', width);
-        return width;
-    }
-    
-    // 创建外层包装器
-    function createWrapper() {
-        const container = document.getElementById('page-container');
-        if (!container || container.parentElement.classList.contains('pdf-wrapper')) {
-            return document.querySelector('.pdf-wrapper');
-        }
-        
-        const wrapper = document.createElement('div');
-        wrapper.className = 'pdf-wrapper';
-        
-        // 将容器包装在wrapper中
-        container.parentElement.insertBefore(wrapper, container);
-        wrapper.appendChild(container);
-        
-        log('已创建PDF包装器');
-        return wrapper;
-    }
-    
-    // 应用60%宽度布局
-// 应用60%宽度布局 → 修改为应用60%宽度布局（左右边距各20%）
-function applyLayout() {
-    const container = document.getElementById('page-container');
-    const pdfPages = document.querySelectorAll('.pf');
-    
-    if (!container || pdfPages.length === 0) {
-        log('等待PDF元素加载...');
-        setTimeout(applyLayout, 100);
-        return;
-    }
-    
-    // 确保包装器存在
-    const wrapper = createWrapper();
-    if (!wrapper) {
-        log('无法创建包装器');
-        return;
-    }
-    
-    // 获取设备宽度和目标宽度
-    const displayWidth = getDisplayWidth();
-    const targetWidth = Math.floor(displayWidth * 0.6); // 60% 内容宽度，左右边距各20%
-        
-        // 获取PDF容器的原始宽度
-        container.style.transform = 'none';
-        const originalWidth = container.scrollWidth || container.offsetWidth;
-        
-        if (originalWidth === 0) {
-            log('PDF尚未渲染完成，稍后重试...');
-            setTimeout(applyLayout, 200);
-            return;
-        }
-        
-        // 计算缩放比例
-        const scale = targetWidth / originalWidth;
-        const finalScale = Math.max(0.1, Math.min(scale, 2.0)); // 限制缩放范围
-        
-        // 应用缩放到整个容器
-// 应用缩放到整个容器
-container.style.transform = `scale(${finalScale})`;
-container.style.transformOrigin = '0 100%';  // ✅ 修复引号
-
-// 调整包装器的高度以适应缩放后的内容  // ✅ 添加注释符号
-const scaledHeight = container.scrollHeight * finalScale;
-wrapper.style.minHeight = `${scaledHeight + 40}px`;
-        
-        // 计算实际的边距
-        // const scaledWidth = originalWidth * finalScale;
-        // const leftMargin = (displayWidth - scaledWidth) / 2;
-        // const marginPercentage = (leftMargin / displayWidth) * 100;
-        
-        // log('布局计算结果:', {
-        //     displayWidth,
-        //     originalWidth,
-        //     targetWidth,
-        //     scale: finalScale.toFixed(3),
-        //     scaledWidth: scaledWidth.toFixed(0),
-        //     leftMargin: leftMargin.toFixed(0),
-        //     marginPercentage: marginPercentage.toFixed(1) + '%'
-        // });
-        
-        // // 显示调试信息
-        // showDebugInfo({
-        //     displayWidth,
-        //     originalWidth,
-        //     targetWidth,
-        //     scale: finalScale,
-        //     scaledWidth,
-        //     leftMargin,
-        //     marginPercentage
-        // });
-        
-        log('PDF布局应用完成');
-    }
-    
-    // // 显示调试信息
-    // function showDebugInfo(info) {
-    //     if (!DEBUG) return;
-        
-    //     let panel = document.getElementById('pdf-debug-panel');
-    //     if (!panel) {
-    //         panel = document.createElement('div');
-    //         panel.id = 'pdf-debug-panel';
-    //         panel.style.cssText = `
-    //             position: fixed;
-    //             top: 10px;
-    //             right: 10px;
-    //             background: rgba(0,0,0,0.9);
-    //             color: white;
-    //             padding: 15px;
-    //             border-radius: 8px;
-    //             font-size: 12px;
-    //             font-family: 'Courier New', monospace;
-    //             z-index: 10000;
-    //             max-width: 320px;
-    //             border: 1px solid #333;
-    //             cursor: pointer;
-    //         `;
-    //         document.body.appendChild(panel);
-            
-    //         panel.addEventListener('click', function() {
-    //             this.style.display = 'none';
-    //         });
-    //     }
-        
-    //     const percentage = ((info.scaledWidth / info.displayWidth) * 100).toFixed(1);
-        
-    //     panel.innerHTML = `
-    //         <strong>📊 PDF布局调试信息</strong><br><br>
-    //         🖥️ 设备显示宽度: ${info.displayWidth}px<br>
-    //         📄 PDF原始宽度: ${info.originalWidth}px<br>
-    //         🎯 目标宽度(60%): ${info.targetWidth}px<br>
-    //         📏 实际宽度: ${info.scaledWidth.toFixed(0)}px (${percentage}%)<br>
-    //         📐 缩放比例: ${info.scale.toFixed(3)}<br>
-    //         ⬅️ 左边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
-    //         ➡️ 右边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
-    //         <br>
-    //         <small>💡 点击关闭此面板</small>
-    //     `;
-    // }
-    
-    // 响应窗口变化
-    let resizeTimeout;
-    function handleResize() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            log('窗口尺寸改变，重新计算布局');
-            applyLayout();
-        }, 300);
-    }
-    
-    // 响应方向变化
-    function handleOrientationChange() {
-        setTimeout(() => {
-            log('屏幕方向改变，重新计算布局');
-            applyLayout();
-        }, 500);
-    }
-    
-    // 初始化
-    function init() {
-        log('PDF 60%宽度布局系统启动');
-        
-        // 等待DOM加载
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                setTimeout(applyLayout, 100);
-            });
-        } else {
-            setTimeout(applyLayout, 100);
-        }
-        
-        // 绑定事件监听器
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('orientationchange', handleOrientationChange);
-        
-        log('事件监听器已设置');
-    }
-    
-    // 全局调试接口
-    window.PDFDebugger = {
-        reapply: applyLayout,
-        getDisplayWidth: getDisplayWidth,
-        toggleDebug: function() {
-            const panel = document.getElementById('pdf-debug-panel');
-            if (panel) {
-                panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-            }
-        },
-        showInfo: function() {
-            document.getElementById('pdf-debug-panel').style.display = 'block';
-        }
-    };
-    
-    // 启动系统
-    init();
-    
-})();
-</script>
 
 <style type="text/css">
 .ff0{font-family:sans-serif;visibility:hidden;}
@@ -3067,6 +3083,8 @@ pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
 
 
 
+{% endraw %}
+</code></pre>
 
     </div>
 
