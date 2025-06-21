@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T17:24:32.442Z">
+<meta property="article:modified_time" content="2025-06-21T17:27:47.428Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -263,6 +263,7 @@
   align-items: flex-start;
   padding: 20px 0;
   box-sizing: border-box;
+  overflow-x: visible;
 }
 
 /* PDF容器 - 保持原始PDF尺寸，通过wrapper控制位置 */
@@ -317,15 +318,19 @@
 
 .pc.opened { display: block !important; }
 
-/* 确保所有PDF内部元素保持原始定位 */
-/* Text rendering */
+/* 文字渲染 - 保持原始设置，特别是transform-origin */
 .t {
   position: absolute;
   white-space: pre;
-  transform-origin: 0 100%;
-  -ms-transform-origin: 0 100%;
-  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100% !important; /* 必须保持不变 */
+  -ms-transform-origin: 0 100% !important;
+  -webkit-transform-origin: 0 100% !important;
   unicode-bidi: bidi-override;
+}
+
+/* 图片和背景元素 - 确保与文字一致的缩放行为 */
+.bi, .bf {
+  transform-origin: 0 0 !important; /* 图片使用左上角为缩放原点 */
 }
 
 /* 禁用所有图片和背景的点击事件 */
@@ -386,48 +391,10 @@ html {
     margin-bottom: 1cm !important;
   }
 }
-
-/* 修改文本渲染的变换原点，使其与容器保持一致 */
-.t {
-  position: absolute;
-  white-space: pre;
-  transform-origin: center center !important; /* 改为居中 */
-  -ms-transform-origin: center center !important;
-  -webkit-transform-origin: center center !important;
-  unicode-bidi: bidi-override;
-}
-
-/* 所有PDF内部元素统一变换原点 */
-.d {
-  position: absolute;
-  transform-origin: center center !important; /* 改为居中 */
-}
-
-/* 确保图片和背景元素也使用相同的变换原点 */
-.bi, .bf {
-  transform-origin: center center !important;
-}
-
-/* PDF容器保持居中顶部的变换原点 */
-#page-container {
-  position: relative;
-  left: 0 !important;
-  height: auto !important;
-  overflow: visible !important;
-  display: block;
-  margin: 0 !important;
-  padding: 0 !important;
-  width: auto !important;
-  max-width: none !important;
-  min-width: auto !important;
-  transform-origin: center top !important;
-  left: auto !important;
-  right: auto !important;
-}
 </style>
 
 <script type="text/javascript">
-// PDF智能60%宽度居中显示系统
+// 完美的 PDF 60% 宽度居中显示系统
 (function() {
     'use strict';
     
@@ -440,15 +407,15 @@ html {
         }
     }
     
-    // 获取设备真实显示宽度
+    // 精确获取设备显示宽度
     function getDisplayWidth() {
-        // 优先级顺序的检测方法
+        // 使用多种方法确保获取到准确的显示宽度
         const methods = [
-            () => screen.width,
-            () => screen.availWidth, 
-            () => window.outerWidth,
+            () => window.innerWidth,
             () => document.documentElement.clientWidth,
-            () => window.innerWidth
+            () => window.outerWidth,
+            () => screen.availWidth,
+            () => screen.width
         ];
         
         let width = 0;
@@ -490,162 +457,122 @@ html {
         return wrapper;
     }
     
-// 修改applyLayout函数，提高精度和处理变换原点问题
-function applyLayout() {
-    const container = document.getElementById('page-container');
-    const pdfPages = document.querySelectorAll('.pf');
-    
-    if (!container || pdfPages.length === 0) {
-        log('等待PDF元素加载...');
-        setTimeout(applyLayout, 100);
-        return;
-    }
-    
-    // 确保包装器存在
-    const wrapper = createWrapper();
-    if (!wrapper) {
-        log('无法创建包装器');
-        return;
-    }
-    
-    // 重置所有变换以获取准确的原始尺寸
-    container.style.transform = 'none';
-    
-    // 等待DOM重排完成
-    container.offsetHeight; // 强制重排
-    
-    // 获取设备宽度和目标宽度
-    const displayWidth = getDisplayWidth();
-    const targetWidth = displayWidth * 0.6; // 精确的60%，不使用Math.floor
-    
-    // 获取PDF容器的原始宽度
-    const originalWidth = container.scrollWidth || container.offsetWidth;
-    
-    if (originalWidth === 0) {
-        log('PDF尚未渲染完成，稍后重试...');
-        setTimeout(applyLayout, 200);
-        return;
-    }
-    
-    // 计算精确的缩放比例
-    const scale = targetWidth / originalWidth;
-    const finalScale = Math.max(0.1, Math.min(scale, 3.0)); // 扩大最大缩放限制
-    
-    // 统一处理所有元素的变换原点
-    updateTransformOrigins(container);
-    
-    // 应用缩放到整个容器
-    container.style.transform = `scale(${finalScale})`;
-    container.style.transformOrigin = 'center top';
-    
-    // 调整包装器的高度以适应缩放后的内容
-    const scaledHeight = container.scrollHeight * finalScale;
-    wrapper.style.minHeight = `${scaledHeight + 40}px`;
-    
-    // 精确计算边距
-    const actualScaledWidth = originalWidth * finalScale;
-    const leftMargin = (displayWidth - actualScaledWidth) / 2;
-    const actualWidthPercentage = (actualScaledWidth / displayWidth) * 100;
-    
-    log('布局计算结果:', {
-        displayWidth: displayWidth.toFixed(0),
-        originalWidth: originalWidth.toFixed(0),
-        targetWidth: targetWidth.toFixed(2),
-        scale: finalScale.toFixed(6),
-        actualScaledWidth: actualScaledWidth.toFixed(2),
-        leftMargin: leftMargin.toFixed(2),
-        actualWidthPercentage: actualWidthPercentage.toFixed(3) + '%',
-        targetPercentage: '60.000%'
-    });
-    
-    // 显示调试信息
-    showDebugInfo({
-        displayWidth,
-        originalWidth,
-        targetWidth,
-        scale: finalScale,
-        scaledWidth: actualScaledWidth,
-        leftMargin,
-        actualWidthPercentage
-    });
-    
-    log('PDF布局应用完成');
-}
-
-// 新增函数：统一更新变换原点
-function updateTransformOrigins(container) {
-    // 更新文本元素的变换原点
-    const textElements = container.querySelectorAll('.t');
-    textElements.forEach(el => {
-        el.style.transformOrigin = 'center center';
-    });
-    
-    // 更新其他需要变换的元素
-    const transformElements = container.querySelectorAll('.d');
-    transformElements.forEach(el => {
-        el.style.transformOrigin = 'center center';
-    });
-    
-    // 更新图片和背景元素
-    const imageElements = container.querySelectorAll('.bi, .bf');
-    imageElements.forEach(el => {
-        el.style.transformOrigin = 'center center';
-    });
-    
-    log('已统一更新变换原点');
-}
-
-// 修改showDebugInfo函数显示更精确的信息
-function showDebugInfo(info) {
-    if (!DEBUG) return;
-    
-    let panel = document.getElementById('pdf-debug-panel');
-    if (!panel) {
-        panel = document.createElement('div');
-        panel.id = 'pdf-debug-panel';
-        panel.style.cssText = `
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-family: 'Courier New', monospace;
-            z-index: 10000;
-            max-width: 350px;
-            border: 1px solid #333;
-            cursor: pointer;
-        `;
-        document.body.appendChild(panel);
+    // 精确计算和应用 60% 宽度布局
+    function applyPerfectLayout() {
+        const container = document.getElementById('page-container');
+        const pdfPages = document.querySelectorAll('.pf');
         
-        panel.addEventListener('click', function() {
-            this.style.display = 'none';
+        if (!container || pdfPages.length === 0) {
+            log('等待PDF元素加载...');
+            setTimeout(applyPerfectLayout, 100);
+            return;
+        }
+        
+        // 确保包装器存在
+        const wrapper = createWrapper();
+        if (!wrapper) {
+            log('无法创建包装器');
+            return;
+        }
+        
+        // 重置所有变换，获取原始尺寸
+        container.style.transform = 'none';
+        container.style.width = 'auto';
+        container.style.height = 'auto';
+        
+        // 强制重新计算布局
+        container.offsetHeight;
+        
+        // 获取设备宽度和目标宽度
+        const displayWidth = getDisplayWidth();
+        const targetWidth = Math.floor(displayWidth * 0.6); // 精确 60%
+        
+        // 获取PDF容器的实际宽度
+        let originalWidth = 0;
+        
+        // 多种方法获取原始宽度，确保准确性
+        const widthMethods = [
+            () => container.scrollWidth,
+            () => container.offsetWidth,
+            () => container.getBoundingClientRect().width,
+            () => {
+                let maxWidth = 0;
+                pdfPages.forEach(page => {
+                    const pageWidth = page.offsetWidth || page.scrollWidth;
+                    if (pageWidth > maxWidth) maxWidth = pageWidth;
+                });
+                return maxWidth;
+            }
+        ];
+        
+        for (const method of widthMethods) {
+            try {
+                const width = method();
+                if (width > originalWidth) {
+                    originalWidth = width;
+                }
+            } catch (e) {
+                continue;
+            }
+        }
+        
+        if (originalWidth === 0) {
+            log('PDF尚未渲染完成，稍后重试...');
+            setTimeout(applyPerfectLayout, 200);
+            return;
+        }
+        
+        // 计算精确的缩放比例
+        const scale = targetWidth / originalWidth;
+        const finalScale = Math.max(0.1, Math.min(scale, 3.0)); // 限制缩放范围
+        
+        // 应用缩放到整个容器
+        container.style.transform = `scale(${finalScale})`;
+        container.style.transformOrigin = 'center top';
+        
+        // 计算缩放后的实际尺寸
+        const scaledWidth = originalWidth * finalScale;
+        const scaledHeight = container.scrollHeight * finalScale;
+        
+        // 调整包装器的高度以适应缩放后的内容
+        wrapper.style.minHeight = `${scaledHeight + 40}px`;
+        
+        // 确保水平居中
+        const leftMargin = Math.max(0, (displayWidth - scaledWidth) / 2);
+        const rightMargin = leftMargin;
+        
+        // 计算实际的宽度占比
+        const actualPercentage = (scaledWidth / displayWidth) * 100;
+        
+        log('精确布局计算结果:', {
+            displayWidth,
+            originalWidth,
+            targetWidth,
+            scale: finalScale.toFixed(4),
+            scaledWidth: scaledWidth.toFixed(1),
+            scaledHeight: scaledHeight.toFixed(1),
+            leftMargin: leftMargin.toFixed(1),
+            rightMargin: rightMargin.toFixed(1),
+            actualPercentage: actualPercentage.toFixed(2) + '%'
         });
+        
+        // 显示调试信息
+        showDebugInfo({
+            displayWidth,
+            originalWidth,
+            targetWidth,
+            scale: finalScale,
+            scaledWidth,
+            scaledHeight,
+            leftMargin,
+            rightMargin,
+            actualPercentage
+        });
+        
+        log('PDF精确布局应用完成');
     }
     
-    const actualPercentage = info.actualWidthPercentage.toFixed(3);
-    const error = Math.abs(info.actualWidthPercentage - 60).toFixed(3);
-    const errorColor = parseFloat(error) < 0.001 ? '#00ff00' : '#ffff00';
-    
-    panel.innerHTML = `
-        <strong>📊 PDF布局调试信息</strong><br><br>
-        🖥️ 设备显示宽度: ${info.displayWidth.toFixed(0)}px<br>
-        📄 PDF原始宽度: ${info.originalWidth.toFixed(0)}px<br>
-        🎯 目标宽度(60%): ${info.targetWidth.toFixed(2)}px<br>
-        📏 实际宽度: ${info.scaledWidth.toFixed(2)}px<br>
-        📐 缩放比例: ${info.scale.toFixed(6)}<br>
-        📊 实际百分比: <span style="color:${errorColor}">${actualPercentage}%</span><br>
-        ⚠️ 误差: <span style="color:${errorColor}">${error}%</span><br>
-        ⬅️ 左边距: ${info.leftMargin.toFixed(2)}px<br>
-        ➡️ 右边距: ${info.leftMargin.toFixed(2)}px<br>
-        <br>
-        <small>💡 点击关闭此面板</small>
-    `;
-}
-    
-    // 显示调试信息
+    // 增强的调试信息显示
     function showDebugInfo(info) {
         if (!DEBUG) return;
         
@@ -664,9 +591,10 @@ function showDebugInfo(info) {
                 font-size: 12px;
                 font-family: 'Courier New', monospace;
                 z-index: 10000;
-                max-width: 320px;
+                max-width: 350px;
                 border: 1px solid #333;
                 cursor: pointer;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             `;
             document.body.appendChild(panel);
             
@@ -675,17 +603,21 @@ function showDebugInfo(info) {
             });
         }
         
-        const percentage = ((info.scaledWidth / info.displayWidth) * 100).toFixed(1);
+        const deviation = Math.abs(60 - info.actualPercentage);
+        const accuracy = deviation < 0.1 ? '🎯 完美' : deviation < 1 ? '✅ 精确' : '⚠️ 偏差';
         
         panel.innerHTML = `
-            <strong>📊 PDF布局调试信息</strong><br><br>
+            <strong>📊 PDF精确布局调试信息</strong><br><br>
             🖥️ 设备显示宽度: ${info.displayWidth}px<br>
             📄 PDF原始宽度: ${info.originalWidth}px<br>
             🎯 目标宽度(60%): ${info.targetWidth}px<br>
-            📏 实际宽度: ${info.scaledWidth.toFixed(0)}px (${percentage}%)<br>
-            📐 缩放比例: ${info.scale.toFixed(3)}<br>
-            ⬅️ 左边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
-            ➡️ 右边距: ${info.leftMargin.toFixed(0)}px (${info.marginPercentage.toFixed(1)}%)<br>
+            📏 实际宽度: ${info.scaledWidth.toFixed(1)}px<br>
+            📐 缩放比例: ${info.scale.toFixed(4)}<br>
+            📊 实际占比: ${info.actualPercentage.toFixed(2)}% ${accuracy}<br>
+            📏 缩放后高度: ${info.scaledHeight.toFixed(1)}px<br>
+            ⬅️ 左边距: ${info.leftMargin.toFixed(1)}px<br>
+            ➡️ 右边距: ${info.rightMargin.toFixed(1)}px<br>
+            🎯 精度偏差: ${deviation.toFixed(2)}%<br>
             <br>
             <small>💡 点击关闭此面板</small>
         `;
@@ -696,42 +628,79 @@ function showDebugInfo(info) {
     function handleResize() {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
-            log('窗口尺寸改变，重新计算布局');
-            applyLayout();
+            log('窗口尺寸改变，重新计算精确布局');
+            applyPerfectLayout();
         }, 300);
     }
     
     // 响应方向变化
     function handleOrientationChange() {
         setTimeout(() => {
-            log('屏幕方向改变，重新计算布局');
-            applyLayout();
+            log('屏幕方向改变，重新计算精确布局');
+            applyPerfectLayout();
         }, 500);
+    }
+    
+    // 监听DOM变化，确保PDF加载后立即应用布局
+    function observeContainer() {
+        const targetNode = document.body;
+        const observer = new MutationObserver((mutations) => {
+            let shouldReapply = false;
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1 && 
+                            (node.id === 'page-container' || 
+                             node.querySelector && node.querySelector('#page-container'))) {
+                            shouldReapply = true;
+                        }
+                    });
+                }
+            });
+            
+            if (shouldReapply) {
+                setTimeout(applyPerfectLayout, 100);
+            }
+        });
+        
+        observer.observe(targetNode, {
+            childList: true,
+            subtree: true
+        });
+        
+        return observer;
     }
     
     // 初始化
     function init() {
-        log('PDF 60%宽度布局系统启动');
+        log('PDF 60%精确布局系统启动');
         
         // 等待DOM加载
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => {
-                setTimeout(applyLayout, 100);
+                setTimeout(applyPerfectLayout, 100);
+                observeContainer();
             });
         } else {
-            setTimeout(applyLayout, 100);
+            setTimeout(applyPerfectLayout, 100);
+            observeContainer();
         }
         
         // 绑定事件监听器
         window.addEventListener('resize', handleResize);
         window.addEventListener('orientationchange', handleOrientationChange);
         
+        // 确保在页面完全加载后再次检查
+        window.addEventListener('load', () => {
+            setTimeout(applyPerfectLayout, 500);
+        });
+        
         log('事件监听器已设置');
     }
     
     // 全局调试接口
     window.PDFDebugger = {
-        reapply: applyLayout,
+        reapply: applyPerfectLayout,
         getDisplayWidth: getDisplayWidth,
         toggleDebug: function() {
             const panel = document.getElementById('pdf-debug-panel');
@@ -740,7 +709,8 @@ function showDebugInfo(info) {
             }
         },
         showInfo: function() {
-            document.getElementById('pdf-debug-panel').style.display = 'block';
+            const panel = document.getElementById('pdf-debug-panel');
+            if (panel) panel.style.display = 'block';
         }
     };
     
