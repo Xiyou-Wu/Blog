@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T15:37:15.253Z">
+<meta property="article:modified_time" content="2025-06-21T15:39:43.364Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -359,14 +359,14 @@
 
 /* 确保所有PDF内部元素保持原始定位 */
 /* Text rendering */
-<!-- .t {
+.t {
   position: absolute;
   white-space: pre;
   transform-origin: 0 100%;
   -ms-transform-origin: 0 100%;
   -webkit-transform-origin: 0 100%;
   unicode-bidi: bidi-override;
-} -->
+}
 
 /* 禁用所有图片和背景的点击事件 */
 .bi, .bf, #page-container img {
@@ -403,6 +403,12 @@ html {
   padding: 0 !important;
 }
 
+/* 博客内容容器 */
+.post-content, .article-entry {
+  overflow: visible !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
 /* 打印样式 */
 @media print {
@@ -425,10 +431,86 @@ html {
 <!-- <!DOCTYPE html>
 <!-- Created by pdf2htmlEX (https://github.com/pdf2htmlEX/pdf2htmlEX) -->
 <head>
+<style type="text/css">
+/*! 
+ * Base CSS for pdf2htmlEX
+ * Copyright 2012,2013 Lu Wang <coolwanglu@gmail.com> 
+ * https://github.com/pdf2htmlEX/pdf2htmlEX/blob/master/share/LICENSE
+ */
+/* Remove sidebar completely */
+#sidebar { display: none !important; }
+
+/* PDF容器 - 仅控制整体布局，不影响内部元素 */
+#page-container {
+  position: relative;
+  left: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+  
+  /* 核心设置：由JS计算的精确定位 */
+  margin: 0 auto !important;
+  padding: 20px 0 !important;
+  
+  /* 变换原点设置为左上角，保持PDF内部坐标系 */
+  transform-origin: left top !important;
+  
+  /* 清除可能的干扰 */
+  display: block !important;
+  box-sizing: content-box !important;
+}
+
+/* 移除所有可能影响PDF内部定位的样式重写 */
+/* PDF页面 - 完全保持原样，不做任何修改 */
+.pf {
+  /* 不设置任何样式，保持PDF原有样式 */
+}
+
+/* 页面内容 - 完全保持原样，不做任何修改 */
+.pc {
+  /* 不设置任何样式，保持PDF原有样式 */
+}
+
+/* PDF内部元素 - 完全保持原样，不做任何修改 */
+.t, .bi, .bf, .c, .d, ._ {
+  /* 不设置任何样式，保持PDF原有样式 */
+}
+
+/* 只设置页面级别的布局 */
+body {
+  overflow-x: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html {
+  overflow-x: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 博客内容容器 */
+.post-content, .article-entry {
+  overflow: visible !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 选择高亮 */
+::selection { background: rgba(127,255,255,0.4); }
+::-moz-selection { background: rgba(127,255,255,0.4); }
+
+/* 打印样式 */
+@media print {
+  #page-container {
+    transform: none !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+}
+</style>
 
 <script type="text/javascript">
 // PDF精确60%宽度居中显示系统 - 保持内部布局版本
-// PDF精确60%宽度居中显示系统 - 文字图片同步缩放版本
 (function() {
     'use strict';
     
@@ -436,7 +518,7 @@ html {
     
     function log(...args) {
         if (DEBUG) {
-            console.log('[PDF文字同步缩放]', ...args);
+            console.log('[PDF布局]', ...args);
         }
     }
     
@@ -455,70 +537,7 @@ html {
         return deviceWidth;
     }
     
-    // 应用文字同步缩放的CSS规则
-    function applyTextScalingCSS(scale) {
-        // 移除已存在的样式表
-        const existingStyle = document.getElementById('pdf-text-scaling');
-        if (existingStyle) {
-            existingStyle.remove();
-        }
-        
-        // 创建新的样式表
-        const style = document.createElement('style');
-        style.id = 'pdf-text-scaling';
-        style.type = 'text/css';
-        
-        // CSS规则确保文字与容器同步缩放
-        const cssRules = `
-            /* 确保所有文字元素同步缩放 */
-            #page-container .t {
-                transform-origin: 0 100% !important;
-            }
-            
-            /* 确保字体大小类同步缩放 */
-            #page-container .fs0,
-            #page-container .fs1,
-            #page-container .fs2,
-            #page-container .fs3,
-            #page-container .fs4,
-            #page-container .fs5,
-            #page-container .fs6,
-            #page-container .fs7,
-            #page-container .fs8,
-            #page-container .fs9,
-            #page-container .fsa,
-            #page-container .fsb,
-            #page-container .fsc,
-            #page-container .fsd,
-            #page-container .fse,
-            #page-container .fsf {
-                transform-origin: inherit !important;
-            }
-            
-            /* 确保页面内容容器与主容器同步 */
-            #page-container .pc {
-                transform-origin: 0 0 !important;
-            }
-            
-            /* 防止文字元素独立缩放 */
-            #page-container * {
-                will-change: auto !important;
-            }
-            
-            /* 优化渲染性能 */
-            #page-container {
-                backface-visibility: hidden;
-                perspective: 1000px;
-            }
-        `;
-        
-        style.innerHTML = cssRules;
-        document.head.appendChild(style);
-        
-        log('文字同步缩放CSS已应用');
-    }
-    
-    // 应用60%宽度布局 - 文字图片同步版
+    // 应用60%宽度布局 - 改进版，保持内部布局
     function applyPDFLayout() {
         const container = document.getElementById('page-container');
         if (!container) {
@@ -529,23 +548,20 @@ html {
         
         // 临时移除transform以获取原始尺寸
         const originalTransform = container.style.transform;
-        const originalTransformOrigin = container.style.transformOrigin;
-        
         container.style.transform = 'none';
-        container.style.transformOrigin = '';
         container.style.width = '';
         container.style.marginLeft = '';
         container.style.marginRight = '';
         
         // 强制重排以获取准确尺寸
-        container.offsetHeight;
+        container.offsetHeight; // 触发重排
         
         requestAnimationFrame(() => {
             const deviceWidth = getRealDeviceWidth();
-            const targetWidth = Math.floor(deviceWidth * 0.6);
-            const sideMargin = Math.floor(deviceWidth * 0.2);
+            const targetWidth = Math.floor(deviceWidth * 0.6); // 精确60%
+            const sideMargin = Math.floor(deviceWidth * 0.2); // 各20%边距
             
-            // 获取PDF的原始宽度
+            // 获取PDF的原始宽度 - 使用多种方法确保准确
             let originalWidth = 0;
             const widthMethods = [
                 () => container.scrollWidth,
@@ -578,13 +594,8 @@ html {
             const scale = targetWidth / originalWidth;
             const finalScale = Math.max(0.2, Math.min(scale, 3.0));
             
-            // 首先应用文字同步缩放的CSS
-            applyTextScalingCSS(finalScale);
-            
-            // 设置变换原点为左上角，确保文字和图片同步
-            container.style.transformOrigin = '0 0';
-            
-            // 应用整体缩放变换
+            // 应用变换 - 使用left top作为原点保持内部布局
+            container.style.transformOrigin = 'left top';
             container.style.transform = `scale(${finalScale})`;
             
             // 计算缩放后的实际宽度和居中所需的左边距
@@ -595,15 +606,15 @@ html {
             container.style.marginLeft = `${centeringMargin}px`;
             container.style.marginRight = `${centeringMargin}px`;
             
-            // 调整容器的下边距
+            // 计算缩放后的高度，调整容器的下边距
             const scaledHeight = container.scrollHeight * finalScale;
-            container.style.marginBottom = `20px`;
+            container.style.marginBottom = `${20}px`; // 固定下边距
             
             // 计算最终效果
             const actualPercentage = (scaledWidth / deviceWidth * 100).toFixed(1);
             const leftMarginPercentage = (centeringMargin / deviceWidth * 100).toFixed(1);
             
-            log('文字图片同步布局应用完成:', {
+            log('布局应用完成:', {
                 设备宽度: deviceWidth,
                 原始PDF宽度: originalWidth,
                 目标宽度: targetWidth,
@@ -662,7 +673,7 @@ html {
         
         panel.innerHTML = `
             <div style="color: #ffff00; font-weight: bold; margin-bottom: 8px;">
-                🎯 PDF文字图片同步缩放调试
+                🎯 PDF 60%布局调试 (保持内部布局)
             </div>
             <div>🖥️ 设备宽度: ${info.deviceWidth}px</div>
             <div>📄 PDF原宽度: ${info.originalWidth}px</div>
@@ -672,7 +683,7 @@ html {
             <div>🎯 居中边距: ${info.centeringMargin.toFixed(0)}px (${info.leftMarginPercentage}%)</div>
             <div>📏 缩放后高度: ${info.scaledHeight.toFixed(0)}px</div>
             <div style="color: #888; font-size: 10px; margin-top: 8px;">
-                ✨ 文字与图片已同步缩放<br>
+                💡 使用left top原点保持内部布局<br>
                 💡 点击关闭 | 窗口变化时自动重新计算
             </div>
         `;
@@ -698,7 +709,7 @@ html {
     
     // 初始化
     function init() {
-        log('PDF文字图片同步缩放系统启动');
+        log('PDF 60%宽度居中布局系统启动 (保持内部布局版本)');
         
         // 初始应用
         if (document.readyState === 'loading') {
@@ -3114,13 +3125,13 @@ pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Blog/elliptic-pdes-gilbarg-trudinger/" rel="prev" title="Introduction of Elliptic PDES (Gilbarg-Trudinger)">
-                  <i class="fa fa-angle-left"></i> Introduction of Elliptic PDES (Gilbarg-Trudinger)
+                <a href="/Blog/hexo-theme-next/" rel="prev" title="Welcome to the NexT Organization!">
+                  <i class="fa fa-angle-left"></i> Welcome to the NexT Organization!
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Blog/elliptic-han-lin-mean-value-properties/" rel="next" title="Mean Value Properties">
-                  Mean Value Properties <i class="fa fa-angle-right"></i>
+                <a href="/Blog/elliptic-pdes-gilbarg-trudinger/" rel="next" title="Introduction of Elliptic PDES (Gilbarg-Trudinger)">
+                  Introduction of Elliptic PDES (Gilbarg-Trudinger) <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
