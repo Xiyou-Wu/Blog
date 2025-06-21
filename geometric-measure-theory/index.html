@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T11:27:31.078Z">
+<meta property="article:modified_time" content="2025-06-21T11:28:33.926Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -281,7 +281,9 @@
     
     <div class="post-body" itemprop="articleBody">
 
-
+<!-- <!DOCTYPE html>
+<!-- Created by pdf2htmlEX (https://github.com/pdf2htmlEX/pdf2htmlEX) -->
+<head>
 <style type="text/css">
 /*! 
  * Base CSS for pdf2htmlEX
@@ -292,8 +294,85 @@
 #sidebar { display: none !important; }
 
 
+#page-container {
+  position: relative;
+  left: 0 !important;
+  height: auto !important;
+  overflow-x: auto !important; /* 添加水平滚动 */
+  margin: 0 0 14000px 400px; /* 居中显示 */
+  padding: 20px;
+  box-sizing: border-box;
+  transform: scale(2) !important; /* 不要放大，或者最多1.2倍 */
+  transform-origin: top center !important;
+  width: 100% !important;
+  max-width: 800px !important; /* 限制最大宽度 */
+}
+/* 解决高度截断问题 */
+/* 移除之前添加的高度限制代码 */
+body {
+  overflow: visible !important; /* 确保可以滚动 */
+  height: auto !important;
+  min-height: 600vh !important; /* 给body足够的高度 */
+}
+
+html {
+  overflow: visible !important;
+  height: auto !important;
+}
+
+/* 为整个文档添加足够的高度 */
+.post-content, .article-entry {
+  min-height: 200vh; /* 确保有足够的高度 */
+  overflow: visible;
+}
+
+/* Core PDF content styles */
+.pf, .pc {
+  position: relative;
+  overflow: visible;
+}
+
+.pc.opened { display: block; }
+
+/* Text rendering */
+.t {
+  position: absolute;
+  white-space: pre;
+  transform-origin: 0 100%;
+  -ms-transform-origin: 0 100%;
+  -webkit-transform-origin: 0 100%;
+  unicode-bidi: bidi-override;
+}
+
+/* 禁用所有图片和背景的点击事件 */
+.bi, .bf, #page-container img {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+/* 禁用所有可能的点击元素 */
+#page-container a,
+#page-container [onclick],
+#page-container [href] {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+
+
+/* Essential utility classes */
+.c { position: absolute; border: 0; padding: 0; margin: 0; overflow: hidden; display: block; }
+.d { position: absolute; transform-origin: 0 100%; }
+._ { display: inline-block; color: transparent; z-index: -1; }
+
+
+
+/* Selection highlight */
+::selection { background: rgba(127,255,255,0.4); }
+::-moz-selection { background: rgba(127,255,255,0.4); }
+
 /* Print optimization */
-@media print{
+@media print {
   #page-container { width: auto; height: auto; overflow: visible; background-color: transparent; max-width: none; padding: 0; }
   .pf { page-break-after: always; page-break-inside: avoid; }
 }</style> 
@@ -2686,13 +2765,13 @@ pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Blog/hexo-theme-next/" rel="prev" title="Welcome to the NexT Organization!">
-                  <i class="fa fa-angle-left"></i> Welcome to the NexT Organization!
+                <a href="/Blog/elliptic-pdes-gilbarg-trudinger/" rel="prev" title="Introduction of Elliptic PDES (Gilbarg-Trudinger)">
+                  <i class="fa fa-angle-left"></i> Introduction of Elliptic PDES (Gilbarg-Trudinger)
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Blog/elliptic-pdes-gilbarg-trudinger/" rel="next" title="Introduction of Elliptic PDES (Gilbarg-Trudinger)">
-                  Introduction of Elliptic PDES (Gilbarg-Trudinger) <i class="fa fa-angle-right"></i>
+                <a href="/Blog/elliptic-pdes-han-lin/" rel="next" title="Introduction of Elliptic PDES (Han-Lin)">
+                  Introduction of Elliptic PDES (Han-Lin) <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
