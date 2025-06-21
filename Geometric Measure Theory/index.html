@@ -27,7 +27,7 @@
 <meta property="og:description" content="Outline">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:28:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T11:56:42.817Z">
+<meta property="article:modified_time" content="2025-06-21T12:03:18.656Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
@@ -265,6 +265,23 @@
   max-width: none !important;
   min-height: 100vh;
 }
+
+/* 确保每个PDF页面都填满容器宽度 */
+#page-container .pf {
+  width: 100% !important;
+  margin: 0 auto 20px auto !important;
+  box-sizing: border-box;
+  display: block !important;
+}
+
+/* 让PDF页面内容适应容器宽度 */
+#page-container .pc {
+  width: 100% !important;
+  transform-origin: top left !important;
+  /* 计算缩放比例：80vw除以PDF原始宽度 */
+  transform: scale(calc(80vw / 595px)) !important;
+}
+
 
 /* 解决高度截断问题 */
 body {
