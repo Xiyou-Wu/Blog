@@ -395,9 +395,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -405,25 +406,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -636,9 +646,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -646,25 +657,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -936,9 +956,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -946,25 +967,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -1373,9 +1403,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -1383,25 +1414,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -1563,9 +1603,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -1573,25 +1614,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -1786,9 +1836,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -1796,25 +1847,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -1919,9 +1979,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -1929,25 +1990,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -2026,9 +2096,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -2036,25 +2107,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -2234,9 +2314,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -2244,25 +2325,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -2413,9 +2503,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -2423,25 +2514,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -2579,9 +2679,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -2589,25 +2690,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -2730,9 +2840,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -2740,25 +2851,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -2886,9 +3006,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -2896,25 +3017,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -3024,9 +3154,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -3034,25 +3165,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -3131,9 +3271,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -3141,25 +3282,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -3251,9 +3401,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -3261,25 +3412,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -3384,9 +3544,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -3394,25 +3555,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -3504,9 +3674,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -3514,25 +3685,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -3624,9 +3804,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -3634,25 +3815,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -3811,9 +4001,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -3821,25 +4012,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -3918,9 +4118,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -3928,25 +4129,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -4025,9 +4235,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -4035,25 +4246,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -4145,9 +4365,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -4155,25 +4376,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -4252,9 +4482,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -4262,25 +4493,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -4359,9 +4599,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -4369,25 +4610,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -4466,9 +4716,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -4476,25 +4727,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -4586,9 +4846,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -4596,25 +4857,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -4693,9 +4963,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -4703,25 +4974,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -4800,9 +5080,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -4810,25 +5091,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -4907,9 +5197,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -4917,25 +5208,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -5014,9 +5314,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -5024,25 +5325,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -5121,9 +5431,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -5131,25 +5442,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -5228,9 +5548,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -5238,25 +5559,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -5335,9 +5665,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -5345,25 +5676,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -5442,9 +5782,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -5452,25 +5793,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -5549,9 +5899,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -5559,25 +5910,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -5674,9 +6034,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -5684,25 +6045,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -5781,9 +6151,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -5791,25 +6162,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -5888,9 +6268,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -5898,25 +6279,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -5995,9 +6385,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -6005,25 +6396,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -6102,9 +6502,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -6112,25 +6513,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -6209,9 +6619,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -6219,25 +6630,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -6316,9 +6736,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -6326,25 +6747,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -6423,9 +6853,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -6433,25 +6864,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -6530,9 +6970,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -6540,25 +6981,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -6637,9 +7087,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -6647,25 +7098,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -6744,9 +7204,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -6754,25 +7215,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -6851,9 +7321,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -6861,25 +7332,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -6958,9 +7438,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -6968,25 +7449,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -7065,9 +7555,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -7075,25 +7566,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -7172,9 +7672,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -7182,25 +7683,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
@@ -7274,9 +7784,10 @@ article neonlingo-mark {
 
 <script>
 /**
- * 折叠 / 展开子回复
- * - 每个 .comment_right 里若存在直属 blockquote.replies，就插入一个箭头按钮
- * - 点击箭头切换子回复显示状态
+ * 折叠 / 展开评论
+ * - 为每个 .comment_right 插入折叠箭头
+ * - 若存在直属 blockquote.replies，则折叠/展开它；
+ *   否则折叠/展开自身正文 (.md)
  */
 (function () {
   function setupReplyToggle() {
@@ -7284,25 +7795,34 @@ article neonlingo-mark {
 
     rights.forEach((right) => {
       const replies = right.querySelector(':scope > blockquote.replies');
-      if (!replies) return; // 没有子回复
+      const body = right.querySelector(':scope > .comment_body');
+      if (!body) return; // 未找到主体，跳过
 
-      // 创建箭头
+      // 创建箭头（若未插入过）
+      if (body.querySelector('.comment_toggle')) return;
       const toggle = document.createElement('span');
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
+      const content = body.querySelector(':scope > .md');
+
       // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
-        const collapsed = replies.style.display === 'none';
-        replies.style.display = collapsed ? '' : 'none';
-        toggle.classList.toggle('collapsed', !collapsed);
+        const willCollapse = !toggle.classList.contains('collapsed');
+        toggle.classList.toggle('collapsed', willCollapse);
+
+        if (replies) {
+          replies.style.display = willCollapse ? 'none' : '';
+        }
+
+        // 当不存在子回复时，折叠/展开正文
+        if (!replies && content) {
+          content.style.display = willCollapse ? 'none' : '';
+        }
       });
 
       // 将箭头插到 comment_body 最前面
-      const body = right.querySelector(':scope > .comment_body');
-      if (body && !body.querySelector('.comment_toggle')) {
-        body.insertAdjacentElement('afterbegin', toggle);
-      }
+      body.insertAdjacentElement('afterbegin', toggle);
     });
   }
 
