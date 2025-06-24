@@ -357,7 +357,7 @@
           <h1 id="US-Supreme-Court-lifts-limits-on-deporting-migrants-to-countries-not-their-own"><a href="#US-Supreme-Court-lifts-limits-on-deporting-migrants-to-countries-not-their-own" class="headerlink" title="US Supreme Court lifts limits on deporting migrants to countries not their own"></a>US Supreme Court lifts limits on deporting migrants to countries not their own</h1><style>
 /* ====== 评论整体样式 ====== */
 article .comment {
-  margin: 12px 0 !important;                                       /* 间距 ↑ 1.5 倍 */
+  margin: 15px 0 !important;                                       /* 间距 ↑ 1.5 倍 */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 article .comment_right {
@@ -400,11 +400,12 @@ article neonlingo-mark {
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 10px solid #888;
+  border-top: 10px solid #888;           /* 默认向下 ▼ */
+  margin-top: -3px;                      /* 向上微移，使箭头与文字更齐 */
   transition: transform 0.15s;
 }
 .comment_toggle.collapsed {
-  transform: rotate(-90deg);
+  transform: rotate(-90deg);             /* 折叠 ► */
 }
 </style>
 
@@ -580,7 +581,7 @@ article neonlingo-mark {
       toggle.className = 'comment_toggle';
       toggle.title = '收起/展开';
 
-      // 默认展开（箭头向下）；点击后折叠
+      // 默认展开（箭头向下 ▼）；点击后折叠 ►
       toggle.addEventListener('click', () => {
         const collapsed = replies.style.display === 'none';
         replies.style.display = collapsed ? '' : 'none';
