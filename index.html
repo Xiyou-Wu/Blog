@@ -357,16 +357,22 @@
           <h1 id="US-Supreme-Court-lifts-limits-on-deporting-migrants-to-countries-not-their-own"><a href="#US-Supreme-Court-lifts-limits-on-deporting-migrants-to-countries-not-their-own" class="headerlink" title="US Supreme Court lifts limits on deporting migrants to countries not their own"></a>US Supreme Court lifts limits on deporting migrants to countries not their own</h1><style>
 /* ====== 评论整体样式 ====== */
 article .comment {
-  margin: 10px 0 !important;
+  margin: 15px 0 !important;                                       /* 间距 ↑ 1.5 倍 */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 article .comment_right {
   width: 100% !important;
 }
 article .comment_body {
+  display: flex;                                                   /* 箭头与文字并排 */
+  align-items: flex-start;
+  gap: 8px;                                                        /* 箭头与文字间距 */
   color: #1A1A1B !important;
   line-height: 1.5 !important;
   font-size: 14px !important;
+}
+article .comment_body .md {
+  flex: 1;                                                         /* 文字占满剩余宽度 */
 }
 article .comment_body p {
   margin: 0 0 8px 0 !important;
@@ -395,7 +401,6 @@ article neonlingo-mark {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-top: 10px solid #888;
-  margin-right: 6px;
   transition: transform 0.15s;
 }
 .comment_toggle.collapsed {
