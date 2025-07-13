@@ -19,25 +19,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xiyou-wu.github.io","root":"/Blog/","images":"/Blog/images","scheme":"Mist","darkmode":false,"version":"8.23.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"item":["recent_posts","archives","categories","tags"]},"hljswrap":true,"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/Blog/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/Blog/js/config.js" defer></script>
 
-    <meta name="description" content="Record my math notes">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Math Notes">
-<meta property="og:url" content="https://xiyou-wu.github.io/Blog/archives/2020/03/index.html">
+    <meta name="description" content="学习目标 掌握lean4基本的语法，以应对未来可能会遇到的情形 能够跟进自身领域中Mathlib已达到的进度  目前进度 Mathematics in Lean，学习至第 1&#x2F;13 章 Bonn Lean Course WiSe 24&#x2F;25, 学习至第0节  配置环境步骤此处分为两种，一种是类似于 MIL 的项目结构，一种是类似于 PFR conjecture 的项目结构。 前">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初始篇 配置环境">
+<meta property="og:url" content="https://xiyou-wu.github.io/Blog/lean4/index.html">
 <meta property="og:site_name" content="Math Notes">
-<meta property="og:description" content="Record my math notes">
+<meta property="og:description" content="学习目标 掌握lean4基本的语法，以应对未来可能会遇到的情形 能够跟进自身领域中Mathlib已达到的进度  目前进度 Mathematics in Lean，学习至第 1&#x2F;13 章 Bonn Lean Course WiSe 24&#x2F;25, 学习至第0节  配置环境步骤此处分为两种，一种是类似于 MIL 的项目结构，一种是类似于 PFR conjecture 的项目结构。 前">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-13T15:58:14.000Z">
+<meta property="article:modified_time" content="2025-07-13T09:00:51.840Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Math Notes">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://xiyou-wu.github.io/Blog/archives/2020/03/">
+<link rel="canonical" href="https://xiyou-wu.github.io/Blog/lean4/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"archives/2020/03/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xiyou-wu.github.io/Blog/lean4/","path":"lean4/","title":"初始篇 配置环境"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Archive | Math Notes</title>
+<title>初始篇 配置环境 | Math Notes</title>
   
 
 
@@ -103,7 +105,7 @@
 
     <a href="/Blog/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Math Notes</h1>
+      <p class="site-title">Math Notes</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Record my math notes</p>
@@ -157,7 +159,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -170,6 +172,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87"><span class="nav-number">1.</span> <span class="nav-text">学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E5%89%8D%E8%BF%9B%E5%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">目前进度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">配置环境步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%AE%89%E8%A3%85"><span class="nav-number">3.1.</span> <span class="nav-text">前置安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows"><span class="nav-number">3.1.1.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac"><span class="nav-number">3.1.2.</span> <span class="nav-text">Mac</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PFR-conjecture-%E5%90%AF%E5%8A%A8"><span class="nav-number">3.2.</span> <span class="nav-text">PFR conjecture 启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">Mac</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -215,50 +218,108 @@
 
     </div>
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xiyou-wu.github.io/Blog/lean4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/Blog/images/touxiang.jpeg">
+      <meta itemprop="name" content="Xiyou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math Notes">
+      <meta itemprop="description" content="Each small advance, its fitting delight.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="初始篇 配置环境 | Math Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          初始篇 配置环境
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-07-13 15:58:14" itemprop="dateCreated datePublished" datetime="2025-07-13T15:58:14Z">2025-07-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ol>
+<li>掌握lean4基本的语法，以应对未来可能会遇到的情形</li>
+<li>能够跟进自身领域中Mathlib已达到的进度</li>
+</ol>
+<h1 id="目前进度"><a href="#目前进度" class="headerlink" title="目前进度"></a>目前进度</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://leanprover-community.github.io/mathematics_in_lean/"><em>Mathematics in Lean</em></a>，学习至第 1&#x2F;13 章</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/fpvandoorn/LeanCourse24"><em>Bonn Lean Course WiSe 24&#x2F;25</em></a>, 学习至第0节</li>
+</ol>
+<h1 id="配置环境步骤"><a href="#配置环境步骤" class="headerlink" title="配置环境步骤"></a>配置环境步骤</h1><p>此处分为两种，一种是类似于 MIL 的项目结构，一种是类似于 PFR conjecture 的项目结构。</p>
+<h2 id="前置安装"><a href="#前置安装" class="headerlink" title="前置安装"></a>前置安装</h2><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>暂未实践总结</p>
+<h3 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h3><ol>
+<li>在 Cursor 或者 Vscode 中下载lean4插件</li>
+<li>插件下载后，Documentation 中有一个 Setup guide，根据步骤操作，就可以下载好 curl 以及 elan。当然，前提是准备好 homebrew。</li>
+</ol>
+<h2 id="PFR-conjecture-启动"><a href="#PFR-conjecture-启动" class="headerlink" title="PFR conjecture 启动"></a>PFR conjecture 启动</h2><h3 id="Windows-1"><a href="#Windows-1" class="headerlink" title="Windows"></a>Windows</h3><p>暂未实践总结</p>
+<h3 id="Mac-1"><a href="#Mac-1" class="headerlink" title="Mac"></a>Mac</h3><ol>
+<li>git clone 要下载的项目</li>
+<li>在终端中进入到具体的项目文件夹，语法是 cd xx，xx是指项目</li>
+<li>此时会出现自动窗口，显示正在安装的toolchain版本，似乎不会遇到什么问题</li>
+<li>上面的自动窗口结束后，可以在user文件夹的.elan中看到已下载好的toolchain版本，此时点开一个lean4文件，会自动编译</li>
+<li>部分时候会报错，实践出的一个可行方法是，首先将 .lake&#x2F;packages 中的文件夹全部删除，然后在终端 lake clean, 完成后再 lake update，能在最后看到 Completed successfully! 就意味着 OK 了</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
         
-        <span class="collection-header">OK! 35 posts in total. Keep on posting.</span>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2020<span class="collection-year-count">1</span></span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-03-01T12:00:00Z"
-              content="2020-03-01">
-          03-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Blog/hexo-theme-next/" itemprop="url">
-            <span itemprop="name">Welcome to the NexT Organization!</span>
-          </a>
-      </div>
-
-      
-    </header>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Blog/7-10-English-Learning/" rel="prev" title="7.10 English Learning">
+                  <i class="fa fa-angle-left"></i> 7.10 English Learning
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
 
 </div>
   </main>
